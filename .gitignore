@@ -1,0 +1,103 @@
+# ---------------------------------------------------------------------------
+# Secrets / credentials  -- NEVER commit these
+# ---------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+service-account*.json
+*credentials*.json
+gcloud-key*.json
+
+# ---------------------------------------------------------------------------
+# Data: raw coaching-session transcripts (contain user_ids / PII)
+# ---------------------------------------------------------------------------
+Transcripts/
+# loose session-UUID transcript dumps sitting in the repo root
+/????????-????-????-????-????????????.json
+audio_files*/
+*.mp3
+*.wav
+*.m4a
+
+# ---------------------------------------------------------------------------
+# Generated run outputs (charts, scores, metrics) -- reproducible from code
+# ---------------------------------------------------------------------------
+wobble_out*/
+wobble_pilot/
+wobble_multi/
+wobble_run*/
+outputs/
+results/
+
+# Logs
+*.log
+logs/
+
+# ---------------------------------------------------------------------------
+# Python
+# ---------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+.conda/
+
+# Testing / linting caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# ---------------------------------------------------------------------------
+# Jupyter
+# ---------------------------------------------------------------------------
+.ipynb_checkpoints/
+*.ipynb.bak
+profile_default/
+ipython_config.py
+
+# ---------------------------------------------------------------------------
+# Editors / IDEs
+# ---------------------------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ---------------------------------------------------------------------------
+# OS cruft
+# ---------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db

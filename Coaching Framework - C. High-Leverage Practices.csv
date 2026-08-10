@@ -1,0 +1,68 @@
+SECTION C — HIGH-LEVERAGE PRACTICES (Teacher Pedagogy & Training Curriculum Alignment),,,,,,,,
+Code,Indicator,1 = Not Observed / Emerging,2 = Developing,3 = Proficient / Effective,4 = Highly Effective,Score (1–4),Training Curriculum Module (Level),Source Framework & Why It Matters
+C1,Quality Questioning (Bloom's Aligned),"Only yes/no or recall questions asked. Close-ended, requiring one-word answers.","Mix of recall and some open-ended questions, but they lack depth. E.g., 'Why is the capital important?' without further exploration.",Purposeful mix including application & analysis questions. Open-ended questions dominate. Wait time given.,Questions span all Bloom's levels (Remember→Create); students generate questions; Socratic questioning evident.,,"L0: Pedagogical Practice (5-step lesson plan)
+L1: Open-Ended Questions + Think-Pair-Share + Bloom's Taxonomy
+L2: Socratic Questioning + Bloom's 3-level question design","FICO V3 (C1) + TEACH (Checks for Understanding) + OECD (Cognitive Activation) + HOTS Instructional Strategies ('Teacher poses open-ended and thought-provoking questions')
+
+Why: HOTS-aligned questioning is the gateway to deeper learning. TEACH evidence: classrooms with higher-order questions show 2× learning gains."
+C2,Responsive Re-explanation & Adaptive Teaching,Repeats same explanation when students don't understand.,Tries a different approach but still teacher-centered.,"Uses alternative representations (visual, concrete, analogy). Adjusts teaching to student level.","Diagnoses misconception, re-explains using student's own logic, confirms understanding.",,"L0: Content Expertise (CPA Approach)
+L1: Diagnosing misconceptions in operations
+L2: Teaching comprehension strategies","FICO V3 (C2) + TEACH (Checks for Understanding) + OECD (Supportive Climate) + HOTS Instructional Strategies ('Scaffolding is used effectively to help students explore complex ideas')
+
+Why: The ability to re-explain separates trained from untrained teachers. Critical in contexts with no remedial support."
+C3,Effective Feedback,"No feedback given, or only 'good/bad' evaluations. Generic: 'Good job' or 'Try again.'",Feedback given but generic ('try harder'). Specific but does not consistently guide improvement.,Specific feedback on what was done well and what to improve. Actionable.,"Feedback is specific, actionable, with next steps. Students use feedback to self-correct. Guides refinement of reasoning.",,"L0: Assessment & Feedback (positive verbal feedback, quick checks)
+L1: Formative assessments + data-driven adjustments
+L2: Rubrics + self-assessment + peer assessment","FICO V3 (C3) + TEACH (Feedback) + OECD (Supportive Climate) + HOTS Assessment & Feedback ('Feedback that guides students in refining reasoning or solutions')
+
+Why: Hattie's meta-analysis: feedback has d=0.73 effect size. But only when specific and actionable. HOTS rubric demands reasoning-focused feedback."
+C4,Equitable Participation,Only 2–3 students participate; others ignored. Teacher-dominated.,Teacher calls on volunteers only. A few students contribute while others stay silent.,"Deliberate strategies: cold call, pair-share, name sticks. Diverse students included.",All students participate; teacher tracks contributions; gender-equitable. Students debate and refine arguments.,,"L0: Inclusive Education (recognizing diverse learners)
+L1: Student-centered strategies in overcrowded classrooms + peer teaching
+L2: Differentiated instruction + learning stations","FICO V3 (C4) + TEACH (Culture of Learning) + OECD (Supportive Climate) + HOTS Student Engagement ('Students actively engage in discussions and debates')
+
+Why: In Pakistani classrooms, participation skews male and toward front-row students. HOTS requires ALL students in complex discussions."
+C5,Student Agency & Voice,Students are passive recipients; no choice or voice. Content from single perspective.,Occasional student input but teacher-dominated. Multiple perspectives mentioned but not explored.,Students make choices about how to demonstrate learning. Explore multiple perspectives.,"Students lead discussions, choose methods, self-assess, peer-teach. Create novel solutions. Evaluate alternatives.",,"L1: Think-Pair-Share + brainstorming
+L2: Student-led discussions + PBL task design + multiple solution approaches
+L3: Student-led behavior committees + peer mentoring","FICO V3 (C5) + OECD (Cognitive Activation) + HOTS Student Engagement ('Students explore multiple perspectives or create novel solutions')
+
+Why: Agency bridges compliance to ownership. HOTS levels of Create and Evaluate require student-initiated thinking."
+C6,Classroom Management & Routines,Frequent disruptions; no visible routines. Students struggle to engage.,Some routines but inconsistently enforced. Instructions lack clarity for all groups.,"Clear routines (entry, transitions, dismissal); minimal disruptions. Expectations clear.","Seamless routines; students self-manage; positive behavioral reinforcement. Students actively participate in complex, clearly defined tasks.",,"L0: Classroom Management (routines, rules, attention strategies)
+L1: SMART goals for behavior + behavior charts
+L2: Restorative practices + positive reinforcement + classroom vision
+L3: School-wide behavior programs + peer mentoring","TEACH (Classroom Culture — Behavioral Expectations) + OECD (Classroom Management) + HOTS Classroom Environment ('Students actively encouraged to participate in complex tasks with clear expectations')
+
+Why: TEACH Area 2: Classroom culture is prerequisite for all learning. HOTS rubric ties management directly to complex task engagement."
+C7,Positive & Supportive Learning Environment,Negative tone; punitive language or humiliation.,Neutral but cold; no encouragement.,"Warm, encouraging tone; mistakes treated as learning opportunities.",Joyful classroom; students feel safe to take risks; laughter and curiosity present.,,"L0: Inclusive Education (child psychology fundamentals)
+L1: Child psychology application + UDL
+L2: Restorative circles + emotional check-ins + advanced psychology","TEACH (Culture of Learning — Positive Language) + OECD (Supportive Climate) + HOTS Classroom Environment ('Classroom fosters open discussions and critical thinking')
+
+Why: Children who feel psychologically safe learn 2× faster (Durlak et al., 2011). HOTS requires open discussion which demands safety."
+C8,"Modeling, Scaffolding & Problem-Solving",Teacher tells but doesn't show. Simple tasks demonstrated without explanation of process.,Teacher demonstrates once but moves on quickly. Problem-solving modeled but strategies not explained.,I Do → We Do → You Do scaffolding visible. Problem-solving and creativity modeled with clear strategies.,Gradual release with checks at each stage; scaffold removed when ready. Teacher brainstorms solutions and explains reasoning.,,"L0: Pedagogical Practice (5-step lesson plan + diagrams)
+L1: Scaffolding complex concepts + GRR model
+L2: Inquiry-based learning + PBL design","TEACH (Lesson Facilitation — Explicit Teaching) + OECD (Instructional Clarity) + HOTS Instructional Strategies ('Teacher demonstrates problem-solving and creativity in real-time scenarios')
+
+Why: Vygotsky's ZPD in practice. HOTS rubric specifically requires real-time problem-solving demonstration."
+C9,Collaborative Learning,No group or pair work. Students work individually without interaction.,Students in groups but working individually. Tasks lack depth.,Purposeful pair/group tasks with clear roles. Students work towards synthesized solutions.,"Structured collaboration (think-pair-share, jigsaw); students build on each other's ideas. Teams design solutions to community problems.",,"L0: Pedagogical Practice (group reading)
+L1: Peer teaching + Think-Pair-Share
+L2: Small-group problem-solving + student-led role assignment
+L3: PBL showcases + interdisciplinary projects","OECD (Cognitive Activation — Collaborative Problem Solving) + HOTS Student Engagement ('Students collaborate on tasks requiring synthesis, evaluation, or innovative problem-solving')
+
+Why: HOTS rubric demands collaboration focused on synthesis and problem-solving, not just sitting together."
+C10,Integration of Taleemabad Technology,No technology used despite availability.,Technology used as distraction/babysitter.,Taleemabad videos/apps used to support learning objectives.,Technology integrated seamlessly; students interact with content; teacher facilitates around it.,,"L0: Digital Literacy (YouTube, Google search, Slides)
+L1: Blended learning + Google Forms + digital checklists
+L2: Canva + Google Drive + interactive digital resources + Google Meet
+L3: School-wide flipped classroom + digital tool workshops","FICO V3 (Original Fidelity) + Taleemabad Curriculum Design + Training Curriculum (Digital Literacy domain L0–L3)
+
+Why: This is Taleemabad's core value proposition — tech-enhanced teaching. Fidelity to tech integration = fidelity to the model."
+C11,Self & Peer Assessment Facilitation,Assessment limited to teacher-led grading. Students receive grades without reflection.,"Some self- or peer-assessment occurs, but inconsistent. Students assess without clear criteria.",Self- and peer-assessment structured and purposeful. Students use rubrics to assess work.,"Students use rubrics to assess work, suggest improvements for peers, and set goals. Assessment tasks require analysis/evaluation/creation.",,"L0: Assessment & Feedback (checklists, verbal feedback)
+L1: Formative + summative assessments + seen vs unseen questions
+L2: Self-assessment + student portfolios + peer review + rubric design
+L3: School-wide assessment systems + data dashboards","HOTS Assessment & Feedback ('Students engage in self-assessment or peer-assessment to evaluate reasoning') + TEACH (Checks for Understanding)
+
+Why: HOTS rubric makes this a standalone indicator. Self/peer assessment builds metacognition — the highest leverage skill."
+C12,Classroom Resources & Space for Collaboration,"Resources and space disorganized, limiting collaborative learning. No group work areas.","Some organization, but space/resources do not fully support collaboration.",Resources and space well-organized for collaborative tasks. Materials accessible.,"Tables arranged for group work, materials easily accessible. Environment designed for inquiry and collaboration.",,"L0: Inclusive Education (visual/auditory aids, differentiated materials)
+L1: Scaffolded lessons + learning stations
+L2: Assistive technologies + differentiated homework
+L3: Community-based inclusive projects","HOTS Classroom Environment ('Resources and space are organized to support collaboration and problem-solving') + OECD (Active Learning)
+
+Why: HOTS rubric includes physical environment as observable indicator. In Pakistani classrooms, space arrangement directly predicts collaboration quality."
+,SECTION C TOTAL,,,,,,,

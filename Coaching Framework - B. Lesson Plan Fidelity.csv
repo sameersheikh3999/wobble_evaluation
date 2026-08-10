@@ -1,0 +1,34 @@
+SECTION B — LESSON PLAN FIDELITY   |   Fidelity Score = (actions observed ÷ actions prescribed) × 100%   |   ≥85% High | 60–84% Medium | <60% Low,,,,,,,
+Code,Indicator,1 = Not Observed / Emerging,2 = Developing,3 = Proficient / Effective,4 = Highly Effective,Score (1–4),Source Framework & Why It Matters
+B1,Instructional Clarity & Learning Objectives,No clear learning objective stated. Activities lack purpose.,Objective mentioned but vague or not referenced during lesson.,"Clear objective stated, referred to during lesson, linked to classroom activities.","Objective co-constructed with students, revisited at close. Students can articulate what they are learning and why.",,"FICO V3 (B1) + TEACH (Lesson Facilitation) + HOTS Lesson Planning ('Objectives explicitly link to critical thinking')
+
+Why: When teachers state objectives clearly, students show 15–20% higher task completion. HOTS rubric requires explicit HOTS-linked objectives."
+B2,Lesson Structure & Sequence,No discernible structure; random activities.,Some structure but missing key phases (intro/body/close).,Clear I Do → We Do → You Do sequence. Logical flow with transitions.,"Logical flow with smooth transitions, recap, and closure activity. Students can follow the arc.",,"FICO V3 (B8) + TEACH (Lesson Facilitation) + OECD (Structured Lesson)
+
+Why: Structured lessons improve retention by ~25% (Rosenshine). Sequence ensures cognitive load is managed progressively."
+B3,Activities & Tasks Alignment,Activities unrelated to lesson objective.,Some activities align but others are filler.,Most activities directly support the learning objective.,All activities purposefully scaffolded toward objective mastery. No wasted time.,,"FICO V3 (B3) + TEACH (Lesson Facilitation) + HOTS Lesson Planning ('Strategies for promoting analysis, evaluation, synthesis')
+
+Why: Alignment between objectives and activities is the strongest predictor of lesson effectiveness (Hattie, d=0.56).
+"
+B4,Activation of Prior Knowledge,No reference to what students already know.,Brief mention but no student input sought.,Teacher connects new content to previously taught material.,Students actively recall and link prior knowledge; teacher builds on it.,,"FICO V3 (B4) + OECD (Cognitive Activation) + HOTS (Remember/Understand level)
+
+Why: Schema activation makes new learning 'stick' — Ausubel's meaningful learning theory. Critical for low-resource contexts."
+B5,Meaningful & Real-World Connections,"Content presented in isolation, no real-world link.",Teacher mentions a connection but doesn't develop it.,Content connected to students' lives or local context.,Students generate their own connections; examples from their community.,,"FICO V3 (B5) + OECD (Cognitive Activation) + HOTS Lesson Planning ('Lesson integrates interdisciplinary or real-world applications')
+
+Why: HOTS rubric explicitly requires real-world integration. Contextual relevance increases motivation and transfer in Pakistani classrooms."
+B6,Differentiation / Catering to Learning Levels,"One-size-fits-all delivery, no differentiation.",Aware of different levels but no adapted tasks.,Tasks differentiated for at least 2 ability groups.,"Multiple pathways offered; struggling students supported, advanced students stretched.",,"FICO V3 (B6) + TEACH (Checks for Understanding) + OECD (Differentiation) + Training Curriculum (Inclusive Education domain)
+
+Why: In multi-grade Pakistani classrooms, differentiation is survival. Linked to reduced dropout rates."
+B7,Use of Taleemabad Lesson Plan,Taleemabad lesson plan not used at all.,Plan open but teacher deviates significantly.,Plan followed with minor contextual adaptations.,Plan followed faithfully AND adapted intelligently to class needs.,,"FICO V3 (Original Fidelity Check)
+
+Why: Core fidelity metric — measures whether the designed intervention is being delivered. Without this, impact evaluation is meaningless."
+B8,Use of Prescribed Resources,"No Taleemabad resources (video, worksheet, manipulatives) used.",Some resources used but not as intended.,Key resources used as prescribed in lesson plan.,All resources used effectively; teacher adds complementary materials.,,"FICO V3 (Bi — Effective Resource Use) + TEACH (Lesson Facilitation)
+
+Why: Resources are the delivery mechanism of the curriculum. Fidelity to resource use = fidelity to pedagogical intent."
+B9,Time on Task / Time on Learning,Less than 50% of class time spent on learning activities.,50–69% on task (significant management/transition time lost).,70–85% on task with efficient transitions.,"More than 85% on task; routines are automatic, transitions seamless.",,"TEACH (Time on Task — Area 1) + OECD (Classroom Management) + HOTS Observation Form (Time on Learning: L/M/H intervals)
+
+Why: TEACH evidence: every 10% increase in time on task = measurable learning gains. Pakistani classrooms average ~55%."
+B10,Lesson Closure & Consolidation,Lesson ends abruptly with no summary.,Teacher rushes through a brief recap.,"Structured closure: recap key points, check understanding.","Students summarize learning, connect to next lesson, self-assess.",,"FICO V3 (B8 Sequence) + TEACH (Lesson Facilitation)
+
+Why: Closure activates retrieval practice — the single most effective learning strategy (Dunlosky et al., 2013)."
+,SECTION B TOTAL,,,,,,

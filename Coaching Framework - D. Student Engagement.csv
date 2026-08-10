@@ -1,0 +1,24 @@
+"SECTION D — STUDENT ENGAGEMENT   |   Observe student behaviors, not just teacher actions. Sample at least 5 students across different locations in the classroom.",,,,,,,
+Code,Indicator,1 = Not Observed / Emerging,2 = Developing,3 = Proficient / Effective,4 = Highly Effective,Score (1–4),Source Framework & Why It Matters
+D1,Active Participation Rate,Less than 25% of students visibly engaged. Collaboration minimal or absent.,25–50% engaged; many passive or off-task.,"50–75% actively participating (writing, discussing, solving).",More than 75% actively engaged; energy is visible; students initiating. Structured collaboration on synthesis/problem-solving.,,"FICO V3 (D1) + TEACH (Time on Task — Student Focus) + OECD (Active Learning) + HOTS Student Engagement ('Students collaborate on tasks requiring synthesis, evaluation')
+
+Why: The most direct measure of whether teaching is reaching students."
+D2,Cognitive Engagement Level (Bloom's),Students copying or doing rote recall only. Passively receiving information.,Students completing tasks but without thinking deeply.,Students applying concepts to new problems (Bloom's Apply/Analyze).,"Students creating, evaluating, debating — genuine intellectual work. Actively analyse, interpret, and critique content with supporting evidence.",,"FICO V3 (D2) + HOTS (Bloom's Taxonomy) + OECD (Cognitive Activation) + HOTS Instructional Strategies ('Students actively analyse, interpret, and critique content')
+
+Why: Being busy ≠ being engaged. HOTS alignment ensures we measure thinking, not just activity."
+D3,Student-to-Student Interaction,No peer interaction; silent individual work only.,Students talk but not about content.,Students discuss content in pairs/groups; academic language used.,Students build on each other's ideas; respectful disagreement; peer teaching. Students debate solutions and propose creative alternatives.,,"FICO V3 (D3) + OECD (Collaborative Problem Solving) + TEACH (Culture of Learning) + HOTS Student Engagement ('Students explore multiple perspectives or create novel solutions')
+
+Why: Peer interaction is a force multiplier. In 40+ student Pakistani classrooms, peer learning is a necessity."
+D4,Student Confidence & Risk-Taking,Students afraid to answer; avoidance behaviors visible.,Students answer only when certain; no risk-taking.,Students attempt challenging tasks; some comfortable with mistakes.,"Students volunteer, ask questions, try difficult problems. Mistakes celebrated. Students freely share and debate ideas.",,"FICO V3 (D4) + OECD (Supportive Climate) + TEACH (Positive Language) + HOTS Classroom Environment ('Classroom fosters open discussions and critical thinking')
+
+Why: If students won't take risks, higher-order thinking is impossible."
+D5,On-Task Behavior During Independent Work,Most students off-task during independent/group work.,Students start on-task but lose focus quickly.,Students sustain focus for most of independent work time.,Students self-regulate; seek help appropriately; persist through difficulty.,,"FICO V3 (D5) + TEACH (Time on Task) + OECD (Classroom Management)
+
+Why: Independent work time reveals whether teaching has transferred. Self-regulation is the ultimate goal."
+D6,Student Use of Learning Materials,Students don't interact with provided materials.,"Materials used passively (watching video, holding textbook).",Students actively use materials to solve problems or practice.,Students use materials creatively; extend beyond prescribed use.,,"TEACH (Lesson Facilitation) + OECD (Active Learning)
+
+Why: If students aren't actively using materials, the materials aren't working."
+D7,Inclusivity of Engagement,Only front-row or high-ability students engaged.,Teacher attempts inclusion but success is limited.,Students across ability levels and genders are participating.,Deliberate inclusion of marginalized students; no one invisible. Gender-equitable participation.,,"TEACH (Culture of Learning — Gender) + OECD (Equity) + FICO V3 (C4) + Training Curriculum (Inclusive Education domain)
+
+Why: Pakistan's gender and ability gaps start in the classroom — this is where they end too."
+,SECTION D TOTAL,,,,,,

@@ -1,0 +1,28 @@
+"SECTION F — TEACHER'S SUBJECT KNOWLEDGE   |   Assessed through lesson observation. Does the teacher demonstrate accurate, deep understanding of the content?",,,,,,,
+Code,Indicator,1 = Not Observed / Emerging,2 = Developing,3 = Proficient / Effective,4 = Highly Effective,Score (1–4),Source Framework & Why It Matters
+F1,Content Accuracy,Teacher makes factual errors that go uncorrected.,Mostly accurate but with minor errors or imprecise language.,Content is accurate; no errors observed.,"Content is accurate AND teacher explains WHY (conceptual depth, not just facts).",,"FICO V3 (B9) + TEACH (Lesson Facilitation) + HOTS Observation Form (Practice #2: 'Teacher's explanation of content is clear and correct')
+
+Why: 15–25% of teachers in LMICs make content errors. If the teacher doesn't know the content, nothing else matters."
+F2,Use of Academic Language,Incorrect or no subject-specific terminology used.,Some terms used but not explained or used inconsistently.,Key terms used accurately and explained to students.,Terms used naturally; students also use them; bilingual bridging (Urdu/English) effective.,,"FICO V3 (B10) + OECD (Instructional Clarity) + Training Curriculum (Content Expertise: vocabulary, grammar, academic language)
+
+Why: Academic language is the medium of assessment. Students who don't learn the vocabulary can't pass the exam."
+F3,Anticipation of Student Misconceptions,Teacher unaware of common misconceptions in this topic.,Aware but doesn't address them proactively.,Anticipates and addresses at least 1–2 common misconceptions.,Systematically surfaces and corrects misconceptions; uses diagnostic questions.,,"FICO V3 (B11) + TEACH (Checks for Understanding) + Training Curriculum L1 (diagnosing misconceptions in operations)
+
+Why: Shulman's PCK: knowing WHERE students will struggle is more important than knowing the content itself."
+F4,Depth of Explanation,Superficial/procedural explanation only ('do it this way').,Some conceptual explanation but relies on memorization.,Explains the 'why' behind procedures; uses multiple representations.,Deep conceptual teaching; connects to broader principles; encourages student reasoning.,,"HOTS (Understand/Analyze) + OECD (Cognitive Activation) + TEACH (Lesson Facilitation) + HOTS Observation Form (Practice #4: 'Teacher models by enacting, thinking aloud')
+
+Why: HOTS demands teachers go beyond Remember. A teacher who only teaches procedures produces students who only memorize."
+F5,Subject-Specific Pedagogy: MATH,Math taught purely procedurally; no use of manipulatives or visuals.,Some visual aids but conceptual understanding not developed.,Uses concrete → pictorial → abstract (CPA) progression; manipulatives present.,CPA approach mastered; multiple solution strategies explored; math talk norms established.,,"FICO V3 (BM12–BM13) + EGMA Framework + Training Curriculum L0–L3 Content Expertise: Math (number sense, CPA, operations, fractions, decimals, percentages, measurement, geometry, data)
+
+Why: CPA is gold standard for primary math. Training Curriculum builds this from L0 (basic CPA) through L3 (mentoring peers in concept-based math)."
+F6,Subject-Specific Pedagogy: SCIENCE,Science taught from textbook only; no inquiry or observation.,Some demonstration but teacher-led; students observe passively.,Hands-on activities present; students make predictions and observations.,Full inquiry cycle: question → predict → investigate → conclude. Students design investigations.,,"FICO V3 (BS12–BS13) + OECD (Cognitive Activation) + HOTS (Analyze/Evaluate/Create)
+
+Why: Inquiry-based learning has d=0.40 effect size. Pakistani science classrooms default to lecture — this pushes toward investigation."
+F7,Subject-Specific Pedagogy: LITERACY / LANGUAGE,Reading taught as decoding only; no comprehension strategies.,Some reading activities but no explicit strategy instruction.,"Teacher models reading strategies (prediction, summarizing, questioning). Balanced approach.",Balanced literacy: phonics + fluency + vocabulary + comprehension + writing integrated.,,"FICO V3 (BL12–BL14) + EGRA Framework + Training Curriculum L0–L3 Content Expertise: English & Urdu (phonics, phonological awareness, vocabulary, grammar, reading fluency, comprehension, writing, Arkaan Saazi, Harakaat)
+
+Why: Balanced literacy wins. Training Curriculum builds from L0 (letter sounds, Harakaat) through L3 (coaching peers in integrated literacy)."
+F8,Cross-Curricular Connections,Subject taught in complete isolation.,Occasional reference to other subjects but not developed.,Meaningful connections made to at least one other subject area.,Integrated approach; students see how math connects to science connects to language.,,"OECD (Cognitive Activation) + HOTS Lesson Planning ('Lesson integrates interdisciplinary or real-world applications') + Training Curriculum L2–L3 (interdisciplinary PBL lessons)
+
+Why: Transfer is the ultimate goal of education. Pakistan's siloed curriculum desperately needs cross-curricular connections."
+,,,,,,,
+,SECTION F TOTAL,,,,,,
