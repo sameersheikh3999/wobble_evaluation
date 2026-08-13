@@ -140,6 +140,98 @@ account of the same lesson.
 indicator cannot separate two different lessons more reliably than it separates
 two runs on the *same* lesson — it is not measuring the classroom.
 
+## Binary mode — `run_wobble_binary.py`
+
+Same 37 indicators, same transcript, same hygiene; the model answers **YES or NO**
+instead of picking a level.
+
+```bash
+python run_wobble_binary.py -n 10                 # YES bar = level 3 (Proficient)
+python run_wobble_binary.py -n 10 --yes-at 2      # YES bar = level 2 (observed at all)
+python run_wobble_binary.py -n 10 --yes-at 4      # YES bar = level 4 (highly effective)
+python run_wobble_binary.py --sweep-effort low,medium,high -n 4
+python run_wobble_binary.py --analyse-only wobble_out_binary/verdicts_long.csv
+```
+
+Every other flag is identical to `run_wobble.py`.
+
+### Where the YES bar comes from
+
+Nothing is hand-authored. The YES bar **is** the level-`--yes-at` descriptor from
+the framework CSVs, so the two runs interrogate the same evidence:
+
+> **YES** — the level-3 descriptor is *clearly* met (or a stronger level is)
+> **NO** — anything below that
+> **NA** — the indicator genuinely cannot apply (F5 MATH in a reading lesson)
+
+That default is the framework's own proficiency cut, so binary YES-rate and the
+1–4 run's `p_proficient` are directly comparable.
+
+### Why run it as well as the 1–4 version
+
+On the 1–4 scale most wobble is **adjacent** — a 3 becomes a 4 — and adjacent
+wobble rarely changes what a coach does. Binary strips that cushion out, so every
+disagreement measured here is one that changes the coaching decision. Expect the
+agreement coefficients to look *better* (two categories are easier to agree in)
+while the count of decision-relevant flips stays about the same. **The pair of
+numbers is the finding; neither alone is.**
+
+It also reproduces the framework's own arithmetic exactly: fidelity = actions
+observed ÷ actions prescribed, banded ≥85% High · 60–84% Medium · <60% Low. The
+report tracks whether that **band** holds still across runs, which is the number a
+coaching report actually quotes.
+
+### Three deliberate statistical substitutions
+
+| 1–4 run | Binary run | Why |
+|---|---|---|
+| Krippendorff α (ordinal) | **Gwet's AC1**, α (nominal) and raw agreement, side by side | With two categories and a skewed split, α and κ collapse toward 0 even at 95% agreement — the *prevalence paradox*, a property of the statistic, not of the model. AC1 is chance-corrected but prevalence-robust. Chart 06 shows all three so the gap is visible; the runner prints a warning when it detects the paradox. |
+| Friedman | **Cochran's Q** | Friedman's binary analogue for run-to-run drift. |
+| Bootstrap CI | **Wilson score interval** | A bootstrap of 10 Bernoulli draws returns [1.0, 1.0] for a unanimous indicator — certainty that does not exist. Wilson stays honest at p = 0 and p = 1. |
+
+ICC(2,1) is dropped: it is a variance-components model for interval data and means
+nothing on a 0/1 scale.
+
+**Read `gwet_ac1` before `kripp_alpha`.** Where AC1 is high and α is low, trust AC1
+and quote raw agreement next to it. Where *both* are low, the model genuinely is
+unreliable there.
+
+### Binary-only columns worth knowing
+
+| Column | Meaning |
+|---|---|
+| `single_pass_error` | chance one run contradicts the majority verdict — the practical error rate of quoting a single pass |
+| `disagree_rate` | chance two runs contradict each other |
+| `votes_needed` | smallest **odd** number of passes whose majority vote reproduces this verdict 95% of the time. `1` = one pass is enough. Blank = too close to a coin flip for voting to ever converge — fix the rubric, not the sample size |
+| `p_coinflip` | two-sided binomial vs p=0.5. A **large** value is the bad news: the verdict is indistinguishable from chance |
+| `band` / `bands_seen` / `band_flips` | the section's High/Medium/Low fidelity band, and whether it moved between runs |
+
+### Output (per run directory)
+
+| File | Contents |
+|---|---|
+| `verdicts_long.csv` | one row per indicator × iteration, with the YES/NO string and evidence (written after every iteration) |
+| `verdicts_wide.csv` | indicators × runs matrix |
+| `indicator_wobble.csv` | YES rate, Wilson CI, modal share, single-pass error, votes needed, `p_coinflip`, `p_wobble`/`q_wobble`, grade |
+| `reliability.csv` | α, **AC1**, PABAK, Fleiss' κ, pairwise agreement, YES prevalence, paradox flag, Cochran's Q — overall and per section |
+| `section_fidelity.csv` | section YES rate, CI, band, band flips, flip counts |
+| `headline.json` | the numbers to quote |
+| `run_meta.json` | full config + model-call count + wall time |
+| `01..07_*.png` | headline · verdict matrix · YES rate · verdict stability · section fidelity · **agreement coefficients** · drift |
+
+Grades are tighter than the 1–4 run's on purpose — there is no adjacent band to
+hide in, so 70% modal agreement is already `material`:
+
+| Grade | Rule |
+|---|---|
+| stable | identical verdict in every run |
+| minor | ≥90% agree with the majority |
+| material | ≥70% agree |
+| severe | below 70%, or mostly NA |
+
+`run_multi.py` has no binary counterpart yet — pooling across transcripts is still
+1–4 only.
+
 ## Reading the result
 
 Look at **overall Krippendorff's α (ordinal)** first:
@@ -186,18 +278,25 @@ nothing to score.
 ## Layout
 
 ```
-run_wobble.py           CLI entry point — one session
-run_multi.py            CLI entry point — a directory of sessions, pooled
+run_wobble.py           CLI entry point — one session, 1-4 scale
+run_wobble_binary.py    CLI entry point — one session, YES/NO scale
+run_multi.py            CLI entry point — a directory of sessions, pooled (1-4 only)
 wobble_eval/
   config.py             hyperparameters (+ the temperature explanation)
   framework.py          all 37 indicators, 4 level descriptors each
   session.py            embedded transcript + loader
-  prompts.py            scoring prompts + three-tier JSON parser
+  prompts.py            1-4 scoring prompts + three-tier JSON parser
   backend.py            Agent SDK (subscription) / API backends
   stats.py              bootstrap CI, α, ICC, κ, Holm, Monte-Carlo tests
   analysis.py           long scores -> wobble tables
-  charts.py             the seven figures
+  charts.py             the seven 1-4 figures
+  binary.py             YES/NO rubric + prompts + parser + AC1/Cochran/Wilson + analysis
+  charts_binary.py      the seven binary figures (shares charts.py's palette)
 ```
+
+`binary.py` and `charts_binary.py` sit alongside the 1–4 path rather than replacing
+it: both scales share `framework.py`, `session.py`, `backend.py` and the reliability
+primitives in `stats.py`, so the two reports cannot drift apart.
 
 `framework.py`, `stats.py`, `analysis.py` and `charts.py` are extracted from the
 same sources as the Colab notebook, so the two paths cannot drift apart.

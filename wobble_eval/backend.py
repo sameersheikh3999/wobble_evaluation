@@ -23,6 +23,7 @@ def _ensure_cli_on_path():
     candidates = [
         os.path.join(os.environ.get("APPDATA", ""), "npm"),
         os.path.expanduser("~/.npm-global/bin"),
+        os.path.expanduser("~/.local/bin"),      # native installer's default on Windows
         "/usr/local/bin",
         os.path.expanduser("~/AppData/Roaming/npm"),
     ]

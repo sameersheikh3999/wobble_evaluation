@@ -101,3 +101,11 @@ ipython_config.py
 Thumbs.db
 desktop.ini
 ehthumbs.db
+
+# Pooled/comparison run outputs. Same reason as Transcripts/ and wobble_out*/:
+# the evidence columns quote classroom speech verbatim and name individual
+# students, so these are PII even though the raw transcripts are excluded.
+multi_binary_out/
+multi_scale14_out/
+scale_comparison/
+*.log

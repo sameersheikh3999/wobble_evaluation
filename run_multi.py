@@ -457,15 +457,26 @@ def main(argv=None):
 
     print("\n" + "=" * 78 + "\nRELIABILITY ACROSS TRANSCRIPTS\n" + "=" * 78)
     al = headlines.kripp_alpha_ordinal
-    print(f"  alpha: mean {al.mean():.3f} | min {al.min():.3f} ({headlines.loc[al.idxmin(),'session']}) "
-          f"| max {al.max():.3f} ({headlines.loc[al.idxmax(),'session']})")
+    # alpha is undefined for a session with fewer than two usable runs; idxmin/idxmax
+    # raise on an all-NA column, which would throw away a completed scoring run at the
+    # very last step. Report what is computable and say how many were not.
+    if al.notna().any():
+        print(f"  alpha: mean {al.mean():.3f} | "
+              f"min {al.min():.3f} ({headlines.loc[al.idxmin(), 'session']}) "
+              f"| max {al.max():.3f} ({headlines.loc[al.idxmax(), 'session']})")
+        if al.isna().any():
+            print(f"  ! {int(al.isna().sum())} transcript(s) had too few usable runs to "
+                  f"compute alpha and are excluded from that mean.")
+    else:
+        print("  alpha: not computable for any transcript (needs >= 2 usable runs each).")
     print(f"  transcripts at alpha >= 0.80 (indicator-level reportable): "
-          f"{int((al >= .80).sum())}/{len(al)}")
+          f"{int((al >= .80).sum())}/{int(al.notna().sum())}")
     print(f"  transcripts at alpha >= 0.67 (section-level only)        : "
-          f"{int((al >= .67).sum())}/{len(al)}")
-    print(f"  overall mean score across transcripts: {headlines.overall_mean.mean():.3f} "
-          f"(SD {headlines.overall_mean.std(ddof=1):.3f}, "
-          f"range {headlines.overall_mean.min():.2f}-{headlines.overall_mean.max():.2f})")
+          f"{int((al >= .67).sum())}/{int(al.notna().sum())}")
+    om = headlines.overall_mean
+    if om.notna().any():
+        print(f"  overall mean score across transcripts: {om.mean():.3f} "
+              f"(SD {om.std(ddof=1):.3f}, range {om.min():.2f}-{om.max():.2f})")
 
     if len(decomp):
         w = decomp.within_transcript_sd

@@ -446,7 +446,10 @@ def chart_drift(res, cfg, session_meta, outdir):
     titles(ax, "Run-to-run drift")
     legend_below(fig, ax, pts=48, ncol=5)
     fr_p, ic_p = reliability.loc[0, "friedman_p"], reliability.loc[0, "p_raters_drift"]
-    caption(fig, ax, f"Friedman p={fr_p:.4f} · ICC rater F-test p={ic_p:.4f}. "
+    # both are None/NaN when a run has too few iterations for the test to exist
+    fr_s = "n/a" if fr_p is None or pd.isna(fr_p) else f"{fr_p:.4f}"
+    ic_s = "n/a" if ic_p is None or pd.isna(ic_p) else f"{ic_p:.4f}"
+    caption(fig, ax, f"Friedman p={fr_s} · ICC rater F-test p={ic_s}. "
             + ("Runs differ systematically — the noise has a direction, so a single run is biased, "
                "not merely imprecise, and averaging converges on that bias."
                if pd.notna(fr_p) and fr_p < CFG.ALPHA else

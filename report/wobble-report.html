@@ -1,0 +1,746 @@
+<title>Does the Scorer Agree With Itself?</title>
+<style>
+  /* ---------------------------------------------------------------
+     Palette derives from the experiment's own chart colours: the deep
+     blue of the ordinal ramp, and the stable/unstable status hues.
+     Neutrals carry a slight blue bias so they sit with the accent.
+     --------------------------------------------------------------- */
+  :root {
+    --paper:      #f4f6f8;
+    --surface:    #ffffff;
+    --surface-2:  #eef1f4;
+    --ink:        #15181f;
+    --ink-2:      #3c434f;
+    --muted:      #6a7280;
+    --rule:       #dde2e8;
+    --rule-soft:  #e8ecf0;
+    --accent:     #1d5fb0;
+    --accent-dim: #dde8f6;
+    --stable:     #12704a;
+    --stable-dim: #dcece4;
+    --warn:       #9c6410;
+    --warn-dim:   #f2e9d8;
+    --alert:      #a83731;
+    --alert-dim:  #f5e2e0;
+    --shadow:     0 1px 2px rgba(21, 24, 31, .06), 0 8px 24px rgba(21, 24, 31, .05);
+
+    --f-display: "Segoe UI", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --f-body:    Constantia, Cambria, Georgia, "Times New Roman", serif;
+    --f-data:    Consolas, "SF Mono", "Roboto Mono", ui-monospace, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:      #0e1116;
+      --surface:    #161a21;
+      --surface-2:  #1c212a;
+      --ink:        #e6e9ee;
+      --ink-2:      #b6bdc8;
+      --muted:      #838c99;
+      --rule:       #2a313b;
+      --rule-soft:  #222831;
+      --accent:     #74aae8;
+      --accent-dim: #17293f;
+      --stable:     #5cbc92;
+      --stable-dim: #14291f;
+      --warn:       #d9a445;
+      --warn-dim:   #2b2415;
+      --alert:      #e0776f;
+      --alert-dim:  #2d1a18;
+      --shadow:     0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px rgba(0, 0, 0, .3);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:      #0e1116;
+    --surface:    #161a21;
+    --surface-2:  #1c212a;
+    --ink:        #e6e9ee;
+    --ink-2:      #b6bdc8;
+    --muted:      #838c99;
+    --rule:       #2a313b;
+    --rule-soft:  #222831;
+    --accent:     #74aae8;
+    --accent-dim: #17293f;
+    --stable:     #5cbc92;
+    --stable-dim: #14291f;
+    --warn:       #d9a445;
+    --warn-dim:   #2b2415;
+    --alert:      #e0776f;
+    --alert-dim:  #2d1a18;
+    --shadow:     0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px rgba(0, 0, 0, .3);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--f-body);
+    font-size: 1.0625rem;
+    line-height: 1.72;
+    margin: 0;
+    padding: 0 1.25rem 6rem;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 40rem; margin: 0 auto; }
+  .wide { max-width: 50rem; margin-left: auto; margin-right: auto; }
+
+  /* ---------- masthead ---------- */
+  header.masthead {
+    max-width: 40rem;
+    margin: 0 auto;
+    padding: 4.5rem 0 2rem;
+  }
+  .eyebrow {
+    font-family: var(--f-data);
+    font-size: .7rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 1.5rem;
+  }
+  h1 {
+    font-family: var(--f-display);
+    font-size: clamp(2rem, 5.5vw, 2.9rem);
+    line-height: 1.1;
+    font-weight: 600;
+    letter-spacing: -.022em;
+    text-wrap: balance;
+    margin: 0 0 1.1rem;
+  }
+  .standfirst {
+    font-size: 1.19rem;
+    line-height: 1.62;
+    color: var(--ink-2);
+    margin: 0 0 2.4rem;
+    text-wrap: pretty;
+  }
+
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .fact { background: var(--surface); padding: .95rem 1rem; }
+  .fact .n {
+    font-family: var(--f-data);
+    font-size: 1.35rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+    display: block;
+    line-height: 1.2;
+  }
+  .fact .l {
+    font-family: var(--f-display);
+    font-size: .74rem;
+    color: var(--muted);
+    display: block;
+    margin-top: .3rem;
+    line-height: 1.35;
+  }
+
+  /* ---------- structure ---------- */
+  section { max-width: 40rem; margin: 0 auto; padding-top: 3.4rem; }
+  h2 {
+    font-family: var(--f-display);
+    font-size: 1.55rem;
+    font-weight: 600;
+    letter-spacing: -.016em;
+    line-height: 1.22;
+    text-wrap: balance;
+    margin: 0 0 .3rem;
+    padding-top: 1.6rem;
+    border-top: 2px solid var(--ink);
+  }
+  h3 {
+    font-family: var(--f-display);
+    font-size: 1.06rem;
+    font-weight: 600;
+    letter-spacing: -.008em;
+    margin: 2.1rem 0 .5rem;
+    line-height: 1.35;
+  }
+  p { margin: 0 0 1.05rem; text-wrap: pretty; }
+  a { color: var(--accent); }
+  strong { font-weight: 600; color: var(--ink); }
+  .lede { font-size: 1.1rem; color: var(--ink-2); margin-bottom: 1.6rem; }
+
+  ul { margin: 0 0 1.2rem; padding-left: 1.15rem; }
+  li { margin-bottom: .5rem; }
+
+  /* ---------- the run-strip motif: ten repeated scorings ---------- */
+  .runs {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .runs .cell {
+    width: 1.55rem;
+    height: 1.55rem;
+    display: grid;
+    place-items: center;
+    font-family: var(--f-data);
+    font-size: .72rem;
+    font-weight: 700;
+    border-radius: 2px;
+    color: var(--surface);
+  }
+  .cell.y { background: var(--accent); }
+  .cell.n { background: var(--accent-dim); color: var(--accent); }
+  .runline {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: .45rem;
+    padding: 1rem 1.05rem;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    margin-bottom: .7rem;
+  }
+  .runline .cap {
+    font-family: var(--f-display);
+    font-size: .82rem;
+    color: var(--ink-2);
+  }
+  .runline .cap b { color: var(--ink); font-weight: 600; }
+  .runline .verdict {
+    font-family: var(--f-data);
+    font-size: .72rem;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+  }
+  .v-stable { color: var(--stable); }
+  .v-bad    { color: var(--alert); }
+
+  /* ---------- callout ---------- */
+  .callout {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent);
+    border-radius: 3px;
+    padding: 1.15rem 1.3rem;
+    margin: 1.7rem 0;
+    box-shadow: var(--shadow);
+  }
+  .callout.warn  { border-left-color: var(--warn); }
+  .callout.alert { border-left-color: var(--alert); }
+  .callout p:last-child { margin-bottom: 0; }
+  .callout .tag {
+    font-family: var(--f-data);
+    font-size: .68rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+    margin-bottom: .5rem;
+  }
+
+  /* ---------- tables ---------- */
+  .tablewrap {
+    overflow-x: auto;
+    margin: 1.5rem 0 1.8rem;
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    background: var(--surface);
+  }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  caption {
+    caption-side: top;
+    text-align: left;
+    font-family: var(--f-display);
+    font-size: .82rem;
+    color: var(--muted);
+    padding: .8rem 1rem .55rem;
+  }
+  th, td {
+    padding: .58rem .85rem;
+    text-align: left;
+    border-bottom: 1px solid var(--rule-soft);
+    white-space: nowrap;
+  }
+  th {
+    font-family: var(--f-display);
+    font-size: .78rem;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: .01em;
+    border-bottom: 1px solid var(--rule);
+  }
+  td.num, th.num {
+    font-family: var(--f-data);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+  }
+  td:first-child { white-space: normal; }
+  tbody tr:last-child td { border-bottom: none; }
+  .win { color: var(--stable); font-weight: 600; }
+
+  .pill {
+    font-family: var(--f-data);
+    font-size: .68rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: .16rem .45rem;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+  .p-ok   { background: var(--stable-dim); color: var(--stable); }
+  .p-warn { background: var(--warn-dim);   color: var(--warn); }
+  .p-bad  { background: var(--alert-dim);  color: var(--alert); }
+
+  /* ---------- findings ---------- */
+  .finding {
+    border-top: 1px solid var(--rule);
+    padding-top: 1.5rem;
+    margin-top: 2.2rem;
+  }
+  .finding .kicker {
+    font-family: var(--f-data);
+    font-size: .7rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+    margin-bottom: .55rem;
+  }
+  .finding h3 { margin-top: 0; font-size: 1.22rem; }
+
+  code {
+    font-family: var(--f-data);
+    font-size: .87em;
+    background: var(--surface-2);
+    padding: .1em .34em;
+    border-radius: 2px;
+  }
+
+  footer {
+    max-width: 40rem;
+    margin: 4.5rem auto 0;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--rule);
+    font-size: .88rem;
+    color: var(--muted);
+  }
+  footer p { margin-bottom: .6rem; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+
+<header class="masthead">
+  <p class="eyebrow">Taleemabad · Coaching Framework · Reliability Study</p>
+  <h1>Does the scorer agree with itself?</h1>
+  <p class="standfirst">
+    We asked an AI to grade the same ten recorded lessons, over and over, using the same
+    rubric and the same words each time. If the grade changes when nothing else has, the
+    grade cannot be trusted. This is what we found.
+  </p>
+  <div class="facts">
+    <div class="fact"><span class="n">800</span><span class="l">scoring passes</span></div>
+    <div class="fact"><span class="n">8</span><span class="l">distinct lessons</span></div>
+    <div class="fact"><span class="n">37</span><span class="l">indicators graded</span></div>
+    <div class="fact"><span class="n">2</span><span class="l">grading scales</span></div>
+  </div>
+</header>
+
+<section>
+  <h2>The question behind the experiment</h2>
+
+  <p class="lede">
+    Taleemabad runs a coaching programme for teachers. A trained observer watches a lesson
+    and rates it against 37 separate points — whether the teacher stated a learning
+    objective, whether students talked to each other, whether the questions asked required
+    real thinking. Those ratings become the coaching conversation the teacher has afterwards.
+  </p>
+
+  <p>
+    Doing that by hand, for thousands of classrooms, is slow and expensive. So the obvious
+    idea is to have an AI read a transcript of the lesson and produce the ratings instead.
+  </p>
+
+  <p>
+    Before trusting that, there is a question that has to be answered first, and it is not
+    "is the AI right?" It is something more basic: <strong>does the AI give the same answer
+    twice?</strong> If you hand it the identical transcript on Monday and again on Tuesday
+    and it says the teacher gave good feedback on Monday and poor feedback on Tuesday, then
+    whatever it is measuring, it is not the lesson. A measurement that moves when nothing
+    has changed is unusable, regardless of how sensible any single answer looks.
+  </p>
+
+  <p>
+    That movement is what we set out to measure. We called it <em>wobble</em>.
+  </p>
+</section>
+
+<section>
+  <h2>What we actually did</h2>
+
+  <p>
+    We took ten transcripts of real lessons — in Urdu, Swahili and English, running between
+    ten and thirty-two minutes. We gave each one to the AI and asked it to grade all 37
+    indicators. Then we did it again. And again, ten times per transcript, with the
+    transcript, the rubric and the instructions kept exactly the same every time.
+  </p>
+
+  <p>
+    Any difference between those ten answers cannot come from the lesson, the rubric or the
+    question. It can only come from the scorer.
+  </p>
+
+  <p>
+    We ran the whole thing twice over, using two different grading scales, to see whether the
+    shape of the question changed the answer's stability:
+  </p>
+
+  <ul>
+    <li><strong>A 1–4 scale</strong>, the framework's own format, where 1 means not observed
+      and 4 means highly effective.</li>
+    <li><strong>A plain yes/no</strong>, where the AI simply judges whether the standard was
+      clearly met.</li>
+  </ul>
+
+  <p>
+    That is 800 separate gradings in total. Here is what a stable indicator and an unstable
+    one actually look like — each square is one pass over the same transcript:
+  </p>
+
+  <div class="runline">
+    <span class="cap"><b>B1 · Instructional Clarity</b> — did the teacher state a learning
+      objective?</span>
+    <div class="runs" role="img" aria-label="Ten passes, all answered No">
+      <span class="cell n">N</span><span class="cell n">N</span><span class="cell n">N</span>
+      <span class="cell n">N</span><span class="cell n">N</span><span class="cell n">N</span>
+      <span class="cell n">N</span><span class="cell n">N</span><span class="cell n">N</span>
+      <span class="cell n">N</span>
+    </div>
+    <span class="verdict v-stable">Ten passes, one answer — trustworthy</span>
+  </div>
+
+  <div class="runline">
+    <span class="cap"><b>C4 · Equitable Participation</b> — were all students deliberately
+      included?</span>
+    <div class="runs" role="img" aria-label="Ten passes, four Yes and six No, in no pattern">
+      <span class="cell n">N</span><span class="cell y">Y</span><span class="cell n">N</span>
+      <span class="cell y">Y</span><span class="cell n">N</span><span class="cell n">N</span>
+      <span class="cell y">Y</span><span class="cell n">N</span><span class="cell y">Y</span>
+      <span class="cell n">N</span>
+    </div>
+    <span class="verdict v-bad">Same lesson, same question — the answer is close to a coin toss</span>
+  </div>
+
+  <p>
+    The second case is the problem in miniature. A coach reading pass 2 would praise the
+    teacher for including everyone. A coach reading pass 3 would flag it as a weakness. Both
+    reports would be generated from the identical recording.
+  </p>
+</section>
+
+<section>
+  <h2>What we measured</h2>
+
+  <p>
+    Four things, each answering a different question a sceptical reader would ask.
+  </p>
+
+  <h3>1. Does the answer hold still?</h3>
+  <p>
+    For every indicator we counted how often a single pass disagreed with the majority of
+    the other passes. This is the practical error rate of quoting one AI run — the chance
+    that the report a teacher receives contradicts what the same system would have said on a
+    rerun.
+  </p>
+
+  <h3>2. How reliable is each indicator, on its own?</h3>
+  <p>
+    Because we had ten lessons rather than one, every individual indicator got its own
+    reliability score across the whole set. We used a statistic called <strong>Gwet's
+    AC1</strong>, which runs from 0 (pure noise) to 1 (perfect repeatability). We chose it
+    over the more familiar Cohen's kappa deliberately: when an indicator is nearly always
+    "no" — which many of these are — kappa collapses toward zero even when the runs agree
+    almost perfectly. That is a known flaw in the statistic, not a fact about the scorer, and
+    it would have made good indicators look broken.
+  </p>
+
+  <h3>3. Does the indicator tell lessons apart?</h3>
+  <p>
+    This one is easy to overlook and turned out to matter most. An indicator that answers
+    "no" for every lesson in the sample is perfectly repeatable — and completely useless. It
+    carries no information a coach could act on. So alongside reliability we tested whether
+    each indicator's answer actually varied across the ten lessons.
+  </p>
+
+  <h3>4. Does the headline verdict survive?</h3>
+  <p>
+    The framework converts scores into a band — <strong>High</strong> (85% or more of
+    standards met), <strong>Medium</strong> (60–84%) or <strong>Low</strong> (under 60%).
+    That band is the thing a coaching report actually quotes. We checked how often the band
+    changed between passes on the same lesson.
+  </p>
+</section>
+
+<section>
+  <h2>What we found</h2>
+
+  <div class="finding">
+    <span class="kicker">Finding 1 · the good news</span>
+    <h3>Overall, the scorer is consistent</h3>
+    <p>
+      Across all 37 indicators and all ten lessons, average reliability came out at
+      <strong>0.87</strong> on a 0-to-1 scale — comfortably in the range normally treated as
+      dependable. A single pass contradicted the majority about <strong>5% of the
+      time</strong>. Two-thirds of indicators returned an identical answer in all ten passes.
+    </p>
+    <p>
+      The overall fidelity band for a lesson held steady on 9 of the 10 transcripts. If you
+      report one number per lesson, that number is solid.
+    </p>
+  </div>
+
+  <div class="finding">
+    <span class="kicker">Finding 2 · the biggest surprise</span>
+    <h3>A quarter of the framework carries no signal at all</h3>
+    <p>
+      Nine of the 37 indicators answered <strong>"no" on every single lesson</strong> — all
+      ten transcripts, all ten passes, both grading scales. Perfectly consistent, and
+      perfectly uninformative.
+    </p>
+    <p>
+      They include Quality Questioning, Effective Feedback, Student Agency, Differentiation,
+      Self &amp; Peer Assessment, and Use of Technology. Six of them sit in Section C, the
+      section meant to capture high-leverage teaching practices — which means half of that
+      section discriminated between no lessons whatsoever.
+    </p>
+    <div class="callout warn">
+      <span class="tag">Why this matters</span>
+      <p>
+        Either the bar for these standards sits above anything happening in these
+        classrooms, or the behaviour simply is not visible in an audio transcript. Both are
+        fixable, but they need different fixes — and neither is visible if you only ever
+        score one lesson, where "always no" looks like a well-behaved indicator.
+      </p>
+    </div>
+  </div>
+
+  <div class="finding">
+    <span class="kicker">Finding 3 · the weak point</span>
+    <h3>One indicator is close to unusable, and we know why</h3>
+    <p>
+      <strong>C4, Equitable Participation</strong>, scored an AC1 of 0.40 on the yes/no scale
+      — the worst in the framework — and changed its verdict on 8 of the 10 lessons.
+      <strong>B2, Lesson Structure</strong>, was second worst.
+    </p>
+    <p>
+      Because we also asked the AI to explain each judgement, we can see the cause rather
+      than guess at it. C4's standard reads: <em>"Deliberate strategies: cold call,
+      pair-share, name sticks. Diverse students included."</em> That is two requirements
+      joined into one. The passes that said yes pointed to the teacher cold-calling students
+      by name; the passes that said no pointed out that the volunteers were the confident
+      readers and the silent children stayed silent. Both readings are correct. The rubric
+      never says which one decides.
+    </p>
+    <p>
+      Splitting compound standards like this into separate checks is the single clearest
+      improvement available.
+    </p>
+  </div>
+
+  <div class="finding">
+    <span class="kicker">Finding 4 · the reporting risk</span>
+    <h3>Two sections cannot be reported from a single pass</h3>
+    <p>
+      Section B (Lesson Plan Fidelity) and Section D (Student Engagement) were the trouble
+      spots. Their High/Medium/Low band moved between passes on roughly half the lessons.
+    </p>
+    <div class="tablewrap">
+      <table>
+        <caption>How often each section's reported band changed across identical reruns</caption>
+        <thead>
+          <tr>
+            <th>Section</th>
+            <th class="num">Band unstable</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>B · Lesson Plan Fidelity</td><td class="num">5 of 10 lessons</td>
+            <td><span class="pill p-bad">Do not quote from one pass</span></td></tr>
+          <tr><td>C · High-Leverage Practices</td><td class="num">0 of 10 lessons</td>
+            <td><span class="pill p-ok">Stable</span></td></tr>
+          <tr><td>D · Student Engagement</td><td class="num">6 of 10 lessons</td>
+            <td><span class="pill p-bad">Do not quote from one pass</span></td></tr>
+          <tr><td>F · Teacher Subject Knowledge</td><td class="num">1 of 10 lessons</td>
+            <td><span class="pill p-ok">Stable</span></td></tr>
+          <tr><td>All sections combined</td><td class="num">1 of 10 lessons</td>
+            <td><span class="pill p-ok">Stable</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      On one lesson, Section D swung from 43% to 86% across identical reruns — the difference
+      between a Low and a High rating, decided purely by which pass happened to be saved.
+      Section C looks stable here for an uncomfortable reason: it was scored Low on every
+      lesson, so there was nothing for the band to move between.
+    </p>
+  </div>
+
+  <div class="finding">
+    <span class="kicker">Finding 5 · the scale comparison</span>
+    <h3>Yes/no is not more reliable than 1–4</h3>
+    <p>
+      We expected the simpler question to produce steadier answers. On a 1–4 scale most
+      disagreement is between neighbouring levels — a 3 becomes a 4 — which rarely changes
+      what a coach does. Forcing a yes/no removes that cushion, so we predicted it would
+      either be visibly steadier or visibly worse.
+    </p>
+    <p>
+      It was neither. Comparing like with like — converting the 1–4 scores into
+      met/not-met and running identical statistics on both — the two approaches came out
+      level, with a slight edge to the 1–4 scale.
+    </p>
+    <div class="tablewrap">
+      <table>
+        <caption>Same lessons, same passes, same statistics — the two scales head to head</caption>
+        <thead>
+          <tr>
+            <th>Measure</th>
+            <th class="num">1–4 scale</th>
+            <th class="num">Yes / no</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Reliability (AC1, higher is better)</td>
+            <td class="num win">0.867</td><td class="num">0.866</td></tr>
+          <tr><td>Single-pass error (lower is better)</td>
+            <td class="num win">5.3%</td><td class="num">5.5%</td></tr>
+          <tr><td>Unstable band readings</td>
+            <td class="num win">10 of 50</td><td class="num">13 of 50</td></tr>
+          <tr><td>Indicators with no signal</td>
+            <td class="num">9</td><td class="num">9</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      The two scales reached the same verdict on <strong>88%</strong> of judgements. Where
+      they disagreed, both were equally unsteady — meaning disagreement between the scales is
+      a symptom of a badly worded indicator, not of a badly chosen scale.
+    </p>
+    <div class="callout">
+      <span class="tag">Prediction not supported</span>
+      <p>
+        We built the yes/no scorer on the expectation that it would produce more dependable
+        coaching decisions. The evidence does not support that. It is reported here because
+        it was the hypothesis under test, and it failed.
+      </p>
+    </div>
+  </div>
+
+  <div class="finding">
+    <span class="kicker">Finding 6 · a useful side effect</span>
+    <h3>The AI knows which of its own answers are shaky</h3>
+    <p>
+      We asked the scorer to rate its own confidence on each judgement, defined precisely as
+      the chance a second careful observer would agree. Then we checked that claim against
+      what actually happened on the other passes.
+    </p>
+    <p>
+      It was <strong>under</strong>-confident: it claimed 0.70 on average and earned 0.88.
+      More usefully, the ordering held. <strong>Every judgement it rated 0.70 or above turned
+      out to be 98–100% reproducible.</strong> That gives a practical shortcut — trust the
+      confident calls from a single pass, and rerun only the hesitant ones.
+    </p>
+  </div>
+</section>
+
+<section>
+  <h2>What we would do with this</h2>
+  <ul>
+    <li><strong>Report the overall lesson score, not Section B or D, from a single pass.</strong>
+      The combined figure is stable; those two sections are not.</li>
+    <li><strong>Rewrite the compound standards</strong>, starting with C4 and B2. Where a
+      standard bundles two requirements, split it or state which one decides.</li>
+    <li><strong>Review the nine silent indicators.</strong> A quarter of the framework is
+      currently generating no coaching signal. Decide whether the bar is wrong or the
+      evidence is invisible in a transcript.</li>
+    <li><strong>Keep the 1–4 scale.</strong> It matched yes/no on every reliability measure
+      and preserves more information — you can always collapse a level into a verdict later,
+      but you cannot recover a level from a yes.</li>
+    <li><strong>Use the confidence score to triage</strong> rather than rerunning everything.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>What this study does not show</h2>
+
+  <div class="callout alert">
+    <span class="tag">The central limitation</span>
+    <p>
+      This measures whether the scorer <strong>agrees with itself</strong>, not whether it is
+      <strong>right</strong>. An indicator that returns the same wrong answer ten times
+      scores perfectly here. Nothing in this experiment was compared against a human expert's
+      judgement of the same lessons, so no claim about accuracy can be made from it. That is
+      a separate study, and it is the necessary next one.
+    </p>
+  </div>
+
+  <p>Three narrower caveats worth stating:</p>
+
+  <ul>
+    <li><strong>Eight lessons, not ten.</strong> Two pairs of files turned out to be the same
+      audio transcribed twice. We kept them, because they let us test something else: how
+      much the verdict depends on the transcription rather than the scoring. The pairs agreed
+      92% of the time, and six indicators changed verdict from the re-transcription alone —
+      instability that better AI scoring cannot fix.</li>
+    <li><strong>Transcripts only.</strong> The scorer never sees the classroom. Anything a
+      human observer would judge visually — seating, body language, who is actually writing —
+      is invisible to it, which may explain part of Finding 2.</li>
+    <li><strong>One incomplete transcript.</strong> On the yes/no run, four of ten passes on
+      one lesson failed to return usable output, so that lesson rests on six passes rather
+      than ten.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Method, in brief</h2>
+  <div class="tablewrap">
+    <table>
+      <caption>Experimental setup</caption>
+      <tbody>
+        <tr><td>Framework</td><td>Taleemabad Coaching Framework — 37 indicators across
+          4 sections</td></tr>
+        <tr><td>Material</td><td>10 lesson transcripts (8 distinct lessons); Urdu, Swahili,
+          English; 10–32 minutes</td></tr>
+        <tr><td>Scorer</td><td>Claude Opus 5, no tools, single response per call</td></tr>
+        <tr><td>Repetitions</td><td>10 identical passes per transcript, per scale</td></tr>
+        <tr><td>Total gradings</td><td>800 scoring passes; roughly 29,000 individual
+          judgements</td></tr>
+        <tr><td>Reliability statistic</td><td>Gwet's AC1, with Krippendorff's alpha and raw
+          agreement reported alongside</td></tr>
+        <tr><td>Significance</td><td>Holm correction applied across all 37 indicators</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Everything was held constant between passes: same transcript, same rubric text, same
+    instructions, same model settings. The scorer had no access to files, the web, or its own
+    previous answers.
+  </p>
+</section>
+
+<footer>
+  <p>
+    Taleemabad Coaching Framework reliability study. All figures drawn from 800 scoring
+    passes across 10 lesson transcripts.
+  </p>
+  <p>
+    Reliability is not accuracy. This study establishes that the scorer is consistent; a
+    separate comparison against expert human ratings is required before it can be called
+    correct.
+  </p>
+</footer>
