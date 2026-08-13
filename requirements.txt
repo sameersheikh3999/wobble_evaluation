@@ -1,0 +1,28 @@
+# Dependencies for run_wobble.py (1-4 scale) and run_wobble_binary.py (YES/NO).
+#
+#   python -m venv .venv
+#   .venv\Scripts\python.exe -m pip install -r requirements.txt      # Windows
+#   .venv/bin/python -m pip install -r requirements.txt              # macOS / Linux
+#
+# Versions below are the ones this project has actually been run on (Python 3.14.7).
+# The lower bounds are what the code needs; the pins are what was verified.
+
+# ---- analysis + charts (required for every path, including --analyse-only) ----
+pandas>=2.0            # long/wide score frames, groupby, CSV io
+numpy>=1.24            # the score matrices and all vectorised stats
+scipy>=1.10            # binomtest, fisher_exact, chi2, norm, binom, spearmanr,
+                       # friedmanchisquare, levene, kruskal, mode, f
+matplotlib>=3.7        # the charts; driven headless via the Agg backend
+
+# ---- model access: subscription path (the default, --backend agent_sdk) ----
+claude-agent-sdk>=0.2   # drives the local `claude` CLI, so auth comes from
+                        # ~/.claude/.credentials.json — no API key, no API billing
+anyio>=4.0              # the SDK's async runtime; run_wobble* call it synchronously
+
+# ---- model access: API path (ONLY if you use --backend api) ----
+# Not installed by default: it bills the Anthropic API rather than the subscription.
+# anthropic>=0.40
+
+# ---- verified working set ----
+# pandas==3.0.5  numpy==2.5.2  scipy==1.18.0  matplotlib==3.11.1
+# claude-agent-sdk==0.2.134  anyio==4.14.2
