@@ -44,7 +44,7 @@ import pandas as pd
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from run_wobble import report, run_experiment
-from wobble_eval import analysis
+from wobble_eval import analysis, exclusions
 from wobble_eval.config import Config
 from wobble_eval.framework import ALL_CODES, CODE2NAME, CODE2SECTION
 from wobble_eval.session import load_session, session_meta, turn_stats
@@ -330,8 +330,17 @@ def main(argv=None):
                    action="store_false")
     p.add_argument("--analyse-only", action="store_true",
                    help="skip all model calls; re-pool whatever is already in --out")
+    p.add_argument("--exclude", default="",
+                   help="indicators to drop from scoring AND analysis: a named "
+                        "set (unreliable | wording | unobservable | none) or a "
+                        "comma-separated code list")
     p.add_argument("--limit", type=int, default=0, help="score at most N sessions (smoke test)")
     a = p.parse_args(argv)
+    _drop = tuple(exclusions.resolve(a.exclude))
+    if _drop:
+        print(f"EXCLUDED - {len(_drop)} indicator(s) dropped from scoring "
+              f"and analysis:")
+        print(exclusions.describe(_drop))
 
     sections = tuple(s.strip().upper() for s in a.sections.split(",") if s.strip())
     os.makedirs(a.out, exist_ok=True)
@@ -379,7 +388,7 @@ def main(argv=None):
         print(f"\nreusing {a.reuse}/ for session {SHORT(reuse_id)} "
               f"({rm.get('N_ITERATIONS')} iterations, effort={rm.get('EFFORT')})")
 
-    per_session, headline_rows = [], []
+    per_session, headline_rows, failed = [], [], []
     todo = [s for s in sessions if s["session_id"] != reuse_id]
     if a.limit:
         todo = todo[:a.limit]
@@ -393,6 +402,7 @@ def main(argv=None):
         out_dir = a.reuse if sid == reuse_id and a.reuse else os.path.join(a.out, short)
         cfg = Config(MODEL=a.model, EFFORT=a.effort, N_ITERATIONS=a.iterations,
                      SECTIONS=sections, MAX_CONCURRENCY=a.concurrency,
+                     EXCLUDE_CODES=_drop,
                      OUT_DIR=out_dir, SESSION_PATH=s["_path"])
         meta = session_meta(s)
 
@@ -408,7 +418,18 @@ def main(argv=None):
                   f"({a.iterations} iterations x {len(sections)} sections)")
             scores, run_meta, meta = run_experiment(cfg, s, label=f"{labels[sid]} {short}")
 
-        res = analysis.analyse(scores, cfg, run_meta)
+        # One transcript failing (rate limit, a refusal, a bad ASR dump) must not
+        # discard the transcripts already scored. Skip it, keep its raw CSV on disk
+        # for --resume, and carry on with the rest.
+        try:
+            res = analysis.analyse(scores, cfg, run_meta)
+        except Exception as exc:
+            failed.append(short)
+            print(f"  ! {short} produced no analysable scores "
+                  f"({type(exc).__name__}: {exc}).")
+            print(f"    Skipping it and continuing; re-run with the same command to "
+                  f"retry just this session.")
+            continue
         if a.per_session_charts:
             report(res, cfg, meta, run_meta)
         else:
@@ -435,9 +456,16 @@ def main(argv=None):
         print("\nnothing to pool.")
         return 1
 
+    if failed:
+        print("")
+        print(f"  ! {len(failed)} transcript(s) produced no usable scores "
+              f"and were EXCLUDED from the pool: {', '.join(failed)}")
+        print("    Every pooled figure below rests on the remaining "
+              "transcripts only.")
+
     # ---- pool ---------------------------------------------------------------
     cfg = Config(MODEL=a.model, EFFORT=a.effort, N_ITERATIONS=a.iterations,
-                 SECTIONS=sections, OUT_DIR=a.out)
+                 SECTIONS=sections, EXCLUDE_CODES=_drop, OUT_DIR=a.out)
     headlines = pd.DataFrame(headline_rows)
     headlines.to_csv(os.path.join(a.out, "sessions_headline.csv"), index=False)
     long, cell, pooled, decomp = pool(per_session, cfg, a.out)

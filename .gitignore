@@ -112,3 +112,6 @@ scale_comparison/
 
 scale_comparison_clean/
 cmp_clean.log
+multi_binary_clean/
+multi_scale14_clean/
+scale_comparison_fresh/
