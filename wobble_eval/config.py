@@ -37,6 +37,7 @@ class Config:
     INCLUDE_EVIDENCE: bool = True
     ALLOW_NA: bool        = True
     MAX_RETRIES: int      = 2
+    EXCLUDE_CODES: tuple  = ()      # indicators dropped from scoring AND analysis
     BASE_SEED: int        = 1234            # labels/shuffling only - the model is not seedable
 
     # ---------- statistics (identical to the notebook) ----------

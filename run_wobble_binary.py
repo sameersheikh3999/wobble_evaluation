@@ -44,7 +44,7 @@ import pandas as pd
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from wobble_eval import binary, charts_binary, prompts
+from wobble_eval import binary, charts_binary, exclusions, prompts
 from wobble_eval.backend import make_backend
 from wobble_eval.binary import BinaryConfig
 from wobble_eval.config import CONTEXT_KIND
@@ -486,6 +486,10 @@ def main(argv=None):
     p.add_argument("--no-explain", action="store_true",
                    help="don't ask how close to the threshold each call was, or what "
                         "would flip it (fewer output tokens per call)")
+    p.add_argument("--exclude", default="",
+                   help="indicators to drop from scoring AND analysis: a named set "
+                        "(unreliable | wording | unobservable | none) or a "
+                        "comma-separated code list, e.g. C4,B2")
     p.add_argument("--session", default="", help="path to a different session JSON")
     p.add_argument("--out", default=cfg0.OUT_DIR)
     p.add_argument("--sweep-effort", default="",
@@ -501,7 +505,7 @@ def main(argv=None):
         SCORING_MODE=a.mode, PROMPT_VARIANT=a.prompt_variant,
         INDICATOR_ORDER=a.indicator_order, MAX_CONCURRENCY=a.concurrency,
         INCLUDE_EVIDENCE=not a.no_evidence, ALLOW_NA=not a.no_na,
-        EXPLAIN=not a.no_explain,
+        EXPLAIN=not a.no_explain, EXCLUDE_CODES=tuple(exclusions.resolve(a.exclude)),
         OUT_DIR=a.out, SESSION_PATH=a.session, YES_AT=a.yes_at)
     for s in cfg.SECTIONS:
         if s not in FRAMEWORK:

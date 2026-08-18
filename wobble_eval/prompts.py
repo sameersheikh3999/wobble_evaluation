@@ -148,6 +148,11 @@ def parse_scores(text, codes):
 def order_codes(cfg, section_code, iteration):
     """Indicator order for one section in one iteration."""
     codes = list(SECTION_CODES[section_code])
+    # Excluded indicators are dropped before the prompt is built, so they cost no
+    # tokens and cannot influence the model's reading of the ones that remain.
+    drop = set(getattr(cfg, "EXCLUDE_CODES", ()) or ())
+    if drop:
+        codes = [c for c in codes if c not in drop]
     if cfg.INDICATOR_ORDER == "shuffled":
         random.Random(cfg.BASE_SEED + 977 * iteration
                       + sum(map(ord, section_code))).shuffle(codes)

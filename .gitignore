@@ -109,3 +109,6 @@ multi_binary_out/
 multi_scale14_out/
 scale_comparison/
 *.log
+
+scale_comparison_clean/
+cmp_clean.log
