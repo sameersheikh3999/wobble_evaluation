@@ -125,7 +125,18 @@ def already_done(out_dir, n_iterations):
         df = pd.read_csv(csv)
     except Exception:
         return False
-    return int(df.iteration.max()) + 1 >= n_iterations and len(df) > 0
+    if not (int(df.iteration.max()) + 1 >= n_iterations and len(df) > 0):
+        return False
+    # A session can hold N iterations of entirely unparseable output (a rate-limit
+    # storm scores every cell as NA). That is NOT done - counting it as done means
+    # the bad data is reused on every later run and never retried. Require that at
+    # least some cells actually carry a score.
+    usable = pd.to_numeric(df["score"], errors="coerce").notna().sum()
+    if usable == 0:
+        print(f"  ! {os.path.basename(out_dir)} has {n_iterations} iterations but ZERO "
+              f"parseable scores - treating as NOT done, will re-score")
+        return False
+    return True
 
 
 def load_done(out_dir, cfg):

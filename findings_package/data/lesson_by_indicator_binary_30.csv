@@ -1,0 +1,301 @@
+session_id,section,code,indicator,n,n_yes,p_yes,verdict,flip,single_pass_error,grade
+Lesson-01,B,B1,Instructional Clarity & Learning Objectives,10,10.0,1.0,YES,False,0.0,stable
+Lesson-01,B,B3,Activities & Tasks Alignment,10,10.0,1.0,YES,False,0.0,stable
+Lesson-01,B,B4,Activation of Prior Knowledge,10,10.0,1.0,YES,False,0.0,stable
+Lesson-01,B,B5,Meaningful & Real-World Connections,10,0.0,0.0,NO,False,0.0,stable
+Lesson-01,B,B6,Differentiation / Catering to Learning Levels,10,0.0,0.0,NO,False,0.0,stable
+Lesson-01,B,B7,Use of Taleemabad Lesson Plan,10,0.0,0.0,NO,False,0.0,stable
+Lesson-01,B,B8,Use of Prescribed Resources,10,0.0,0.0,NO,False,0.0,stable
+Lesson-01,B,B10,Lesson Closure & Consolidation,10,0.0,0.0,NO,False,0.0,stable
+Lesson-01,C,C1,Quality Questioning (Bloom's Aligned),10,0.0,0.0,NO,False,0.0,stable
+Lesson-01,C,C2,Responsive Re-explanation & Adaptive Teaching,10,0.0,0.0,NO,False,0.0,stable
+Lesson-01,C,C3,Effective Feedback,10,0.0,0.0,NO,False,0.0,stable
+Lesson-01,C,C5,Student Agency & Voice,10,0.0,0.0,NO,False,0.0,stable
+Lesson-01,C,C7,Positive & Supportive Learning Environment,10,3.0,0.3,NO,True,0.3,material
+Lesson-01,C,C8,"Modeling, Scaffolding & Problem-Solving",10,0.0,0.0,NO,False,0.0,stable
+Lesson-01,C,C9,Collaborative Learning,10,0.0,0.0,NO,False,0.0,stable
+Lesson-01,C,C10,Integration of Taleemabad Technology,10,0.0,0.0,NO,False,0.0,stable
+Lesson-01,C,C11,Self & Peer Assessment Facilitation,10,0.0,0.0,NO,False,0.0,stable
+Lesson-01,C,C12,Classroom Resources & Space for Collaboration,10,0.0,0.0,NO,False,0.0,stable
+Lesson-01,D,D1,Active Participation Rate,10,10.0,1.0,YES,False,0.0,stable
+Lesson-01,D,D2,Cognitive Engagement Level (Bloom's),10,8.0,0.8,YES,True,0.1999999999999999,material
+Lesson-01,D,D3,Student-to-Student Interaction,10,0.0,0.0,NO,False,0.0,stable
+Lesson-01,D,D7,Inclusivity of Engagement,10,8.0,0.8,YES,True,0.1999999999999999,material
+Lesson-01,F,F1,Content Accuracy,10,0.0,0.0,NO,False,0.0,stable
+Lesson-01,F,F2,Use of Academic Language,10,10.0,1.0,YES,False,0.0,stable
+Lesson-01,F,F3,Anticipation of Student Misconceptions,10,0.0,0.0,NO,False,0.0,stable
+Lesson-01,F,F4,Depth of Explanation,10,0.0,0.0,NO,False,0.0,stable
+Lesson-01,F,F5,Subject-Specific Pedagogy: MATH,0,,,,False,,severe
+Lesson-01,F,F6,Subject-Specific Pedagogy: SCIENCE,0,,,,False,,severe
+Lesson-01,F,F7,Subject-Specific Pedagogy: LITERACY / LANGUAGE,10,0.0,0.0,NO,False,0.0,stable
+Lesson-01,F,F8,Cross-Curricular Connections,10,0.0,0.0,NO,False,0.0,stable
+Lesson-02,B,B1,Instructional Clarity & Learning Objectives,10,0.0,0.0,NO,False,0.0,stable
+Lesson-02,B,B3,Activities & Tasks Alignment,10,10.0,1.0,YES,False,0.0,stable
+Lesson-02,B,B4,Activation of Prior Knowledge,10,10.0,1.0,YES,False,0.0,stable
+Lesson-02,B,B5,Meaningful & Real-World Connections,10,10.0,1.0,YES,False,0.0,stable
+Lesson-02,B,B6,Differentiation / Catering to Learning Levels,10,0.0,0.0,NO,False,0.0,stable
+Lesson-02,B,B7,Use of Taleemabad Lesson Plan,10,0.0,0.0,NO,False,0.0,stable
+Lesson-02,B,B8,Use of Prescribed Resources,10,0.0,0.0,NO,False,0.0,stable
+Lesson-02,B,B10,Lesson Closure & Consolidation,10,10.0,1.0,YES,False,0.0,stable
+Lesson-02,C,C1,Quality Questioning (Bloom's Aligned),10,0.0,0.0,NO,False,0.0,stable
+Lesson-02,C,C2,Responsive Re-explanation & Adaptive Teaching,10,0.0,0.0,NO,False,0.0,stable
+Lesson-02,C,C3,Effective Feedback,10,0.0,0.0,NO,False,0.0,stable
+Lesson-02,C,C5,Student Agency & Voice,10,0.0,0.0,NO,False,0.0,stable
+Lesson-02,C,C7,Positive & Supportive Learning Environment,10,10.0,1.0,YES,False,0.0,stable
+Lesson-02,C,C8,"Modeling, Scaffolding & Problem-Solving",10,0.0,0.0,NO,False,0.0,stable
+Lesson-02,C,C9,Collaborative Learning,10,0.0,0.0,NO,False,0.0,stable
+Lesson-02,C,C10,Integration of Taleemabad Technology,10,0.0,0.0,NO,False,0.0,stable
+Lesson-02,C,C11,Self & Peer Assessment Facilitation,10,0.0,0.0,NO,False,0.0,stable
+Lesson-02,C,C12,Classroom Resources & Space for Collaboration,10,0.0,0.0,NO,False,0.0,stable
+Lesson-02,D,D1,Active Participation Rate,10,10.0,1.0,YES,False,0.0,stable
+Lesson-02,D,D2,Cognitive Engagement Level (Bloom's),10,0.0,0.0,NO,False,0.0,stable
+Lesson-02,D,D3,Student-to-Student Interaction,10,10.0,1.0,YES,False,0.0,stable
+Lesson-02,D,D7,Inclusivity of Engagement,10,9.0,0.9,YES,True,0.0999999999999999,minor
+Lesson-02,F,F1,Content Accuracy,10,1.0,0.1,NO,True,0.0999999999999999,minor
+Lesson-02,F,F2,Use of Academic Language,10,9.0,0.9,YES,True,0.0999999999999999,minor
+Lesson-02,F,F3,Anticipation of Student Misconceptions,10,4.0,0.4,NO,True,0.4,severe
+Lesson-02,F,F4,Depth of Explanation,10,0.0,0.0,NO,False,0.0,stable
+Lesson-02,F,F5,Subject-Specific Pedagogy: MATH,0,,,,False,,severe
+Lesson-02,F,F6,Subject-Specific Pedagogy: SCIENCE,0,,,,False,,severe
+Lesson-02,F,F7,Subject-Specific Pedagogy: LITERACY / LANGUAGE,10,6.0,0.6,YES,True,0.4,severe
+Lesson-02,F,F8,Cross-Curricular Connections,10,0.0,0.0,NO,False,0.0,stable
+Lesson-03,B,B1,Instructional Clarity & Learning Objectives,10,4.0,0.4,NO,True,0.4,severe
+Lesson-03,B,B3,Activities & Tasks Alignment,10,10.0,1.0,YES,False,0.0,stable
+Lesson-03,B,B4,Activation of Prior Knowledge,10,8.0,0.8,YES,True,0.1999999999999999,material
+Lesson-03,B,B5,Meaningful & Real-World Connections,10,10.0,1.0,YES,False,0.0,stable
+Lesson-03,B,B6,Differentiation / Catering to Learning Levels,10,0.0,0.0,NO,False,0.0,stable
+Lesson-03,B,B7,Use of Taleemabad Lesson Plan,10,0.0,0.0,NO,False,0.0,stable
+Lesson-03,B,B8,Use of Prescribed Resources,10,0.0,0.0,NO,False,0.0,stable
+Lesson-03,B,B10,Lesson Closure & Consolidation,10,0.0,0.0,NO,False,0.0,stable
+Lesson-03,C,C1,Quality Questioning (Bloom's Aligned),10,0.0,0.0,NO,False,0.0,stable
+Lesson-03,C,C2,Responsive Re-explanation & Adaptive Teaching,10,0.0,0.0,NO,False,0.0,stable
+Lesson-03,C,C3,Effective Feedback,10,0.0,0.0,NO,False,0.0,stable
+Lesson-03,C,C5,Student Agency & Voice,10,0.0,0.0,NO,False,0.0,stable
+Lesson-03,C,C7,Positive & Supportive Learning Environment,10,10.0,1.0,YES,False,0.0,stable
+Lesson-03,C,C8,"Modeling, Scaffolding & Problem-Solving",10,0.0,0.0,NO,False,0.0,stable
+Lesson-03,C,C9,Collaborative Learning,10,0.0,0.0,NO,False,0.0,stable
+Lesson-03,C,C10,Integration of Taleemabad Technology,10,0.0,0.0,NO,False,0.0,stable
+Lesson-03,C,C11,Self & Peer Assessment Facilitation,10,0.0,0.0,NO,False,0.0,stable
+Lesson-03,C,C12,Classroom Resources & Space for Collaboration,10,0.0,0.0,NO,False,0.0,stable
+Lesson-03,D,D1,Active Participation Rate,10,10.0,1.0,YES,False,0.0,stable
+Lesson-03,D,D2,Cognitive Engagement Level (Bloom's),10,0.0,0.0,NO,False,0.0,stable
+Lesson-03,D,D3,Student-to-Student Interaction,10,0.0,0.0,NO,False,0.0,stable
+Lesson-03,D,D7,Inclusivity of Engagement,10,8.0,0.8,YES,True,0.1999999999999999,material
+Lesson-03,F,F1,Content Accuracy,10,0.0,0.0,NO,False,0.0,stable
+Lesson-03,F,F2,Use of Academic Language,10,10.0,1.0,YES,False,0.0,stable
+Lesson-03,F,F3,Anticipation of Student Misconceptions,10,0.0,0.0,NO,False,0.0,stable
+Lesson-03,F,F4,Depth of Explanation,10,0.0,0.0,NO,False,0.0,stable
+Lesson-03,F,F5,Subject-Specific Pedagogy: MATH,0,,,,False,,severe
+Lesson-03,F,F6,Subject-Specific Pedagogy: SCIENCE,0,,,,False,,severe
+Lesson-03,F,F7,Subject-Specific Pedagogy: LITERACY / LANGUAGE,10,0.0,0.0,NO,False,0.0,stable
+Lesson-03,F,F8,Cross-Curricular Connections,10,1.0,0.1,NO,True,0.0999999999999999,minor
+Lesson-04,B,B1,Instructional Clarity & Learning Objectives,10,0.0,0.0,NO,False,0.0,stable
+Lesson-04,B,B3,Activities & Tasks Alignment,10,7.0,0.7,YES,True,0.3,material
+Lesson-04,B,B4,Activation of Prior Knowledge,10,1.0,0.1,NO,True,0.0999999999999999,minor
+Lesson-04,B,B5,Meaningful & Real-World Connections,10,0.0,0.0,NO,False,0.0,stable
+Lesson-04,B,B6,Differentiation / Catering to Learning Levels,10,0.0,0.0,NO,False,0.0,stable
+Lesson-04,B,B7,Use of Taleemabad Lesson Plan,10,0.0,0.0,NO,False,0.0,stable
+Lesson-04,B,B8,Use of Prescribed Resources,10,0.0,0.0,NO,False,0.0,stable
+Lesson-04,B,B10,Lesson Closure & Consolidation,10,0.0,0.0,NO,False,0.0,stable
+Lesson-04,C,C1,Quality Questioning (Bloom's Aligned),10,0.0,0.0,NO,False,0.0,stable
+Lesson-04,C,C2,Responsive Re-explanation & Adaptive Teaching,10,0.0,0.0,NO,False,0.0,stable
+Lesson-04,C,C3,Effective Feedback,10,0.0,0.0,NO,False,0.0,stable
+Lesson-04,C,C5,Student Agency & Voice,10,0.0,0.0,NO,False,0.0,stable
+Lesson-04,C,C7,Positive & Supportive Learning Environment,10,8.0,0.8,YES,True,0.1999999999999999,material
+Lesson-04,C,C8,"Modeling, Scaffolding & Problem-Solving",10,0.0,0.0,NO,False,0.0,stable
+Lesson-04,C,C9,Collaborative Learning,10,0.0,0.0,NO,False,0.0,stable
+Lesson-04,C,C10,Integration of Taleemabad Technology,10,0.0,0.0,NO,False,0.0,stable
+Lesson-04,C,C11,Self & Peer Assessment Facilitation,10,0.0,0.0,NO,False,0.0,stable
+Lesson-04,C,C12,Classroom Resources & Space for Collaboration,10,0.0,0.0,NO,False,0.0,stable
+Lesson-04,D,D1,Active Participation Rate,10,0.0,0.0,NO,False,0.0,stable
+Lesson-04,D,D2,Cognitive Engagement Level (Bloom's),10,0.0,0.0,NO,False,0.0,stable
+Lesson-04,D,D3,Student-to-Student Interaction,10,0.0,0.0,NO,False,0.0,stable
+Lesson-04,D,D7,Inclusivity of Engagement,10,0.0,0.0,NO,False,0.0,stable
+Lesson-04,F,F1,Content Accuracy,10,3.0,0.3,NO,True,0.3,material
+Lesson-04,F,F2,Use of Academic Language,10,6.0,0.6,YES,True,0.4,severe
+Lesson-04,F,F3,Anticipation of Student Misconceptions,10,0.0,0.0,NO,False,0.0,stable
+Lesson-04,F,F4,Depth of Explanation,10,0.0,0.0,NO,False,0.0,stable
+Lesson-04,F,F5,Subject-Specific Pedagogy: MATH,0,,,,False,,severe
+Lesson-04,F,F6,Subject-Specific Pedagogy: SCIENCE,0,,,,False,,severe
+Lesson-04,F,F7,Subject-Specific Pedagogy: LITERACY / LANGUAGE,10,0.0,0.0,NO,False,0.0,stable
+Lesson-04,F,F8,Cross-Curricular Connections,10,0.0,0.0,NO,False,0.0,stable
+Lesson-05,B,B1,Instructional Clarity & Learning Objectives,10,10.0,1.0,YES,False,0.0,stable
+Lesson-05,B,B3,Activities & Tasks Alignment,10,10.0,1.0,YES,False,0.0,stable
+Lesson-05,B,B4,Activation of Prior Knowledge,10,10.0,1.0,YES,False,0.0,stable
+Lesson-05,B,B5,Meaningful & Real-World Connections,10,10.0,1.0,YES,False,0.0,stable
+Lesson-05,B,B6,Differentiation / Catering to Learning Levels,10,0.0,0.0,NO,False,0.0,stable
+Lesson-05,B,B7,Use of Taleemabad Lesson Plan,10,0.0,0.0,NO,False,0.0,stable
+Lesson-05,B,B8,Use of Prescribed Resources,10,3.0,0.3,NO,True,0.3,material
+Lesson-05,B,B10,Lesson Closure & Consolidation,10,10.0,1.0,YES,False,0.0,stable
+Lesson-05,C,C1,Quality Questioning (Bloom's Aligned),10,0.0,0.0,NO,False,0.0,stable
+Lesson-05,C,C2,Responsive Re-explanation & Adaptive Teaching,10,10.0,1.0,YES,False,0.0,stable
+Lesson-05,C,C3,Effective Feedback,10,0.0,0.0,NO,False,0.0,stable
+Lesson-05,C,C5,Student Agency & Voice,10,0.0,0.0,NO,False,0.0,stable
+Lesson-05,C,C7,Positive & Supportive Learning Environment,10,10.0,1.0,YES,False,0.0,stable
+Lesson-05,C,C8,"Modeling, Scaffolding & Problem-Solving",10,6.0,0.6,YES,True,0.4,severe
+Lesson-05,C,C9,Collaborative Learning,10,0.0,0.0,NO,False,0.0,stable
+Lesson-05,C,C10,Integration of Taleemabad Technology,10,0.0,0.0,NO,False,0.0,stable
+Lesson-05,C,C11,Self & Peer Assessment Facilitation,10,0.0,0.0,NO,False,0.0,stable
+Lesson-05,C,C12,Classroom Resources & Space for Collaboration,10,0.0,0.0,NO,False,0.0,stable
+Lesson-05,D,D1,Active Participation Rate,10,10.0,1.0,YES,False,0.0,stable
+Lesson-05,D,D2,Cognitive Engagement Level (Bloom's),10,10.0,1.0,YES,False,0.0,stable
+Lesson-05,D,D3,Student-to-Student Interaction,10,0.0,0.0,NO,False,0.0,stable
+Lesson-05,D,D7,Inclusivity of Engagement,10,10.0,1.0,YES,False,0.0,stable
+Lesson-05,F,F1,Content Accuracy,10,0.0,0.0,NO,False,0.0,stable
+Lesson-05,F,F2,Use of Academic Language,10,5.0,0.5,TIED,True,0.5,severe
+Lesson-05,F,F3,Anticipation of Student Misconceptions,10,10.0,1.0,YES,False,0.0,stable
+Lesson-05,F,F4,Depth of Explanation,10,9.0,0.9,YES,True,0.0999999999999999,minor
+Lesson-05,F,F5,Subject-Specific Pedagogy: MATH,10,10.0,1.0,YES,False,0.0,stable
+Lesson-05,F,F6,Subject-Specific Pedagogy: SCIENCE,0,,,,False,,severe
+Lesson-05,F,F7,Subject-Specific Pedagogy: LITERACY / LANGUAGE,0,,,,False,,severe
+Lesson-05,F,F8,Cross-Curricular Connections,10,0.0,0.0,NO,False,0.0,stable
+Lesson-06,B,B1,Instructional Clarity & Learning Objectives,10,10.0,1.0,YES,False,0.0,stable
+Lesson-06,B,B3,Activities & Tasks Alignment,10,10.0,1.0,YES,False,0.0,stable
+Lesson-06,B,B4,Activation of Prior Knowledge,10,10.0,1.0,YES,False,0.0,stable
+Lesson-06,B,B5,Meaningful & Real-World Connections,10,0.0,0.0,NO,False,0.0,stable
+Lesson-06,B,B6,Differentiation / Catering to Learning Levels,10,0.0,0.0,NO,False,0.0,stable
+Lesson-06,B,B7,Use of Taleemabad Lesson Plan,10,0.0,0.0,NO,False,0.0,stable
+Lesson-06,B,B8,Use of Prescribed Resources,10,0.0,0.0,NO,False,0.0,stable
+Lesson-06,B,B10,Lesson Closure & Consolidation,10,0.0,0.0,NO,False,0.0,stable
+Lesson-06,C,C1,Quality Questioning (Bloom's Aligned),10,0.0,0.0,NO,False,0.0,stable
+Lesson-06,C,C2,Responsive Re-explanation & Adaptive Teaching,10,0.0,0.0,NO,False,0.0,stable
+Lesson-06,C,C3,Effective Feedback,10,0.0,0.0,NO,False,0.0,stable
+Lesson-06,C,C5,Student Agency & Voice,10,0.0,0.0,NO,False,0.0,stable
+Lesson-06,C,C7,Positive & Supportive Learning Environment,10,2.0,0.2,NO,True,0.1999999999999999,material
+Lesson-06,C,C8,"Modeling, Scaffolding & Problem-Solving",10,0.0,0.0,NO,False,0.0,stable
+Lesson-06,C,C9,Collaborative Learning,10,0.0,0.0,NO,False,0.0,stable
+Lesson-06,C,C10,Integration of Taleemabad Technology,10,0.0,0.0,NO,False,0.0,stable
+Lesson-06,C,C11,Self & Peer Assessment Facilitation,10,0.0,0.0,NO,False,0.0,stable
+Lesson-06,C,C12,Classroom Resources & Space for Collaboration,10,0.0,0.0,NO,False,0.0,stable
+Lesson-06,D,D1,Active Participation Rate,10,10.0,1.0,YES,False,0.0,stable
+Lesson-06,D,D2,Cognitive Engagement Level (Bloom's),10,9.0,0.9,YES,True,0.0999999999999999,minor
+Lesson-06,D,D3,Student-to-Student Interaction,10,0.0,0.0,NO,False,0.0,stable
+Lesson-06,D,D7,Inclusivity of Engagement,10,9.0,0.9,YES,True,0.0999999999999999,minor
+Lesson-06,F,F1,Content Accuracy,10,0.0,0.0,NO,False,0.0,stable
+Lesson-06,F,F2,Use of Academic Language,10,9.0,0.9,YES,True,0.0999999999999999,minor
+Lesson-06,F,F3,Anticipation of Student Misconceptions,10,0.0,0.0,NO,False,0.0,stable
+Lesson-06,F,F4,Depth of Explanation,10,0.0,0.0,NO,False,0.0,stable
+Lesson-06,F,F5,Subject-Specific Pedagogy: MATH,0,,,,False,,severe
+Lesson-06,F,F6,Subject-Specific Pedagogy: SCIENCE,0,,,,False,,severe
+Lesson-06,F,F7,Subject-Specific Pedagogy: LITERACY / LANGUAGE,10,0.0,0.0,NO,False,0.0,stable
+Lesson-06,F,F8,Cross-Curricular Connections,10,0.0,0.0,NO,False,0.0,stable
+Lesson-07,B,B1,Instructional Clarity & Learning Objectives,10,0.0,0.0,NO,False,0.0,stable
+Lesson-07,B,B3,Activities & Tasks Alignment,10,10.0,1.0,YES,False,0.0,stable
+Lesson-07,B,B4,Activation of Prior Knowledge,10,10.0,1.0,YES,False,0.0,stable
+Lesson-07,B,B5,Meaningful & Real-World Connections,10,10.0,1.0,YES,False,0.0,stable
+Lesson-07,B,B6,Differentiation / Catering to Learning Levels,10,0.0,0.0,NO,False,0.0,stable
+Lesson-07,B,B7,Use of Taleemabad Lesson Plan,10,0.0,0.0,NO,False,0.0,stable
+Lesson-07,B,B8,Use of Prescribed Resources,10,0.0,0.0,NO,False,0.0,stable
+Lesson-07,B,B10,Lesson Closure & Consolidation,10,10.0,1.0,YES,False,0.0,stable
+Lesson-07,C,C1,Quality Questioning (Bloom's Aligned),10,0.0,0.0,NO,False,0.0,stable
+Lesson-07,C,C2,Responsive Re-explanation & Adaptive Teaching,10,0.0,0.0,NO,False,0.0,stable
+Lesson-07,C,C3,Effective Feedback,10,0.0,0.0,NO,False,0.0,stable
+Lesson-07,C,C5,Student Agency & Voice,10,0.0,0.0,NO,False,0.0,stable
+Lesson-07,C,C7,Positive & Supportive Learning Environment,10,10.0,1.0,YES,False,0.0,stable
+Lesson-07,C,C8,"Modeling, Scaffolding & Problem-Solving",10,0.0,0.0,NO,False,0.0,stable
+Lesson-07,C,C9,Collaborative Learning,10,0.0,0.0,NO,False,0.0,stable
+Lesson-07,C,C10,Integration of Taleemabad Technology,10,0.0,0.0,NO,False,0.0,stable
+Lesson-07,C,C11,Self & Peer Assessment Facilitation,10,0.0,0.0,NO,False,0.0,stable
+Lesson-07,C,C12,Classroom Resources & Space for Collaboration,10,0.0,0.0,NO,False,0.0,stable
+Lesson-07,D,D1,Active Participation Rate,10,10.0,1.0,YES,False,0.0,stable
+Lesson-07,D,D2,Cognitive Engagement Level (Bloom's),10,0.0,0.0,NO,False,0.0,stable
+Lesson-07,D,D3,Student-to-Student Interaction,10,9.0,0.9,YES,True,0.0999999999999999,minor
+Lesson-07,D,D7,Inclusivity of Engagement,10,10.0,1.0,YES,False,0.0,stable
+Lesson-07,F,F1,Content Accuracy,10,0.0,0.0,NO,False,0.0,stable
+Lesson-07,F,F2,Use of Academic Language,10,9.0,0.9,YES,True,0.0999999999999999,minor
+Lesson-07,F,F3,Anticipation of Student Misconceptions,10,7.0,0.7,YES,True,0.3,material
+Lesson-07,F,F4,Depth of Explanation,10,0.0,0.0,NO,False,0.0,stable
+Lesson-07,F,F5,Subject-Specific Pedagogy: MATH,0,,,,False,,severe
+Lesson-07,F,F6,Subject-Specific Pedagogy: SCIENCE,0,,,,False,,severe
+Lesson-07,F,F7,Subject-Specific Pedagogy: LITERACY / LANGUAGE,10,7.0,0.7,YES,True,0.3,material
+Lesson-07,F,F8,Cross-Curricular Connections,10,0.0,0.0,NO,False,0.0,stable
+Lesson-08,B,B1,Instructional Clarity & Learning Objectives,10,10.0,1.0,YES,False,0.0,stable
+Lesson-08,B,B3,Activities & Tasks Alignment,10,10.0,1.0,YES,False,0.0,stable
+Lesson-08,B,B4,Activation of Prior Knowledge,10,6.0,0.6,YES,True,0.4,severe
+Lesson-08,B,B5,Meaningful & Real-World Connections,10,0.0,0.0,NO,False,0.0,stable
+Lesson-08,B,B6,Differentiation / Catering to Learning Levels,10,0.0,0.0,NO,False,0.0,stable
+Lesson-08,B,B7,Use of Taleemabad Lesson Plan,10,0.0,0.0,NO,False,0.0,stable
+Lesson-08,B,B8,Use of Prescribed Resources,10,3.0,0.3,NO,True,0.3,material
+Lesson-08,B,B10,Lesson Closure & Consolidation,10,1.0,0.1,NO,True,0.0999999999999999,minor
+Lesson-08,C,C1,Quality Questioning (Bloom's Aligned),10,0.0,0.0,NO,False,0.0,stable
+Lesson-08,C,C2,Responsive Re-explanation & Adaptive Teaching,10,0.0,0.0,NO,False,0.0,stable
+Lesson-08,C,C3,Effective Feedback,10,0.0,0.0,NO,False,0.0,stable
+Lesson-08,C,C5,Student Agency & Voice,10,0.0,0.0,NO,False,0.0,stable
+Lesson-08,C,C7,Positive & Supportive Learning Environment,10,10.0,1.0,YES,False,0.0,stable
+Lesson-08,C,C8,"Modeling, Scaffolding & Problem-Solving",10,0.0,0.0,NO,False,0.0,stable
+Lesson-08,C,C9,Collaborative Learning,10,0.0,0.0,NO,False,0.0,stable
+Lesson-08,C,C10,Integration of Taleemabad Technology,10,0.0,0.0,NO,False,0.0,stable
+Lesson-08,C,C11,Self & Peer Assessment Facilitation,10,0.0,0.0,NO,False,0.0,stable
+Lesson-08,C,C12,Classroom Resources & Space for Collaboration,10,0.0,0.0,NO,False,0.0,stable
+Lesson-08,D,D1,Active Participation Rate,10,10.0,1.0,YES,False,0.0,stable
+Lesson-08,D,D2,Cognitive Engagement Level (Bloom's),10,0.0,0.0,NO,False,0.0,stable
+Lesson-08,D,D3,Student-to-Student Interaction,10,1.0,0.1,NO,True,0.0999999999999999,minor
+Lesson-08,D,D7,Inclusivity of Engagement,10,8.0,0.8,YES,True,0.1999999999999999,material
+Lesson-08,F,F1,Content Accuracy,10,0.0,0.0,NO,False,0.0,stable
+Lesson-08,F,F2,Use of Academic Language,10,2.0,0.2,NO,True,0.1999999999999999,material
+Lesson-08,F,F3,Anticipation of Student Misconceptions,10,1.0,0.1,NO,True,0.0999999999999999,minor
+Lesson-08,F,F4,Depth of Explanation,10,0.0,0.0,NO,False,0.0,stable
+Lesson-08,F,F5,Subject-Specific Pedagogy: MATH,10,10.0,1.0,YES,False,0.0,stable
+Lesson-08,F,F6,Subject-Specific Pedagogy: SCIENCE,0,,,,False,,severe
+Lesson-08,F,F7,Subject-Specific Pedagogy: LITERACY / LANGUAGE,0,,,,False,,severe
+Lesson-08,F,F8,Cross-Curricular Connections,10,0.0,0.0,NO,False,0.0,stable
+Lesson-09,B,B1,Instructional Clarity & Learning Objectives,10,10.0,1.0,YES,False,0.0,stable
+Lesson-09,B,B3,Activities & Tasks Alignment,10,10.0,1.0,YES,False,0.0,stable
+Lesson-09,B,B4,Activation of Prior Knowledge,10,6.0,0.6,YES,True,0.4,severe
+Lesson-09,B,B5,Meaningful & Real-World Connections,10,10.0,1.0,YES,False,0.0,stable
+Lesson-09,B,B6,Differentiation / Catering to Learning Levels,10,0.0,0.0,NO,False,0.0,stable
+Lesson-09,B,B7,Use of Taleemabad Lesson Plan,10,0.0,0.0,NO,False,0.0,stable
+Lesson-09,B,B8,Use of Prescribed Resources,10,0.0,0.0,NO,False,0.0,stable
+Lesson-09,B,B10,Lesson Closure & Consolidation,10,8.0,0.8,YES,True,0.1999999999999999,material
+Lesson-09,C,C1,Quality Questioning (Bloom's Aligned),10,0.0,0.0,NO,False,0.0,stable
+Lesson-09,C,C2,Responsive Re-explanation & Adaptive Teaching,10,0.0,0.0,NO,False,0.0,stable
+Lesson-09,C,C3,Effective Feedback,10,0.0,0.0,NO,False,0.0,stable
+Lesson-09,C,C5,Student Agency & Voice,10,0.0,0.0,NO,False,0.0,stable
+Lesson-09,C,C7,Positive & Supportive Learning Environment,10,10.0,1.0,YES,False,0.0,stable
+Lesson-09,C,C8,"Modeling, Scaffolding & Problem-Solving",10,6.0,0.6,YES,True,0.4,severe
+Lesson-09,C,C9,Collaborative Learning,10,6.0,0.6,YES,True,0.4,severe
+Lesson-09,C,C10,Integration of Taleemabad Technology,10,0.0,0.0,NO,False,0.0,stable
+Lesson-09,C,C11,Self & Peer Assessment Facilitation,10,0.0,0.0,NO,False,0.0,stable
+Lesson-09,C,C12,Classroom Resources & Space for Collaboration,10,0.0,0.0,NO,False,0.0,stable
+Lesson-09,D,D1,Active Participation Rate,10,10.0,1.0,YES,False,0.0,stable
+Lesson-09,D,D2,Cognitive Engagement Level (Bloom's),10,10.0,1.0,YES,False,0.0,stable
+Lesson-09,D,D3,Student-to-Student Interaction,10,3.0,0.3,NO,True,0.3,material
+Lesson-09,D,D7,Inclusivity of Engagement,10,9.0,0.9,YES,True,0.0999999999999999,minor
+Lesson-09,F,F1,Content Accuracy,10,0.0,0.0,NO,False,0.0,stable
+Lesson-09,F,F2,Use of Academic Language,10,10.0,1.0,YES,False,0.0,stable
+Lesson-09,F,F3,Anticipation of Student Misconceptions,10,0.0,0.0,NO,False,0.0,stable
+Lesson-09,F,F4,Depth of Explanation,10,10.0,1.0,YES,False,0.0,stable
+Lesson-09,F,F5,Subject-Specific Pedagogy: MATH,0,,,,False,,severe
+Lesson-09,F,F6,Subject-Specific Pedagogy: SCIENCE,0,,,,False,,severe
+Lesson-09,F,F7,Subject-Specific Pedagogy: LITERACY / LANGUAGE,10,0.0,0.0,NO,False,0.0,stable
+Lesson-09,F,F8,Cross-Curricular Connections,10,0.0,0.0,NO,False,0.0,stable
+Lesson-10,B,B1,Instructional Clarity & Learning Objectives,10,0.0,0.0,NO,False,0.0,stable
+Lesson-10,B,B3,Activities & Tasks Alignment,10,0.0,0.0,NO,False,0.0,stable
+Lesson-10,B,B4,Activation of Prior Knowledge,10,0.0,0.0,NO,False,0.0,stable
+Lesson-10,B,B5,Meaningful & Real-World Connections,10,0.0,0.0,NO,False,0.0,stable
+Lesson-10,B,B6,Differentiation / Catering to Learning Levels,10,0.0,0.0,NO,False,0.0,stable
+Lesson-10,B,B7,Use of Taleemabad Lesson Plan,10,0.0,0.0,NO,False,0.0,stable
+Lesson-10,B,B8,Use of Prescribed Resources,10,0.0,0.0,NO,False,0.0,stable
+Lesson-10,B,B10,Lesson Closure & Consolidation,10,0.0,0.0,NO,False,0.0,stable
+Lesson-10,C,C1,Quality Questioning (Bloom's Aligned),10,0.0,0.0,NO,False,0.0,stable
+Lesson-10,C,C2,Responsive Re-explanation & Adaptive Teaching,10,0.0,0.0,NO,False,0.0,stable
+Lesson-10,C,C3,Effective Feedback,10,0.0,0.0,NO,False,0.0,stable
+Lesson-10,C,C5,Student Agency & Voice,10,0.0,0.0,NO,False,0.0,stable
+Lesson-10,C,C7,Positive & Supportive Learning Environment,10,0.0,0.0,NO,False,0.0,stable
+Lesson-10,C,C8,"Modeling, Scaffolding & Problem-Solving",10,0.0,0.0,NO,False,0.0,stable
+Lesson-10,C,C9,Collaborative Learning,10,0.0,0.0,NO,False,0.0,stable
+Lesson-10,C,C10,Integration of Taleemabad Technology,10,0.0,0.0,NO,False,0.0,stable
+Lesson-10,C,C11,Self & Peer Assessment Facilitation,10,0.0,0.0,NO,False,0.0,stable
+Lesson-10,C,C12,Classroom Resources & Space for Collaboration,10,0.0,0.0,NO,False,0.0,stable
+Lesson-10,D,D1,Active Participation Rate,10,10.0,1.0,YES,False,0.0,stable
+Lesson-10,D,D2,Cognitive Engagement Level (Bloom's),10,0.0,0.0,NO,False,0.0,stable
+Lesson-10,D,D3,Student-to-Student Interaction,10,0.0,0.0,NO,False,0.0,stable
+Lesson-10,D,D7,Inclusivity of Engagement,10,10.0,1.0,YES,False,0.0,stable
+Lesson-10,F,F1,Content Accuracy,10,9.0,0.9,YES,True,0.0999999999999999,minor
+Lesson-10,F,F2,Use of Academic Language,10,0.0,0.0,NO,False,0.0,stable
+Lesson-10,F,F3,Anticipation of Student Misconceptions,10,0.0,0.0,NO,False,0.0,stable
+Lesson-10,F,F4,Depth of Explanation,10,0.0,0.0,NO,False,0.0,stable
+Lesson-10,F,F5,Subject-Specific Pedagogy: MATH,10,0.0,0.0,NO,False,0.0,stable
+Lesson-10,F,F6,Subject-Specific Pedagogy: SCIENCE,0,,,,False,,severe
+Lesson-10,F,F7,Subject-Specific Pedagogy: LITERACY / LANGUAGE,0,,,,False,,severe
+Lesson-10,F,F8,Cross-Curricular Connections,10,0.0,0.0,NO,False,0.0,stable

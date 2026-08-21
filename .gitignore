@@ -115,3 +115,9 @@ cmp_clean.log
 multi_binary_clean/
 multi_scale14_clean/
 scale_comparison_fresh/
+
+# Effort-sweep subset holds COPIES of raw transcripts - same PII as Transcripts/
+_effort_subset/
+# Preserved output of a rate-limit failure, kept for debugging only
+_failed_backup/
+effort_*_out/
