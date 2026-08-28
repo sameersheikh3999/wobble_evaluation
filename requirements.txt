@@ -26,3 +26,4 @@ anyio>=4.0              # the SDK's async runtime; run_wobble* call it synchrono
 # ---- verified working set ----
 # pandas==3.0.5  numpy==2.5.2  scipy==1.18.0  matplotlib==3.11.1
 # claude-agent-sdk==0.2.134  anyio==4.14.2
+pyyaml>=6.0            # framework spec files are hand-edited, so YAML not JSON

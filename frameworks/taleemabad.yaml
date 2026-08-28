@@ -1,0 +1,315 @@
+name: Taleemabad Coaching Framework
+version: ''
+source: ''
+scale:
+  levels: 4
+  labels:
+  - Not Observed / Emerging
+  - Developing
+  - Proficient / Effective
+  - Highly Effective
+  proficiency_cut: 3
+bands:
+- name: High
+  min: 0.85
+- name: Medium
+  min: 0.6
+- name: Low
+  min: 0.0
+sections:
+- code: B
+  title: Lesson Plan Fidelity
+  note: SECTION B — LESSON PLAN FIDELITY   |   Fidelity Score = (actions observed ÷ actions prescribed)
+    × 100%   |   ≥85% High | 60–84% Medium | <60% Low
+  indicators:
+  - code: B1
+    name: Instructional Clarity & Learning Objectives
+    levels:
+      1: No clear learning objective stated. Activities lack purpose.
+      2: Objective mentioned but vague or not referenced during lesson.
+      3: Clear objective stated, referred to during lesson, linked to classroom activities.
+      4: Objective co-constructed with students, revisited at close. Students can articulate what they
+        are learning and why.
+  - code: B2
+    name: Lesson Structure & Sequence
+    levels:
+      1: No discernible structure; random activities.
+      2: Some structure but missing key phases (intro/body/close).
+      3: Clear I Do → We Do → You Do sequence. Logical flow with transitions.
+      4: Logical flow with smooth transitions, recap, and closure activity. Students can follow the arc.
+  - code: B3
+    name: Activities & Tasks Alignment
+    levels:
+      1: Activities unrelated to lesson objective.
+      2: Some activities align but others are filler.
+      3: Most activities directly support the learning objective.
+      4: All activities purposefully scaffolded toward objective mastery. No wasted time.
+  - code: B4
+    name: Activation of Prior Knowledge
+    levels:
+      1: No reference to what students already know.
+      2: Brief mention but no student input sought.
+      3: Teacher connects new content to previously taught material.
+      4: Students actively recall and link prior knowledge; teacher builds on it.
+  - code: B5
+    name: Meaningful & Real-World Connections
+    levels:
+      1: Content presented in isolation, no real-world link.
+      2: Teacher mentions a connection but doesn't develop it.
+      3: Content connected to students' lives or local context.
+      4: Students generate their own connections; examples from their community.
+  - code: B6
+    name: Differentiation / Catering to Learning Levels
+    levels:
+      1: One-size-fits-all delivery, no differentiation.
+      2: Aware of different levels but no adapted tasks.
+      3: Tasks differentiated for at least 2 ability groups.
+      4: Multiple pathways offered; struggling students supported, advanced students stretched.
+  - code: B7
+    name: Use of Taleemabad Lesson Plan
+    levels:
+      1: Taleemabad lesson plan not used at all.
+      2: Plan open but teacher deviates significantly.
+      3: Plan followed with minor contextual adaptations.
+      4: Plan followed faithfully AND adapted intelligently to class needs.
+  - code: B8
+    name: Use of Prescribed Resources
+    levels:
+      1: No Taleemabad resources (video, worksheet, manipulatives) used.
+      2: Some resources used but not as intended.
+      3: Key resources used as prescribed in lesson plan.
+      4: All resources used effectively; teacher adds complementary materials.
+  - code: B9
+    name: Time on Task / Time on Learning
+    levels:
+      1: Less than 50% of class time spent on learning activities.
+      2: 50–69% on task (significant management/transition time lost).
+      3: 70–85% on task with efficient transitions.
+      4: More than 85% on task; routines are automatic, transitions seamless.
+  - code: B10
+    name: Lesson Closure & Consolidation
+    levels:
+      1: Lesson ends abruptly with no summary.
+      2: Teacher rushes through a brief recap.
+      3: 'Structured closure: recap key points, check understanding.'
+      4: Students summarize learning, connect to next lesson, self-assess.
+- code: C
+  title: High-Leverage Practices
+  note: SECTION C — HIGH-LEVERAGE PRACTICES (Teacher Pedagogy & Training Curriculum Alignment)
+  indicators:
+  - code: C1
+    name: Quality Questioning (Bloom's Aligned)
+    levels:
+      1: Only yes/no or recall questions asked. Close-ended, requiring one-word answers.
+      2: Mix of recall and some open-ended questions, but they lack depth. E.g., 'Why is the capital important?'
+        without further exploration.
+      3: Purposeful mix including application & analysis questions. Open-ended questions dominate. Wait
+        time given.
+      4: Questions span all Bloom's levels (Remember→Create); students generate questions; Socratic questioning
+        evident.
+  - code: C2
+    name: Responsive Re-explanation & Adaptive Teaching
+    levels:
+      1: Repeats same explanation when students don't understand.
+      2: Tries a different approach but still teacher-centered.
+      3: Uses alternative representations (visual, concrete, analogy). Adjusts teaching to student level.
+      4: Diagnoses misconception, re-explains using student's own logic, confirms understanding.
+  - code: C3
+    name: Effective Feedback
+    levels:
+      1: 'No feedback given, or only ''good/bad'' evaluations. Generic: ''Good job'' or ''Try again.'''
+      2: Feedback given but generic ('try harder'). Specific but does not consistently guide improvement.
+      3: Specific feedback on what was done well and what to improve. Actionable.
+      4: Feedback is specific, actionable, with next steps. Students use feedback to self-correct. Guides
+        refinement of reasoning.
+  - code: C4
+    name: Equitable Participation
+    levels:
+      1: Only 2–3 students participate; others ignored. Teacher-dominated.
+      2: Teacher calls on volunteers only. A few students contribute while others stay silent.
+      3: 'Deliberate strategies: cold call, pair-share, name sticks. Diverse students included.'
+      4: All students participate; teacher tracks contributions; gender-equitable. Students debate and
+        refine arguments.
+  - code: C5
+    name: Student Agency & Voice
+    levels:
+      1: Students are passive recipients; no choice or voice. Content from single perspective.
+      2: Occasional student input but teacher-dominated. Multiple perspectives mentioned but not explored.
+      3: Students make choices about how to demonstrate learning. Explore multiple perspectives.
+      4: Students lead discussions, choose methods, self-assess, peer-teach. Create novel solutions. Evaluate
+        alternatives.
+  - code: C6
+    name: Classroom Management & Routines
+    levels:
+      1: Frequent disruptions; no visible routines. Students struggle to engage.
+      2: Some routines but inconsistently enforced. Instructions lack clarity for all groups.
+      3: Clear routines (entry, transitions, dismissal); minimal disruptions. Expectations clear.
+      4: Seamless routines; students self-manage; positive behavioral reinforcement. Students actively
+        participate in complex, clearly defined tasks.
+  - code: C7
+    name: Positive & Supportive Learning Environment
+    levels:
+      1: Negative tone; punitive language or humiliation.
+      2: Neutral but cold; no encouragement.
+      3: Warm, encouraging tone; mistakes treated as learning opportunities.
+      4: Joyful classroom; students feel safe to take risks; laughter and curiosity present.
+  - code: C8
+    name: Modeling, Scaffolding & Problem-Solving
+    levels:
+      1: Teacher tells but doesn't show. Simple tasks demonstrated without explanation of process.
+      2: Teacher demonstrates once but moves on quickly. Problem-solving modeled but strategies not explained.
+      3: I Do → We Do → You Do scaffolding visible. Problem-solving and creativity modeled with clear
+        strategies.
+      4: Gradual release with checks at each stage; scaffold removed when ready. Teacher brainstorms solutions
+        and explains reasoning.
+  - code: C9
+    name: Collaborative Learning
+    levels:
+      1: No group or pair work. Students work individually without interaction.
+      2: Students in groups but working individually. Tasks lack depth.
+      3: Purposeful pair/group tasks with clear roles. Students work towards synthesized solutions.
+      4: Structured collaboration (think-pair-share, jigsaw); students build on each other's ideas. Teams
+        design solutions to community problems.
+  - code: C10
+    name: Integration of Taleemabad Technology
+    levels:
+      1: No technology used despite availability.
+      2: Technology used as distraction/babysitter.
+      3: Taleemabad videos/apps used to support learning objectives.
+      4: Technology integrated seamlessly; students interact with content; teacher facilitates around
+        it.
+  - code: C11
+    name: Self & Peer Assessment Facilitation
+    levels:
+      1: Assessment limited to teacher-led grading. Students receive grades without reflection.
+      2: Some self- or peer-assessment occurs, but inconsistent. Students assess without clear criteria.
+      3: Self- and peer-assessment structured and purposeful. Students use rubrics to assess work.
+      4: Students use rubrics to assess work, suggest improvements for peers, and set goals. Assessment
+        tasks require analysis/evaluation/creation.
+  - code: C12
+    name: Classroom Resources & Space for Collaboration
+    levels:
+      1: Resources and space disorganized, limiting collaborative learning. No group work areas.
+      2: Some organization, but space/resources do not fully support collaboration.
+      3: Resources and space well-organized for collaborative tasks. Materials accessible.
+      4: Tables arranged for group work, materials easily accessible. Environment designed for inquiry
+        and collaboration.
+- code: D
+  title: Student Engagement
+  note: SECTION D — STUDENT ENGAGEMENT   |   Observe student behaviors, not just teacher actions. Sample
+    at least 5 students across different locations in the classroom.
+  indicators:
+  - code: D1
+    name: Active Participation Rate
+    levels:
+      1: Less than 25% of students visibly engaged. Collaboration minimal or absent.
+      2: 25–50% engaged; many passive or off-task.
+      3: 50–75% actively participating (writing, discussing, solving).
+      4: More than 75% actively engaged; energy is visible; students initiating. Structured collaboration
+        on synthesis/problem-solving.
+  - code: D2
+    name: Cognitive Engagement Level (Bloom's)
+    levels:
+      1: Students copying or doing rote recall only. Passively receiving information.
+      2: Students completing tasks but without thinking deeply.
+      3: Students applying concepts to new problems (Bloom's Apply/Analyze).
+      4: Students creating, evaluating, debating — genuine intellectual work. Actively analyse, interpret,
+        and critique content with supporting evidence.
+  - code: D3
+    name: Student-to-Student Interaction
+    levels:
+      1: No peer interaction; silent individual work only.
+      2: Students talk but not about content.
+      3: Students discuss content in pairs/groups; academic language used.
+      4: Students build on each other's ideas; respectful disagreement; peer teaching. Students debate
+        solutions and propose creative alternatives.
+  - code: D4
+    name: Student Confidence & Risk-Taking
+    levels:
+      1: Students afraid to answer; avoidance behaviors visible.
+      2: Students answer only when certain; no risk-taking.
+      3: Students attempt challenging tasks; some comfortable with mistakes.
+      4: Students volunteer, ask questions, try difficult problems. Mistakes celebrated. Students freely
+        share and debate ideas.
+  - code: D5
+    name: On-Task Behavior During Independent Work
+    levels:
+      1: Most students off-task during independent/group work.
+      2: Students start on-task but lose focus quickly.
+      3: Students sustain focus for most of independent work time.
+      4: Students self-regulate; seek help appropriately; persist through difficulty.
+  - code: D6
+    name: Student Use of Learning Materials
+    levels:
+      1: Students don't interact with provided materials.
+      2: Materials used passively (watching video, holding textbook).
+      3: Students actively use materials to solve problems or practice.
+      4: Students use materials creatively; extend beyond prescribed use.
+  - code: D7
+    name: Inclusivity of Engagement
+    levels:
+      1: Only front-row or high-ability students engaged.
+      2: Teacher attempts inclusion but success is limited.
+      3: Students across ability levels and genders are participating.
+      4: Deliberate inclusion of marginalized students; no one invisible. Gender-equitable participation.
+- code: F
+  title: Teacher Subject Knowledge
+  note: SECTION F — TEACHER'S SUBJECT KNOWLEDGE   |   Assessed through lesson observation. Does the teacher
+    demonstrate accurate, deep understanding of the content?
+  indicators:
+  - code: F1
+    name: Content Accuracy
+    levels:
+      1: Teacher makes factual errors that go uncorrected.
+      2: Mostly accurate but with minor errors or imprecise language.
+      3: Content is accurate; no errors observed.
+      4: Content is accurate AND teacher explains WHY (conceptual depth, not just facts).
+  - code: F2
+    name: Use of Academic Language
+    levels:
+      1: Incorrect or no subject-specific terminology used.
+      2: Some terms used but not explained or used inconsistently.
+      3: Key terms used accurately and explained to students.
+      4: Terms used naturally; students also use them; bilingual bridging (Urdu/English) effective.
+  - code: F3
+    name: Anticipation of Student Misconceptions
+    levels:
+      1: Teacher unaware of common misconceptions in this topic.
+      2: Aware but doesn't address them proactively.
+      3: Anticipates and addresses at least 1–2 common misconceptions.
+      4: Systematically surfaces and corrects misconceptions; uses diagnostic questions.
+  - code: F4
+    name: Depth of Explanation
+    levels:
+      1: Superficial/procedural explanation only ('do it this way').
+      2: Some conceptual explanation but relies on memorization.
+      3: Explains the 'why' behind procedures; uses multiple representations.
+      4: Deep conceptual teaching; connects to broader principles; encourages student reasoning.
+  - code: F5
+    name: 'Subject-Specific Pedagogy: MATH'
+    levels:
+      1: Math taught purely procedurally; no use of manipulatives or visuals.
+      2: Some visual aids but conceptual understanding not developed.
+      3: Uses concrete → pictorial → abstract (CPA) progression; manipulatives present.
+      4: CPA approach mastered; multiple solution strategies explored; math talk norms established.
+  - code: F6
+    name: 'Subject-Specific Pedagogy: SCIENCE'
+    levels:
+      1: Science taught from textbook only; no inquiry or observation.
+      2: Some demonstration but teacher-led; students observe passively.
+      3: Hands-on activities present; students make predictions and observations.
+      4: 'Full inquiry cycle: question → predict → investigate → conclude. Students design investigations.'
+  - code: F7
+    name: 'Subject-Specific Pedagogy: LITERACY / LANGUAGE'
+    levels:
+      1: Reading taught as decoding only; no comprehension strategies.
+      2: Some reading activities but no explicit strategy instruction.
+      3: Teacher models reading strategies (prediction, summarizing, questioning). Balanced approach.
+      4: 'Balanced literacy: phonics + fluency + vocabulary + comprehension + writing integrated.'
+  - code: F8
+    name: Cross-Curricular Connections
+    levels:
+      1: Subject taught in complete isolation.
+      2: Occasional reference to other subjects but not developed.
+      3: Meaningful connections made to at least one other subject area.
+      4: Integrated approach; students see how math connects to science connects to language.
