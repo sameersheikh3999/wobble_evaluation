@@ -72,6 +72,8 @@ sections:
       2: Plan open but teacher deviates significantly.
       3: Plan followed with minor contextual adaptations.
       4: Plan followed faithfully AND adapted intelligently to class needs.
+    requires:
+    - lesson_plan
   - code: B8
     name: Use of Prescribed Resources
     levels:
@@ -79,6 +81,8 @@ sections:
       2: Some resources used but not as intended.
       3: Key resources used as prescribed in lesson plan.
       4: All resources used effectively; teacher adds complementary materials.
+    requires:
+    - lesson_plan
   - code: B9
     name: Time on Task / Time on Learning
     levels:

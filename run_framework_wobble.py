@@ -91,9 +91,24 @@ ALPHA = 0.05
 
 
 # ----------------------------------------------------------------- transcripts
+# Reference documents an observation may carry in addition to the transcript.
+# A coaching observation is an AUDIO TRANSCRIPT of a classroom session. Some
+# indicators - "did she follow the plan", "were the prescribed resources used" -
+# cannot be judged from that alone: they compare the observation against a
+# document. Where the teacher attached one, it is supplied to the model; where
+# she did not, the dependent indicators are reported NOT_ASSESSABLE rather than
+# scored against a document nobody showed the scorer.
+REFERENCE_FIELDS = ("lesson_plan", "lesson_plan_text", "plan", "curriculum_guide",
+                    "scheme_of_work")
+
+
 def find_transcripts(d, text_field="transcript"):
     """Any JSON with a text field. `id` falls back to the filename, so a drop of
-    plain {"transcript": "..."} files works with no other metadata."""
+    plain {"transcript": "..."} files works with no other metadata.
+
+    A file may also carry reference documents (see REFERENCE_FIELDS); these are
+    picked up automatically and made available to indicators that declare them.
+    """
     out = []
     for f in sorted(glob.glob(os.path.join(d, "*.json"))):
         try:
@@ -107,7 +122,12 @@ def find_transcripts(d, text_field="transcript"):
             continue
         sid = str(j.get("session_id") or j.get("id")
                   or os.path.splitext(os.path.basename(f))[0])[:8]
-        out.append(dict(id=sid, text=text, path=f,
+        refs = {}
+        for k in REFERENCE_FIELDS:
+            v = j.get(k)
+            if isinstance(v, str) and v.strip():
+                refs["lesson_plan" if k in ("lesson_plan_text", "plan") else k] = v
+        out.append(dict(id=sid, text=text, path=f, refs=refs,
                         language=j.get("language", "?"),
                         meta={k: v for k, v in j.items() if k != text_field}))
     return out
@@ -124,7 +144,7 @@ SYSTEM = (
 
 
 def build_prompt(fw, section_code, codes, text, binary, yes_at, allow_na,
-                 want_evidence=True):
+                 want_evidence=True, refs=None):
     rubric = fw.render_section(section_code, codes=codes, binary=binary, yes_at=yes_at)
     na = ('\nIf an indicator genuinely cannot apply to this lesson, use the string '
           '"NA". A practice that could have happened but did not is NOT "NA".'
@@ -262,8 +282,9 @@ def parse(text, codes, binary, n_levels):
 
 # --------------------------------------------------------------------- scoring
 def score_section(backend, fw, section, codes, text, binary, yes_at, allow_na,
-                  retries=2):
-    system, user = build_prompt(fw, section, codes, text, binary, yes_at, allow_na)
+                  retries=2, refs=None):
+    system, user = build_prompt(fw, section, codes, text, binary, yes_at, allow_na,
+                                refs=refs)
     got, det, method, raw = {}, {}, "none", ""
     for attempt in range(retries + 1):
         u = user if attempt == 0 else (
@@ -290,17 +311,21 @@ def score_transcript(backend, fw, t, n_runs, binary, yes_at, allow_na, workers):
     rows = []
     t0 = time.time()
     for it in range(n_runs):
-        jobs = [(s.code, [i.code for i in s.indicators]) for s in fw.sections
-                if s.indicators]
+        have = set((t.get("refs") or {}))
+        skip = set(fw.unassessable(have))
+        jobs = [(s.code, [i.code for i in s.indicators if i.code not in skip])
+                for s in fw.sections if s.indicators]
+        jobs = [(sc, cs) for sc, cs in jobs if cs]
         got = []
         if workers <= 1:
             for sc, codes in jobs:
                 got += score_section(backend, fw, sc, codes, t["text"], binary,
-                                     yes_at, allow_na)
+                                     yes_at, allow_na, refs=t.get("refs"))
         else:
             with futures.ThreadPoolExecutor(max_workers=min(workers, len(jobs))) as ex:
                 futs = [ex.submit(score_section, backend, fw, sc, codes, t["text"],
-                                  binary, yes_at, allow_na) for sc, codes in jobs]
+                                  binary, yes_at, allow_na, refs=t.get("refs"))
+                        for sc, codes in jobs]
                 for f in futures.as_completed(futs):
                     got += f.result()
         for r in got:
@@ -313,8 +338,15 @@ def score_transcript(backend, fw, t, n_runs, binary, yes_at, allow_na, workers):
 
 
 # -------------------------------------------------------------------- analysis
-def analyse(df, fw, binary, yes_at):
-    """-> per-indicator reliability + discrimination, per-lesson cells, bands."""
+def analyse(df, fw, binary, yes_at, unassessable=()):
+    """-> per-indicator reliability + discrimination, per-lesson cells, bands.
+
+    `unassessable` names indicators whose required reference document (a lesson
+    plan, say) was not supplied for any observation. They are reported as
+    NOT_ASSESSABLE, never as UNINFORMATIVE: the difference is whether the
+    framework failed or the input was missing.
+    """
+    unassessable = set(unassessable)
     df = df.copy()
     df["score"] = pd.to_numeric(df["score"], errors="coerce")
     # A level scale is collapsed at the proficiency cut so every framework is
@@ -410,8 +442,12 @@ def analyse(df, fw, binary, yes_at):
     ind["q_discriminates"] = holm(ind["p_discriminates"].to_numpy(float))
     ind["reliable"] = ~(ind["q_unstable"] < ALPHA)
     ind["discriminates"] = ind["q_discriminates"] < ALPHA
+    # An indicator whose reference document was never supplied was not measured -
+    # it must never be reported as UNINFORMATIVE, which would blame the rubric or
+    # the classrooms for a gap in the inputs.
     ind["verdict_class"] = [
-        ("UNTESTED" if r.n_lessons < MIN_LESSONS_FOR_TEST else
+        ("NOT_ASSESSABLE" if r.code in unassessable else
+         "UNTESTED" if r.n_lessons < MIN_LESSONS_FOR_TEST else
          "HEALTHY" if r.reliable and r.discriminates else
          "UNINFORMATIVE" if r.reliable else
          "NOISY" if r.discriminates else "BROKEN")
@@ -513,7 +549,10 @@ def write_report(res, out, fw):
         print(ind[cols].to_string(index=False, na_rep="-",
                                   float_format=lambda v: f"{v:.3f}"))
 
-    for cls, blurb in (("NOISY", "will not reproduce - rewrite before using"),
+    for cls, blurb in (("NOT_ASSESSABLE", "these compare the observation against a "
+                                          "document that was not supplied - supply it "
+                                          "or drop them; do NOT read them as findings"),
+                       ("NOISY", "will not reproduce - rewrite before using"),
                        ("BROKEN", "no reliable signal at all"),
                        ("UNINFORMATIVE", "same answer on every lesson - carries no "
                                          "coaching signal, however stable")):
@@ -648,7 +687,16 @@ def cmd_run(a):
     print(f"\n{fw.summary()}")
     print(f"  {a.model} · effort={a.effort} · {a.iterations} runs · "
           f"{'binary at level ' + str(yes_at) if a.binary else f'1-{fw.n_levels} scale'}")
-    print(f"  {len(ts)} transcripts, {len(fw.all_codes)} indicators")
+    print(f"  {len(ts)} observation transcripts, {len(fw.all_codes)} indicators")
+    have_any = set().union(*[set(t["refs"]) for t in ts]) if ts else set()
+    n_with = sum(1 for t in ts if t["refs"])
+    gaps = fw.unassessable(have_any)
+    if any(i.requires for s_ in fw.sections for i in s_.indicators):
+        print(f"  reference documents: {n_with}/{len(ts)} observations carry one "
+              f"({', '.join(sorted(have_any)) or 'none'})")
+        if gaps:
+            print(f"  ! {len(gaps)} indicator(s) need a document no observation "
+                  f"supplies and will NOT be scored: {', '.join(sorted(gaps))}")
 
     t0 = time.time()
     for i, t in enumerate(ts, 1):
@@ -669,7 +717,9 @@ def cmd_run(a):
           f"{backend.calls} model calls")
 
     df = pd.DataFrame(records)
-    res = analyse(df, fw, a.binary, yes_at)
+    never_had = set(fw.unassessable(set().union(*[set(t["refs"]) for t in ts])
+                                    if ts else set()))
+    res = analyse(df, fw, a.binary, yes_at, never_had)
     write_report(res, a.out, fw)
     return 0
 
@@ -682,7 +732,9 @@ def cmd_analyse(a):
     df = pd.read_csv(f)
     binary = a.binary or set(pd.to_numeric(df.score, errors="coerce")
                              .dropna().unique()) <= {0.0, 1.0}
-    res = analyse(df, fw, binary, a.cut or fw.proficiency_cut)
+    scored = set(df.code.unique())
+    never_had = {c for c in fw.unassessable(set()) if c not in scored}
+    res = analyse(df, fw, binary, a.cut or fw.proficiency_cut, never_had)
     write_report(res, a.out, fw)
     return 0
 

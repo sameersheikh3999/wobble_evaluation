@@ -65,6 +65,12 @@ class Indicator:
     levels: dict                                       # {1: "...", 2: "...", ...}
     section: str = ""
     applies_when: dict = field(default_factory=dict)   # e.g. {"subject": "MATH"}
+    # Extra documents this indicator cannot be judged without. The observation
+    # transcript is always supplied; anything listed here is an ADDITIONAL input,
+    # e.g. ["lesson_plan"] for an indicator whose bar is "followed the plan".
+    # Scoring such an indicator without its reference document does not produce a
+    # low score - it produces a meaningless one.
+    requires: list = field(default_factory=list)
     note: str = ""
 
     def descriptor(self, level):
@@ -141,6 +147,10 @@ class Framework:
         if ind.applies_when:
             cond = ", ".join(f"{k}={v}" for k, v in ind.applies_when.items())
             lines.append(f"  [Applies only when {cond}]")
+        if ind.requires:
+            docs = ", ".join(x.replace("_", " ") for x in ind.requires)
+            lines.append(f"  [Judge this against the supplied {docs}, not against "
+                         f"the observation alone]")
         return "\n".join(lines)
 
     def render_binary_indicator(self, ind, yes_at=None, terse=False):
@@ -166,6 +176,10 @@ class Framework:
         if ind.applies_when:
             cond = ", ".join(f"{k}={v}" for k, v in ind.applies_when.items())
             lines.append(f"  [Applies only when {cond}]")
+        if ind.requires:
+            docs = ", ".join(x.replace("_", " ") for x in ind.requires)
+            lines.append(f"  [Judge this against the supplied {docs}, not against "
+                         f"the observation alone]")
         return "\n".join(lines)
 
     def render_section(self, section_code, codes=None, binary=False,
@@ -181,6 +195,18 @@ class Framework:
             self.render_binary_indicator(i, yes_at, terse) if binary
             else self.render_indicator(i, terse) for i in inds)
         return head + "\n\n" + body
+
+    def unassessable(self, available):
+        """Indicators whose required reference documents are not in `available`.
+
+        Scoring these anyway does not yield a low score - it yields a
+        meaningless one, because the model is asked to compare the observation
+        against a document it was never shown.
+        """
+        have = set(available or [])
+        return {i.code: [r for r in i.requires if r not in have]
+                for s in self.sections for i in s.indicators
+                if i.requires and not set(i.requires) <= have}
 
     def summary(self):
         return (f"{self.name}" + (f" v{self.version}" if self.version else "")
@@ -297,6 +323,7 @@ def _from_dict(d):
                                   name=str(idd.get("name", "")).strip(),
                                   levels=lv, section=str(sd["code"]).strip(),
                                   applies_when=idd.get("applies_when") or {},
+                                  requires=list(idd.get("requires") or []),
                                   note=idd.get("note", "")))
         sections.append(Section(code=str(sd["code"]).strip(),
                                 title=sd.get("title", ""), note=sd.get("note", ""),
@@ -407,7 +434,9 @@ def to_yaml(fw, path):
              sections=[dict(code=s.code, title=s.title, note=s.note,
                             indicators=[dict(code=i.code, name=i.name, levels=i.levels,
                                              **({"applies_when": i.applies_when}
-                                                if i.applies_when else {}))
+                                                if i.applies_when else {}),
+                                             **({"requires": i.requires}
+                                                if i.requires else {}))
                                         for i in s.indicators])
                        for s in fw.sections])
     with open(path, "w", encoding="utf-8") as f:
