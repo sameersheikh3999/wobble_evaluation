@@ -1,0 +1,394 @@
+<title>Which Rubric Can AI Score?</title>
+<style>
+  :root {
+    --paper:#f5f6f4; --surface:#ffffff; --surface-2:#eceee9;
+    --ink:#16191a; --ink-2:#3d4446; --muted:#6b7477;
+    --rule:#dde0da; --rule-soft:#e8ebe5; --code-bg:#eef0ec;
+    --fico:#2a6f97; --fico-bg:#dde9f0;
+    --hots:#9a5b1e; --hots-bg:#f3e6d6;
+    --teach:#4a6b31; --teach-bg:#e2ecda;
+    --good:#12704a; --good-bg:#dcece4;
+    --bad:#a3352f;  --bad-bg:#f5e1df;
+    --warn:#8a6410; --warn-bg:#f2e9d5;
+    --f-display:"Segoe UI",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+    --f-body:Constantia,Cambria,Georgia,"Times New Roman",serif;
+    --f-data:Consolas,"SF Mono",ui-monospace,monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#101211; --surface:#181b19; --surface-2:#1e2220;
+      --ink:#e7e9e5; --ink-2:#b4bab6; --muted:#828a86;
+      --rule:#2a2f2c; --rule-soft:#212523; --code-bg:#1e2220;
+      --fico:#79b4d8; --fico-bg:#16262f;
+      --hots:#d5a05c; --hots-bg:#2c2216;
+      --teach:#93bd74; --teach-bg:#1c2716;
+      --good:#5cbc92; --good-bg:#14291f;
+      --bad:#e0776f;  --bad-bg:#2c1917;
+      --warn:#d3a54c; --warn-bg:#2a2314;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#101211; --surface:#181b19; --surface-2:#1e2220;
+    --ink:#e7e9e5; --ink-2:#b4bab6; --muted:#828a86;
+    --rule:#2a2f2c; --rule-soft:#212523; --code-bg:#1e2220;
+    --fico:#79b4d8; --fico-bg:#16262f;
+    --hots:#d5a05c; --hots-bg:#2c2216;
+    --teach:#93bd74; --teach-bg:#1c2716;
+    --good:#5cbc92; --good-bg:#14291f;
+    --bad:#e0776f;  --bad-bg:#2c1917;
+    --warn:#d3a54c; --warn-bg:#2a2314;
+  }
+  *{box-sizing:border-box}
+  body{background:var(--paper);color:var(--ink);font-family:var(--f-body);
+       font-size:1.0625rem;line-height:1.72;margin:0;padding:0 1.25rem 6rem;
+       -webkit-font-smoothing:antialiased}
+  header.top{max-width:40rem;margin:0 auto;padding:4.5rem 0 1.5rem}
+  .eyebrow{font-family:var(--f-data);font-size:.7rem;letter-spacing:.14em;
+           text-transform:uppercase;color:var(--muted);margin:0 0 1.4rem}
+  h1{font-family:var(--f-display);font-size:clamp(2rem,5.5vw,2.85rem);line-height:1.1;
+     font-weight:600;letter-spacing:-.022em;text-wrap:balance;margin:0 0 1rem}
+  .standfirst{font-size:1.18rem;line-height:1.62;color:var(--ink-2);
+              margin:0 0 1.6rem;text-wrap:pretty}
+  section{max-width:40rem;margin:0 auto;padding-top:3.2rem}
+  figure.wide{max-width:50rem;margin:2rem auto}
+  h2{font-family:var(--f-display);font-size:1.5rem;font-weight:600;
+     letter-spacing:-.016em;line-height:1.22;text-wrap:balance;margin:0 0 .3rem;
+     padding-top:1.5rem;border-top:2px solid var(--ink)}
+  h3{font-family:var(--f-display);font-size:1.05rem;font-weight:600;
+     margin:2rem 0 .5rem;line-height:1.35}
+  p{margin:0 0 1.05rem;text-wrap:pretty}
+  strong{font-weight:600;color:var(--ink)}
+  ul,ol{margin:0 0 1.2rem;padding-left:1.2rem} li{margin-bottom:.5rem}
+  code{font-family:var(--f-data);font-size:.87em;background:var(--code-bg);
+       padding:.1em .34em;border-radius:2px}
+  .tablewrap{overflow-x:auto;margin:1.4rem 0 1.8rem;border:1px solid var(--rule);
+             border-radius:3px;background:var(--surface)}
+  table{border-collapse:collapse;width:100%;font-size:.93rem}
+  th,td{padding:.55rem .8rem;text-align:left;border-bottom:1px solid var(--rule-soft)}
+  th{font-family:var(--f-display);font-size:.78rem;font-weight:600;color:var(--muted);
+     border-bottom:1px solid var(--rule)}
+  tbody tr:last-child td{border-bottom:none}
+  td.num,th.num{font-family:var(--f-data);text-align:right;
+                font-variant-numeric:tabular-nums;white-space:nowrap}
+  .f-fico{color:var(--fico);font-weight:600}
+  .f-hots{color:var(--hots);font-weight:600}
+  .f-teach{color:var(--teach);font-weight:600}
+  figure{margin:2rem 0}
+  figure svg{max-width:100%;height:auto;display:block;margin:0 auto}
+  figcaption{font-family:var(--f-display);font-size:.86rem;color:var(--muted);
+             margin-top:.9rem;line-height:1.55;text-wrap:pretty}
+  .callout{background:var(--surface);border:1px solid var(--rule);
+           border-left:3px solid var(--muted);border-radius:3px;
+           padding:1.1rem 1.25rem;margin:1.7rem 0}
+  .callout.warn{border-left-color:var(--warn)}
+  .callout.bad{border-left-color:var(--bad)}
+  .callout p:last-child{margin-bottom:0}
+  .callout .tag{font-family:var(--f-data);font-size:.68rem;letter-spacing:.12em;
+                text-transform:uppercase;color:var(--muted);display:block;
+                margin-bottom:.45rem}
+  .pill{font-family:var(--f-data);font-size:.68rem;letter-spacing:.05em;
+        padding:.14rem .42rem;border-radius:2px;white-space:nowrap}
+  .p-good{background:var(--good-bg);color:var(--good)}
+  .p-bad{background:var(--bad-bg);color:var(--bad)}
+  .p-warn{background:var(--warn-bg);color:var(--warn)}
+  .codelist{font-family:var(--f-data);font-size:.84rem;line-height:1.9;
+            color:var(--ink-2)}
+  footer{max-width:40rem;margin:4rem auto 0;padding-top:1.5rem;
+         border-top:1px solid var(--rule);font-size:.88rem;color:var(--muted)}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+
+<header class="top">
+  <p class="eyebrow">FICO · HOTS · TEACH — same observations, same scorer</p>
+  <h1>Which rubric can AI score?</h1>
+  <p class="standfirst">
+    Three coaching frameworks, applied to the same three classroom observations,
+    scored ten times each by the same model. The scorer was equally consistent on
+    all three. What separated them was not reliability — it was whether their
+    scales could reach the classrooms being observed.
+  </p>
+</header>
+
+<section>
+  <h2>The headline</h2>
+  <p>
+    Each framework was scored at its <strong>own</strong> proficiency bar — the
+    level its authors call "proficient". On that basis:
+  </p>
+
+  <div class="tablewrap">
+    <table>
+      <thead><tr>
+        <th>Framework</th><th class="num">Indicators</th><th class="num">Scale</th>
+        <th class="num">Met</th><th class="num">AC1</th>
+        <th class="num">Carrying signal</th>
+      </tr></thead>
+      <tbody>
+        <tr><td class="f-fico">FICO</td><td class="num">37</td><td class="num">1–4</td>
+            <td class="num">30.5%</td><td class="num">0.879</td>
+            <td class="num">18 of 35 &nbsp;<span class="pill p-good">51%</span></td></tr>
+        <tr><td class="f-hots">HOTS</td><td class="num">17</td><td class="num">1–3</td>
+            <td class="num"><strong>0.0%</strong></td><td class="num">1.000*</td>
+            <td class="num">0 of 17 &nbsp;<span class="pill p-bad">0%</span></td></tr>
+        <tr><td class="f-teach">TEACH</td><td class="num">28</td><td class="num">L/M/H</td>
+            <td class="num">19.4%</td><td class="num">0.893</td>
+            <td class="num">10 of 28 &nbsp;<span class="pill p-warn">36%</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout bad">
+    <span class="tag">The finding</span>
+    <p>
+      <strong>HOTS awarded its top level exactly zero times in 510 judgements.</strong>
+      Not rarely — never. Every indicator scored 1 or 2 on every observation, in
+      every one of the ten runs.
+    </p>
+    <p>
+      Because HOTS is a 3-point scale whose top point <em>is</em> "Proficient", a
+      proficiency verdict is unreachable in these classrooms. Its AC1 of 1.000 is
+      not excellent reliability — it is the arithmetic of a constant. Perfect
+      agreement on "no" every time.
+    </p>
+  </div>
+</section>
+
+<section>
+  <h2>Why: the scales don't reach the same places</h2>
+
+  <figure class="wide">
+    <svg viewBox="0 0 660 260" role="img" aria-label="Distribution of scores across levels for each framework. FICO spreads across levels 1 to 3 and almost never reaches level 4. HOTS uses only levels 1 and 2 and never reaches level 3. TEACH spreads across all three of its levels.">
+      <g font-family="Consolas, monospace" font-size="11.5">
+        <text x="8" y="26" font-size="12" font-weight="600" fill="currentColor">FICO</text>
+        <text x="8" y="42" font-size="10.5" fill="currentColor" opacity=".6">1–4 scale</text>
+        <rect x="92" y="12" width="128" height="34" fill="#c9d9e5"/>
+        <text x="156" y="34" text-anchor="middle" fill="#16191a">1 · 24%</text>
+        <rect x="222" y="12" width="247" height="34" fill="#7fa8c4"/>
+        <text x="345" y="34" text-anchor="middle" fill="#16191a">2 · 46%</text>
+        <rect x="471" y="12" width="164" height="34" fill="#2a6f97"/>
+        <text x="553" y="34" text-anchor="middle" fill="#ffffff">3 · 30%</text>
+        <rect x="637" y="12" width="3" height="34" fill="#123a51"/>
+        <text x="600" y="62" font-size="10.5" fill="currentColor" opacity=".75">level 4 used once in 989</text>
+
+        <text x="8" y="118" font-size="12" font-weight="600" fill="currentColor">HOTS</text>
+        <text x="8" y="134" font-size="10.5" fill="currentColor" opacity=".6">1–3 scale</text>
+        <rect x="92" y="104" width="383" height="34" fill="#e8d3b6"/>
+        <text x="283" y="126" text-anchor="middle" fill="#16191a">1 · 71%</text>
+        <rect x="477" y="104" width="157" height="34" fill="#9a5b1e"/>
+        <text x="555" y="126" text-anchor="middle" fill="#ffffff">2 · 29%</text>
+        <line x1="636" y1="100" x2="636" y2="142" stroke="#a3352f" stroke-width="2.5"/>
+        <text x="628" y="158" font-size="11" font-weight="600" fill="#a3352f"
+              text-anchor="end">level 3 — never used, 0 of 510</text>
+
+        <text x="8" y="212" font-size="12" font-weight="600" fill="currentColor">TEACH</text>
+        <text x="8" y="228" font-size="10.5" fill="currentColor" opacity=".6">L/M/H</text>
+        <rect x="92" y="198" width="118" height="34" fill="#d3e0c8"/>
+        <text x="151" y="220" text-anchor="middle" fill="#16191a">L · 22%</text>
+        <rect x="212" y="198" width="317" height="34" fill="#8fb173"/>
+        <text x="370" y="220" text-anchor="middle" fill="#16191a">M · 59%</text>
+        <rect x="531" y="198" width="105" height="34" fill="#4a6b31"/>
+        <text x="583" y="220" text-anchor="middle" fill="#ffffff">H · 19%</text>
+      </g>
+      <line x1="92" y1="250" x2="636" y2="250" stroke="currentColor" stroke-width="1"
+            opacity=".35"/>
+      <text x="92" y="248" font-size="10" fill="currentColor" opacity=".55">lowest level</text>
+      <text x="636" y="248" font-size="10" fill="currentColor" opacity=".55"
+            text-anchor="end">highest level</text>
+    </svg>
+    <figcaption>
+      Where each framework's judgements actually landed, across 2,339 scored cells.
+      FICO and HOTS both fail to reach their top level — but FICO has a second-from-top
+      level that works as its proficiency bar, and HOTS does not. TEACH is the only
+      one of the three that uses its full range.
+    </figcaption>
+  </figure>
+
+  <p>
+    The two frameworks fail in <strong>opposite directions</strong>, and neither
+    failure is about the AI:
+  </p>
+  <ul>
+    <li><strong class="f-hots">HOTS is pitched above these classrooms.</strong> It
+      measures higher-order thinking — open-ended questioning, synthesis, debate,
+      peer assessment. These were basic literacy and numeracy lessons. Its ceiling
+      is never touched, so it cannot distinguish a weak lesson from a slightly
+      better one at the proficient end.</li>
+    <li><strong class="f-teach">TEACH's lower bar is too easy.</strong> Drop to
+      "evidenced at all" and 11 of its 28 behaviours are met on <em>every</em>
+      observation — the teacher treats students respectfully, uses positive
+      language, acknowledges effort. True everywhere, so they separate nothing.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>At a comparable bar, the picture inverts</h2>
+  <p>
+    Because "proficient" means different things on a 3-point and a 4-point scale,
+    the frameworks were also scored at the one bar that means the same thing on all
+    three: <strong>above the bottom level</strong> — did the practice appear at all?
+  </p>
+
+  <div class="tablewrap">
+    <table>
+      <thead><tr>
+        <th>Framework</th><th class="num">Met</th><th class="num">AC1</th>
+        <th class="num">Flip rate</th><th class="num">Works</th>
+        <th class="num">No signal</th><th class="num">Carrying signal</th>
+      </tr></thead>
+      <tbody>
+        <tr><td class="f-fico">FICO</td><td class="num">76.3%</td><td class="num">0.921</td>
+            <td class="num">3.3%</td><td class="num">10</td><td class="num">22</td>
+            <td class="num"><span class="pill p-bad">29%</span></td></tr>
+        <tr><td class="f-hots">HOTS</td><td class="num">29.0%</td><td class="num">0.892</td>
+            <td class="num">4.7%</td><td class="num">9</td><td class="num">8</td>
+            <td class="num"><span class="pill p-good">53%</span></td></tr>
+        <tr><td class="f-teach">TEACH</td><td class="num">78.2%</td><td class="num">0.907</td>
+            <td class="num">4.2%</td><td class="num">11</td><td class="num">17</td>
+            <td class="num"><span class="pill p-warn">39%</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>
+    <strong>HOTS becomes the most efficient of the three</strong> — 53% of its
+    indicators carry signal, against FICO's 29%. The same framework that was
+    useless at its own bar is the best-discriminating one a level down. Its
+    problem is entirely where the bar sits, not what it asks about.
+  </p>
+
+  <div class="callout">
+    <span class="tag">The result that did not vary</span>
+    <p>
+      <strong>Reliability was near-identical across all three</strong> — AC1
+      between 0.89 and 0.92, flip rates between 3.3% and 4.7%, zero parse failures
+      on any of them. The scorer reads all three rubrics about equally well.
+    </p>
+    <p>
+      So the frameworks are not distinguished by how consistently an AI can apply
+      them. They are distinguished by <em>what their scales can detect</em> in the
+      classrooms you actually have.
+    </p>
+  </div>
+</section>
+
+<section>
+  <h2>Which indicators work</h2>
+  <p>
+    Judged at the comparable bar. "Works" means it both reproduces across runs and
+    tells the observations apart.
+  </p>
+
+  <h3><span class="f-hots">HOTS</span> — 9 of 17 work</h3>
+  <p class="codelist">
+    <strong>Work:</strong> 1.2 Resources &amp; Space · 1.3 Complex Tasks ·
+    2.3 Real-World Applications · 3.2 Students Analyse/Interpret ·
+    4.1 Collaboration · 4.2 Multiple Perspectives · 4.3 Discussions &amp; Debates ·
+    5.1 Self/Peer Assessment · 5.3 Assessment Requiring HOTS<br>
+    <strong>No signal:</strong> 1.1 Open Discussions · 2.1 Objectives Linked to HOTS ·
+    2.2 Strategies for Analysis · 3.1 Open-Ended Questions ·
+    3.3 Teacher Models Problem-Solving · 3.4 Effective Scaffolding ·
+    5.2 Feedback Guiding Reasoning · MG.1 Cross-Grade
+  </p>
+  <p>
+    Note the pattern: <strong>Domain 4 (Student Engagement) works entirely</strong> —
+    all three of its indicators discriminate. <strong>Domain 3 (Instructional
+    Strategies) mostly does not</strong> — three of its four carry no signal, all
+    scored "not evidenced" on every observation.
+  </p>
+
+  <h3><span class="f-teach">TEACH</span> — 11 of 28 work</h3>
+  <p class="codelist">
+    <strong>Work:</strong> 3.1, 3.2, 3.3 Lesson Facilitation · 4.2 Monitors students ·
+    5.2 Feedback on success · 6.1, 6.2, 6.3 Critical Thinking ·
+    7.2 Opportunities for roles · 8.2 Positive attitude to challenge ·
+    9.2 Interpersonal skills<br>
+    <strong>No signal:</strong> all of Element 1 (Supportive Environment) and
+    Element 2 (Behavioural Expectations) · 3.4 Models by thinking aloud ·
+    4.1, 4.3 Checks for Understanding · 5.1 Feedback on misunderstanding ·
+    7.1, 7.3 Autonomy · 8.1, 8.3 Perseverance · 9.1, 9.3 Collaboration
+  </p>
+  <p>
+    <strong>TEACH's Critical Thinking element (6.1–6.3) works completely</strong> —
+    all three behaviours discriminate, with AC1 between 0.74 and 0.89. Its
+    Classroom Culture area (Elements 1 and 2) is entirely dead: every behaviour
+    scored "evidenced" on every observation.
+  </p>
+
+  <h3><span class="f-fico">FICO</span> — 10 of 33 testable work</h3>
+  <p>
+    Plus two — <code>B7</code> Use of Lesson Plan and <code>B8</code> Use of
+    Prescribed Resources — reported <strong>NOT_ASSESSABLE</strong> rather than
+    scored, because both compare the observation against a lesson plan and none of
+    the three observations carried one. Scoring them anyway would have produced a
+    number about a missing file.
+  </p>
+</section>
+
+<section>
+  <h2>What I would take from this</h2>
+  <ol>
+    <li><strong>HOTS cannot be used at its own proficiency bar on these
+      classrooms.</strong> Either lower the bar to level 2 for reporting, or accept
+      that a "proficient" HOTS verdict is currently unattainable and say so
+      explicitly rather than reporting 0% as a finding about teachers.</li>
+    <li><strong>Take HOTS Domain 4 and TEACH Element 6 seriously.</strong> Both are
+      fully discriminating blocks measuring student engagement and critical
+      thinking — the two areas where all three frameworks agree there is signal.</li>
+    <li><strong>Drop or rewrite TEACH's Classroom Culture area</strong> for this
+      purpose. Seven behaviours, all met everywhere, no coaching signal. That may
+      be a genuine finding about these classrooms, or a bar set too low.</li>
+    <li><strong>FICO's breadth costs it.</strong> 37 indicators but the lowest
+      proportion carrying signal. HOTS gets more discrimination from 17.</li>
+  </ol>
+</section>
+
+<section>
+  <h2>What would change these numbers</h2>
+
+  <div class="callout warn">
+    <span class="tag">Read before quoting</span>
+    <p>
+      <strong>Three observations.</strong> That is the minimum for the
+      discrimination test, and it inflates "no signal" counts on all three
+      frameworks: an indicator must differ sharply across just three lessons to
+      register. The comparison between frameworks is sound — they all faced the
+      same three — but the absolute counts would rise with more observations. Do
+      not quote "N indicators work" as a fixed property.
+    </p>
+    <p>
+      <strong>TEACH was scored without its manual.</strong> The PDF supplied is the
+      observation tick-sheet: behaviour statements and L/M/H boxes, but no
+      behaviour-level descriptors of what Low, Medium and High mean. Generic
+      anchors were used instead. FICO and HOTS both ship full written descriptors
+      for every level. TEACH is therefore judged on a thinner rubric than the other
+      two, and its results should be treated as a floor rather than a fair
+      estimate.
+    </p>
+    <p>
+      <strong>No lesson plans.</strong> None of the three observations carried one,
+      which is why FICO's B7 and B8 are unassessable. HOTS Domain 2 is "Lesson
+      Planning" — its three indicators were scored from the transcript alone, and
+      two of them carry no signal. Whether that is the indicators or the missing
+      plan is not resolvable from this data.
+    </p>
+  </div>
+
+  <p>
+    And the standing limit on all of this work: <strong>it measures whether the
+    scorer agrees with itself, not whether it is right.</strong> An indicator that
+    returns the same wrong answer ten times scores perfectly here. Nothing has been
+    compared against a trained human observer.
+  </p>
+</section>
+
+<footer>
+  <p>
+    Three coaching frameworks scored against three classroom observations —
+    Swahili 25 min, Urdu 27 min, English 10 min — ten repeated runs each, one model,
+    identical pipeline. 2,339 scored judgements.
+  </p>
+  <p>
+    Reliability is not accuracy. These figures establish which indicators an AI can
+    apply consistently; whether it applies them correctly is a separate study.
+  </p>
+</footer>

@@ -729,7 +729,11 @@ def cmd_analyse(a):
     f = os.path.join(a.out, "all_scores_long.csv")
     if not os.path.exists(f):
         raise SystemExit(f"{f} not found - nothing to analyse")
-    df = pd.read_csv(f)
+    # code/session_id MUST stay strings. A framework whose indicator codes are all
+    # numeric ("1.1" ... "9.3", as TEACH's are) otherwise gets them inferred as
+    # floats on read, and every lookup against the spec silently misses - which
+    # surfaces as every indicator being UNTESTED rather than as an error.
+    df = pd.read_csv(f, dtype={"code": str, "session_id": str, "section": str})
     binary = a.binary or set(pd.to_numeric(df.score, errors="coerce")
                              .dropna().unique()) <= {0.0, 1.0}
     scored = set(df.code.unique())

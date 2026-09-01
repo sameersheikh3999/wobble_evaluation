@@ -1,0 +1,157 @@
+name: HOTS Observation Framework
+version: ''
+source: Coaching Framework - HOTS Framework.csv
+scale:
+  levels: 3
+  labels:
+  - Emerging
+  - Developing
+  - Proficient
+  proficiency_cut: 3
+bands:
+- name: High
+  min: 0.85
+- name: Medium
+  min: 0.6
+- name: Low
+  min: 0.0
+sections:
+- code: D1
+  title: CLASSROOM ENVIRONMENT
+  note: ''
+  indicators:
+  - code: '1.1'
+    name: Open Discussions & Critical Thinking
+    levels:
+      1: Discussions are teacher-dominated with minimal student input. Students respond only when directly
+        called upon.
+      2: Some encouragement for discussions, but student participation is limited and inconsistent.
+      3: Open discussions are encouraged, with students freely sharing and debating ideas. Critical thinking
+        is embedded in interactions.
+  - code: '1.2'
+    name: Resources & Space for Collaboration
+    levels:
+      1: Resources and space are disorganised, limiting collaborative learning.
+      2: Some organisation, but space/resources do not fully support collaborative tasks.
+      3: Resources and space are well-organised for collaborative tasks. Tables arranged for group work.
+  - code: '1.3'
+    name: Complex Tasks with Clear Expectations
+    levels:
+      1: Students are given basic tasks without clear expectations. Instructions unclear.
+      2: Some students engage in complex tasks, but expectations are not consistently communicated.
+      3: Students actively participate in complex, clearly defined tasks. Success criteria stated upfront.
+- code: D2
+  title: LESSON PLANNING
+  note: ''
+  indicators:
+  - code: '2.1'
+    name: Objectives Linked to HOTS
+    levels:
+      1: 'Objectives are vague or focused on rote learning. Example: "Understand the topic."'
+      2: Objectives mention higher-order skills but lack detailed alignment with HOTS verbs.
+      3: 'Objectives are explicit and linked to HOTS. Example: "Evaluate the author''s argument using
+        textual evidence."'
+  - code: '2.2'
+    name: Strategies for Analysis, Evaluation & Synthesis
+    levels:
+      1: Strategies focus on recall and comprehension. Activities ask for definitions or facts only.
+      2: Some activities promote analysis or synthesis but lack variety or depth.
+      3: Strategies explicitly foster HOTS including evaluation and synthesis. Multiple Bloom's levels
+        in one lesson.
+  - code: '2.3'
+    name: Real-World Applications
+    levels:
+      1: Lessons are taught in isolation without real-world relevance.
+      2: Some connections to real-world themes, but not fully embedded in activities.
+      3: Lessons integrate real-world applications and interdisciplinary links. Students apply learning
+        to their context.
+- code: D3
+  title: INSTRUCTIONAL STRATEGIES
+  note: ''
+  indicators:
+  - code: '3.1'
+    name: Open-Ended & Thought-Provoking Questions
+    levels:
+      1: 'Questions are mostly close-ended, requiring one-word answers. Example: "What is the capital?"'
+      2: 'Some open-ended questions are asked, but they lack depth. Example: "Why is the earth round?"'
+      3: 'Open-ended, thought-provoking questions dominate. Example: "How would the story change if the
+        character made a different choice?"'
+  - code: '3.2'
+    name: Students Analyse, Interpret & Critique
+    levels:
+      1: Students passively receive information. Teacher explains everything without student input.
+      2: Some analysis and critique are encouraged, but not consistent across the lesson.
+      3: Students actively analyse, interpret, and critique content. Students challenge ideas with evidence.
+  - code: '3.3'
+    name: Teacher Models Problem-Solving & Creativity
+    levels:
+      1: Simple tasks demonstrated without explanation of the problem-solving process.
+      2: Problem-solving is modelled, but the teacher does not explain strategies or invite students to
+        try.
+      3: Problem-solving and creativity are modelled with clear strategies. Students are invited to attempt
+        their own approaches.
+  - code: '3.4'
+    name: Effective Scaffolding
+    levels:
+      1: Minimal or no scaffolding. Students asked to solve problems without support.
+      2: Some scaffolding provided, but inconsistent. Support does not adjust to student needs.
+      3: 'Effective scaffolding supports student exploration. Multiple tools: sentence frames, graphic
+        organisers, think-alouds.'
+- code: D4
+  title: STUDENT ENGAGEMENT
+  note: ''
+  indicators:
+  - code: '4.1'
+    name: Collaboration on HOTS Tasks
+    levels:
+      1: Collaboration is minimal or absent. Students work individually throughout.
+      2: Some collaboration occurs, but tasks lack depth. Students share ideas but don't synthesise.
+      3: Collaboration is structured and focused on synthesis and problem-solving. Groups produce joint
+        outputs.
+  - code: '4.2'
+    name: Multiple Perspectives & Novel Solutions
+    levels:
+      1: Content is presented from a single perspective. No alternative viewpoints explored.
+      2: Multiple perspectives are mentioned, but exploration is limited. Teacher-led only.
+      3: Students actively explore and evaluate multiple perspectives. Novel solutions encouraged and
+        celebrated.
+  - code: '4.3'
+    name: Discussions & Debates on Complex Topics
+    levels:
+      1: Discussions are teacher-led with limited student involvement.
+      2: Some discussions occur, but only a few students participate actively.
+      3: Discussions and debates actively involve all students. Students collaborate and build on each
+        other's ideas.
+- code: D5
+  title: ASSESSMENT & FEEDBACK
+  note: ''
+  indicators:
+  - code: '5.1'
+    name: Self-Assessment & Peer-Assessment
+    levels:
+      1: Assessment limited to teacher-led grading. Students receive a grade with no self-reflection.
+      2: Some self- or peer-assessment occurs, but inconsistent. No structured criteria provided.
+      3: Self- and peer-assessment are structured and purposeful. Students use rubrics to evaluate reasoning.
+  - code: '5.2'
+    name: Feedback Guiding Reasoning & Improvement
+    levels:
+      1: 'Feedback is generic: "Good job" or "Try again" with no specifics.'
+      2: Feedback is specific but does not consistently guide improvement.
+      3: 'Feedback is specific, actionable, and focused on improvement. Example: "Your argument would
+        be stronger with evidence from paragraph 3."'
+  - code: '5.3'
+    name: Assessment Tasks Requiring HOTS
+    levels:
+      1: Assessment tasks focus on recall only. No higher-order thinking required.
+      2: Some tasks involve analysis or evaluation but lack depth.
+      3: Assessment tasks consistently require analysis, evaluation, or creation.
+- code: DMG
+  title: Additional Indicator
+  note: ''
+  indicators:
+  - code: MG.1
+    name: Cross-Grade HOTS Integration
+    levels:
+      1: Grade groups work in isolation. No cross-grade interaction or peer teaching.
+      2: Some cross-grade moments but not structured. Older students occasionally help younger.
+      3: Structured cross-grade HOTS activities. Older students teach younger. Peer learning is planned.

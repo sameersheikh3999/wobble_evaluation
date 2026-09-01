@@ -124,3 +124,8 @@ effort_*_out/
 _fw_test/
 _fw_out/
 framework_out/
+cmp_*/
+_cmp3/
+cmp3run.log
+cmp10.log
+cmp3.log
