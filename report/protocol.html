@@ -1,0 +1,597 @@
+<title>Rubric Reliability Protocol</title>
+<style>
+  /* Instrumentation palette: cool slate ground, one teal signal for the
+     measured path, and four semantic hues that exist only for the 2x2. */
+  :root {
+    --paper:      #f4f6f7;
+    --surface:    #ffffff;
+    --surface-2:  #eaeef0;
+    --ink:        #14181b;
+    --ink-2:      #3b444a;
+    --muted:      #67727a;
+    --rule:       #d9e0e3;
+    --rule-soft:  #e6ebed;
+    --accent:     #0f6f72;
+    --accent-dim: #dcecec;
+    --healthy:    #12704a;
+    --healthy-bg: #dcece4;
+    --noisy:      #9a6008;
+    --noisy-bg:   #f4e8d4;
+    --uninf:      #4a5a86;
+    --uninf-bg:   #e2e6f0;
+    --broken:     #a3352f;
+    --broken-bg:  #f5e1df;
+    --code-bg:    #eef2f3;
+
+    --f-display: "Segoe UI", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --f-body:    Constantia, Cambria, Georgia, "Times New Roman", serif;
+    --f-data:    Consolas, "SF Mono", ui-monospace, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #0d1113; --surface: #151a1d; --surface-2: #1b2226;
+      --ink: #e4e9eb; --ink-2: #b2bcc1; --muted: #808d94;
+      --rule: #283136; --rule-soft: #1f272b;
+      --accent: #5cb5b7; --accent-dim: #122b2c;
+      --healthy: #5cbc92; --healthy-bg: #13291f;
+      --noisy: #d2a04a; --noisy-bg: #2a2214;
+      --uninf: #93a3cc; --uninf-bg: #1a1f2e;
+      --broken: #e0776f; --broken-bg: #2c1917;
+      --code-bg: #1b2226;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #0d1113; --surface: #151a1d; --surface-2: #1b2226;
+    --ink: #e4e9eb; --ink-2: #b2bcc1; --muted: #808d94;
+    --rule: #283136; --rule-soft: #1f272b;
+    --accent: #5cb5b7; --accent-dim: #122b2c;
+    --healthy: #5cbc92; --healthy-bg: #13291f;
+    --noisy: #d2a04a; --noisy-bg: #2a2214;
+    --uninf: #93a3cc; --uninf-bg: #1a1f2e;
+    --broken: #e0776f; --broken-bg: #2c1917;
+    --code-bg: #1b2226;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--paper); color: var(--ink);
+    font-family: var(--f-body); font-size: 1.0625rem; line-height: 1.72;
+    margin: 0; padding: 0 1.25rem 6rem; -webkit-font-smoothing: antialiased;
+  }
+  header.top { max-width: 40rem; margin: 0 auto; padding: 4.5rem 0 1.5rem; }
+  .eyebrow {
+    font-family: var(--f-data); font-size: .7rem; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--accent); margin: 0 0 1.4rem;
+  }
+  h1 {
+    font-family: var(--f-display); font-size: clamp(2rem, 5.5vw, 2.8rem);
+    line-height: 1.1; font-weight: 600; letter-spacing: -.022em;
+    text-wrap: balance; margin: 0 0 1rem;
+  }
+  .standfirst {
+    font-size: 1.18rem; line-height: 1.62; color: var(--ink-2);
+    margin: 0 0 1.5rem; text-wrap: pretty;
+  }
+  section { max-width: 40rem; margin: 0 auto; padding-top: 3.2rem; }
+  figure.wide { max-width: 52rem; margin: 2rem auto; }
+  h2 {
+    font-family: var(--f-display); font-size: 1.5rem; font-weight: 600;
+    letter-spacing: -.016em; line-height: 1.22; text-wrap: balance;
+    margin: 0 0 .3rem; padding-top: 1.5rem; border-top: 2px solid var(--ink);
+  }
+  h3 {
+    font-family: var(--f-display); font-size: 1.05rem; font-weight: 600;
+    margin: 2rem 0 .5rem; line-height: 1.35;
+  }
+  p { margin: 0 0 1.05rem; text-wrap: pretty; }
+  strong { font-weight: 600; color: var(--ink); }
+  ul, ol { margin: 0 0 1.2rem; padding-left: 1.2rem; }
+  li { margin-bottom: .5rem; }
+
+  code {
+    font-family: var(--f-data); font-size: .87em;
+    background: var(--code-bg); padding: .1em .34em; border-radius: 2px;
+  }
+  pre {
+    background: var(--code-bg); border: 1px solid var(--rule); border-radius: 3px;
+    padding: .95rem 1.1rem; overflow-x: auto; font-family: var(--f-data);
+    font-size: .84rem; line-height: 1.65; margin: 1.2rem 0;
+  }
+  pre code { background: none; padding: 0; font-size: inherit; }
+
+  .tablewrap {
+    overflow-x: auto; margin: 1.4rem 0 1.8rem;
+    border: 1px solid var(--rule); border-radius: 3px; background: var(--surface);
+  }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td {
+    padding: .58rem .85rem; text-align: left;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  th {
+    font-family: var(--f-display); font-size: .78rem; font-weight: 600;
+    color: var(--muted); border-bottom: 1px solid var(--rule);
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  td.num { font-family: var(--f-data); text-align: right;
+           font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+  figure { margin: 2rem 0; }
+  figure svg { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+  figcaption {
+    font-family: var(--f-display); font-size: .86rem; color: var(--muted);
+    margin-top: .9rem; line-height: 1.55; text-wrap: pretty;
+  }
+
+  .callout {
+    background: var(--surface); border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent); border-radius: 3px;
+    padding: 1.1rem 1.25rem; margin: 1.7rem 0;
+  }
+  .callout.warn { border-left-color: var(--noisy); }
+  .callout p:last-child { margin-bottom: 0; }
+  .callout .tag {
+    font-family: var(--f-data); font-size: .68rem; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--muted); display: block;
+    margin-bottom: .45rem;
+  }
+
+  .quad {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
+    background: var(--rule); border: 1px solid var(--rule); border-radius: 3px;
+    overflow: hidden; margin: 1.5rem 0;
+  }
+  .quad div { background: var(--surface); padding: 1rem 1.1rem; }
+  .quad .n {
+    font-family: var(--f-data); font-size: .74rem; letter-spacing: .08em;
+    display: inline-block; padding: .15rem .45rem; border-radius: 2px;
+    margin-bottom: .5rem;
+  }
+  .q-h .n { background: var(--healthy-bg); color: var(--healthy); }
+  .q-n .n { background: var(--noisy-bg);   color: var(--noisy); }
+  .q-u .n { background: var(--uninf-bg);   color: var(--uninf); }
+  .q-b .n { background: var(--broken-bg);  color: var(--broken); }
+  .quad p { font-size: .92rem; margin: 0; color: var(--ink-2); line-height: 1.55; }
+
+  .steps { counter-reset: st; list-style: none; padding-left: 0; }
+  .steps > li {
+    counter-increment: st; position: relative; padding-left: 2.6rem;
+    margin-bottom: 1.5rem;
+  }
+  .steps > li::before {
+    content: counter(st); position: absolute; left: 0; top: .1rem;
+    font-family: var(--f-data); font-size: .78rem; width: 1.7rem; height: 1.7rem;
+    display: grid; place-items: center; border-radius: 50%;
+    background: var(--accent-dim); color: var(--accent); font-weight: 700;
+  }
+  .steps h3 { margin-top: 0; }
+
+  footer {
+    max-width: 40rem; margin: 4rem auto 0; padding-top: 1.5rem;
+    border-top: 1px solid var(--rule); font-size: .88rem; color: var(--muted);
+  }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style>
+
+<header class="top">
+  <p class="eyebrow">Method · Any coaching framework · Any region</p>
+  <h1>Rubric reliability protocol</h1>
+  <p class="standfirst">
+    A repeatable way to find out which indicators in a coaching framework can
+    actually be scored, and which cannot — before anyone builds a coaching
+    programme on top of them. Works on any rubric: Tanzania, Pakistan, a regional
+    variant, or one written last week.
+  </p>
+</header>
+
+<section>
+  <h2>What is being assessed</h2>
+  <p>
+    The unit is a <strong>coaching observation</strong>: an audio recording of a
+    real classroom session, transcribed. That transcript is what the framework is
+    applied to, and every reliability figure in this protocol describes how
+    consistently a scorer can read it.
+  </p>
+  <p>
+    Some indicators need a <strong>second document</strong>. Where a teacher
+    attaches the lesson plan she taught from, the transcript can be compared
+    against it — did she follow it, did she use the resources it prescribed? In
+    the framework this study used, that comparison is the job of
+    <strong>one section</strong> (Lesson Plan Fidelity), not of the observation as
+    a whole. The other sections judge teaching practice, student engagement and
+    subject knowledge directly from the transcript, and need no attachment.
+  </p>
+  <div class="callout warn">
+    <span class="tag">A mistake worth not repeating</span>
+    <p>
+      In the study that produced this protocol, the lesson plan was
+      <strong>never supplied to the scorer</strong> — only the transcript was. Two
+      indicators asked whether the plan was followed and whether the prescribed
+      resources were used. Both returned "no" almost everywhere, and one was
+      initially classified as carrying <em>no signal</em>.
+    </p>
+    <p>
+      That classification was wrong. A scorer cannot judge adherence to a document
+      it was never shown. The verdict measured a gap in the inputs, not a defect in
+      the rubric or a shortcoming in the classrooms.
+    </p>
+    <p>
+      The protocol now treats this as a first-class case: an indicator declares the
+      documents it needs, and when one is absent the indicator is reported
+      <code>NOT_ASSESSABLE</code> rather than scored. Marking it as merely
+      "uninformative" would quietly blame the framework for a missing file.
+    </p>
+  </div>
+
+  <h2>The question this answers</h2>
+  <p>
+    Every coaching framework is a list of indicators with descriptors. It looks
+    authoritative on paper. But before you can use one — with an AI scorer or a
+    human observer — two things have to be true of each indicator, and neither is
+    visible by reading it:
+  </p>
+  <ol>
+    <li><strong>It reproduces.</strong> Score the same observation twice and you get
+      the same answer.</li>
+    <li><strong>It discriminates.</strong> Different observations get different
+      answers.</li>
+  </ol>
+  <p>
+    An indicator that fails the first is noise. An indicator that fails the second
+    is a constant — perfectly stable and perfectly useless, because it tells a
+    coach nothing they didn't already know. <strong>Both failures are common, and
+    both are invisible until you measure.</strong>
+  </p>
+
+  <div class="callout warn">
+    <span class="tag">The finding that shapes this protocol</span>
+    <p>
+      We tried to predict which indicators would fail by inspecting their wording.
+      It does not work. Across 37 indicators with flip rates measured over 800
+      scoring passes, <strong>no textual feature correlated with the wobble that
+      was actually observed</strong> — word count, sentence count and clause count
+      all returned |ρ| &lt; 0.16, p &gt; 0.36. A "two or more sentences" rule caught
+      4 of the 7 genuinely broken indicators at 21% precision.
+    </p>
+    <p>
+      Reviewing a rubric is cheap and worth doing. It is not a substitute for
+      measuring it.
+    </p>
+  </div>
+</section>
+
+<section>
+  <h2>How the measurement works</h2>
+  <p>
+    The whole protocol rests on one arrangement: score every observation many times,
+    and read the resulting grid in two directions.
+  </p>
+
+  <figure class="wide">
+    <svg viewBox="0 0 720 340" role="img" aria-label="One indicator's grid of observations by repeated runs. Reading across a row, where the observation is fixed and only the run changes, measures reliability. Reading down a column, comparing different observations, measures discrimination.">
+      <defs>
+        <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5"
+                markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/>
+        </marker>
+        <marker id="arT" viewBox="0 0 10 10" refX="9" refY="5"
+                markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#0f6f72"/>
+        </marker>
+      </defs>
+
+      <text x="150" y="26" font-size="13" font-weight="600" fill="currentColor"
+            text-anchor="middle">One indicator, e.g. C4</text>
+      <text x="150" y="46" font-size="11.5" fill="currentColor" opacity=".65"
+            text-anchor="middle">same rubric, same prompt, every cell</text>
+
+      <text x="150" y="72" font-size="11.5" fill="currentColor" opacity=".75"
+            text-anchor="middle">run 1   run 2   run 3   run 4   run 5</text>
+
+      <g font-size="12" font-family="monospace">
+        <text x="18" y="100" font-size="11.5" fill="currentColor" opacity=".75">obs. A</text>
+        <rect x="78" y="86" width="28" height="22" rx="2" fill="#dcece4"/><text x="92" y="102" text-anchor="middle" fill="#12704a">Y</text>
+        <rect x="112" y="86" width="28" height="22" rx="2" fill="#dcece4"/><text x="126" y="102" text-anchor="middle" fill="#12704a">Y</text>
+        <rect x="146" y="86" width="28" height="22" rx="2" fill="#dcece4"/><text x="160" y="102" text-anchor="middle" fill="#12704a">Y</text>
+        <rect x="180" y="86" width="28" height="22" rx="2" fill="#dcece4"/><text x="194" y="102" text-anchor="middle" fill="#12704a">Y</text>
+        <rect x="214" y="86" width="28" height="22" rx="2" fill="#dcece4"/><text x="228" y="102" text-anchor="middle" fill="#12704a">Y</text>
+
+        <text x="18" y="132" font-size="11.5" fill="currentColor" opacity=".75">obs. B</text>
+        <rect x="78" y="118" width="28" height="22" rx="2" fill="#f4e8d4"/><text x="92" y="134" text-anchor="middle" fill="#9a6008">Y</text>
+        <rect x="112" y="118" width="28" height="22" rx="2" fill="#f5e1df"/><text x="126" y="134" text-anchor="middle" fill="#a3352f">N</text>
+        <rect x="146" y="118" width="28" height="22" rx="2" fill="#f4e8d4"/><text x="160" y="134" text-anchor="middle" fill="#9a6008">Y</text>
+        <rect x="180" y="118" width="28" height="22" rx="2" fill="#f5e1df"/><text x="194" y="134" text-anchor="middle" fill="#a3352f">N</text>
+        <rect x="214" y="118" width="28" height="22" rx="2" fill="#f5e1df"/><text x="228" y="134" text-anchor="middle" fill="#a3352f">N</text>
+
+        <text x="18" y="164" font-size="11.5" fill="currentColor" opacity=".75">obs. C</text>
+        <rect x="78" y="150" width="28" height="22" rx="2" fill="#e2e6f0"/><text x="92" y="166" text-anchor="middle" fill="#4a5a86">N</text>
+        <rect x="112" y="150" width="28" height="22" rx="2" fill="#e2e6f0"/><text x="126" y="166" text-anchor="middle" fill="#4a5a86">N</text>
+        <rect x="146" y="150" width="28" height="22" rx="2" fill="#e2e6f0"/><text x="160" y="166" text-anchor="middle" fill="#4a5a86">N</text>
+        <rect x="180" y="150" width="28" height="22" rx="2" fill="#e2e6f0"/><text x="194" y="166" text-anchor="middle" fill="#4a5a86">N</text>
+        <rect x="214" y="150" width="28" height="22" rx="2" fill="#e2e6f0"/><text x="228" y="166" text-anchor="middle" fill="#4a5a86">N</text>
+      </g>
+
+      <!-- reliability: read ACROSS a row -->
+      <line x1="256" y1="129" x2="330" y2="129" stroke="#0f6f72" stroke-width="2"
+            marker-end="url(#arT)"/>
+      <text x="340" y="120" font-size="12.5" font-weight="600" fill="#0f6f72">RELIABILITY</text>
+      <text x="340" y="138" font-size="11.5" fill="currentColor" opacity=".8">across a row: observation fixed,</text>
+      <text x="340" y="153" font-size="11.5" fill="currentColor" opacity=".8">only the run changes — so any</text>
+      <text x="340" y="168" font-size="11.5" fill="currentColor" opacity=".8">difference is pure scorer noise</text>
+      <text x="340" y="186" font-size="11.5" font-family="monospace" fill="#0f6f72">Gwet's AC1 · flip rate</text>
+
+      <!-- discrimination: read DOWN a column -->
+      <line x1="160" y1="182" x2="160" y2="228" stroke="#0f6f72" stroke-width="2"
+            marker-end="url(#arT)"/>
+      <text x="150" y="248" font-size="12.5" font-weight="600" fill="#0f6f72"
+            text-anchor="middle">DISCRIMINATION</text>
+      <text x="150" y="266" font-size="11.5" fill="currentColor" opacity=".8"
+            text-anchor="middle">down a column: do different</text>
+      <text x="150" y="281" font-size="11.5" fill="currentColor" opacity=".8"
+            text-anchor="middle">observations get different answers?</text>
+      <text x="150" y="299" font-size="11.5" font-family="monospace" fill="#0f6f72"
+            text-anchor="middle">chi-square across observations</text>
+
+      <!-- the join -->
+      <line x1="150" y1="310" x2="150" y2="326" stroke="currentColor" stroke-width="1.4"
+            opacity=".5"/>
+      <line x1="150" y1="326" x2="470" y2="326" stroke="currentColor" stroke-width="1.4"
+            opacity=".5"/>
+      <line x1="470" y1="326" x2="470" y2="206" stroke="currentColor" stroke-width="1.4"
+            opacity=".5" marker-end="url(#ar)"/>
+      <text x="490" y="215" font-size="12.5" font-weight="600" fill="currentColor">
+        crossed → the 2×2 verdict</text>
+    </svg>
+    <figcaption>
+      Every indicator gets its own observations × runs grid. Reliability is read
+      <em>across</em> a row — the observation is held fixed, so any disagreement
+      can only be scorer noise. Discrimination is read <em>down</em> a column — if
+      every observation gets the same answer, the indicator carries no signal. A single
+      observation gives you one row, which is why one observation cannot answer
+      either question.
+    </figcaption>
+  </figure>
+
+  <p>
+    Crossing the two axes gives four verdicts, and each one implies a different
+    action:
+  </p>
+
+  <div class="quad">
+    <div class="q-h"><span class="n">HEALTHY</span>
+      <p>Reproduces and separates observations. Usable as-is.</p></div>
+    <div class="q-n"><span class="n">NOISY</span>
+      <p>Separates observations but will not reproduce. The descriptor is ambiguous —
+         rewrite it, or accept it needs a richer data source.</p></div>
+    <div class="q-u"><span class="n">UNINFORMATIVE</span>
+      <p>Reproduces perfectly, same answer on every observation. No coaching signal.
+         Either the bar is set outside the range of these classrooms, or the
+         evidence isn't in your data.</p></div>
+    <div class="q-b"><span class="n">BROKEN</span>
+      <p>Neither. Remove it.</p></div>
+  </div>
+
+  <p>
+    Both tests are Holm-corrected across the indicator set, because testing thirty
+    or forty indicators at once otherwise manufactures significance.
+  </p>
+</section>
+
+<section>
+  <h2>Why Gwet's AC1, not Cohen's kappa</h2>
+  <p>
+    The default choice would be kappa or Krippendorff's alpha. On this kind of data
+    they break, and the break is easy to mistake for a real result.
+  </p>
+  <p>
+    When an indicator is nearly always "not met" — and in practice many are — the
+    chance-agreement term grows until the coefficient collapses toward zero
+    <em>even at 95% raw agreement</em>. That is the prevalence paradox: a property
+    of the statistic, not of the scorer. An analyst who reports kappa here will
+    conclude the framework is unusable when it isn't.
+  </p>
+  <p>
+    <strong>Gwet's AC1</strong> corrects for chance without that failure mode. The
+    protocol reports AC1, alpha and raw agreement together, so where they diverge
+    you can see it rather than inherit whichever one was chosen for you.
+  </p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Statistic</th><th>Reports</th><th>Read it when</th></tr></thead>
+      <tbody>
+        <tr><td>Gwet's AC1</td><td>chance-corrected agreement, prevalence-robust</td>
+            <td>always — this is the headline</td></tr>
+        <tr><td>Krippendorff's α</td><td>chance-corrected, prevalence-sensitive</td>
+            <td>next to AC1; a large gap means a lopsided split, not unreliability</td></tr>
+        <tr><td>Raw agreement</td><td>uncorrected % of run-pairs agreeing</td>
+            <td>as the sanity anchor both coefficients are adjusting</td></tr>
+        <tr><td>Flip rate</td><td>share of passes contradicting the majority</td>
+            <td>the operational number — the error rate of quoting one pass</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>The five steps</h2>
+
+  <figure class="wide">
+    <svg viewBox="0 0 700 130" role="img" aria-label="Pipeline of five stages: import, check and plan are free and involve no model calls; run is the only stage that spends money; analyse is free and repeatable.">
+      <defs>
+        <marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5"
+                markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/>
+        </marker>
+      </defs>
+      <g font-family="monospace" font-size="12.5">
+        <rect x="6"   y="40" width="104" height="40" rx="3" fill="none"
+              stroke="currentColor" stroke-width="1.3" opacity=".55"/>
+        <text x="58"  y="65" text-anchor="middle" fill="currentColor">import</text>
+        <rect x="146" y="40" width="104" height="40" rx="3" fill="none"
+              stroke="currentColor" stroke-width="1.3" opacity=".55"/>
+        <text x="198" y="65" text-anchor="middle" fill="currentColor">check</text>
+        <rect x="286" y="40" width="104" height="40" rx="3" fill="none"
+              stroke="currentColor" stroke-width="1.3" opacity=".55"/>
+        <text x="338" y="65" text-anchor="middle" fill="currentColor">plan</text>
+        <rect x="426" y="34" width="104" height="52" rx="3" fill="#dcecec"
+              stroke="#0f6f72" stroke-width="2"/>
+        <text x="478" y="58" text-anchor="middle" fill="#0f6f72"
+              font-weight="700">run</text>
+        <text x="478" y="74" text-anchor="middle" fill="#0f6f72"
+              font-size="10.5">L × R × S calls</text>
+        <rect x="566" y="40" width="104" height="40" rx="3" fill="none"
+              stroke="currentColor" stroke-width="1.3" opacity=".55"/>
+        <text x="618" y="65" text-anchor="middle" fill="currentColor">analyse</text>
+      </g>
+      <g stroke="currentColor" stroke-width="1.3" marker-end="url(#ar2)" opacity=".6">
+        <line x1="112" y1="60" x2="142" y2="60"/>
+        <line x1="252" y1="60" x2="282" y2="60"/>
+        <line x1="392" y1="60" x2="422" y2="60"/>
+        <line x1="532" y1="60" x2="562" y2="60"/>
+      </g>
+      <path d="M 618 88 L 618 108 L 478 108" fill="none" stroke="currentColor"
+            stroke-width="1.2" stroke-dasharray="4 3" opacity=".45"
+            marker-end="url(#ar2)"/>
+      <text x="548" y="122" font-size="10.5" fill="currentColor" opacity=".6"
+            text-anchor="middle">re-analyse costs nothing</text>
+      <text x="196" y="22" font-size="11" fill="currentColor" opacity=".6"
+            text-anchor="middle">free — no model calls</text>
+      <text x="478" y="22" font-size="11" fill="#0f6f72" text-anchor="middle"
+            font-weight="600">the only paid stage</text>
+    </svg>
+    <figcaption>
+      Only <code>run</code> spends anything. Everything before it is validation you
+      should exhaust first, and <code>analyse</code> can be repeated on stored
+      scores as often as you like — re-cutting the threshold or excluding
+      indicators never requires re-scoring.
+    </figcaption>
+  </figure>
+
+  <ol class="steps">
+    <li>
+      <h3>Import the framework</h3>
+      <p>Frameworks arrive as spreadsheets — one sheet per section, one column per
+        level. Point the importer at the folder; it detects the header row, the
+        level columns and the section banner.</p>
+      <pre><code>python run_framework_wobble.py import \
+       --csv-dir tanzania_csvs --out frameworks/tanzania.yaml</code></pre>
+      <p>The result is editable YAML. Any number of levels, any number of sections,
+        any band thresholds — nothing is hard-coded to a particular rubric.</p>
+    </li>
+    <li>
+      <h3>Check the spec</h3>
+      <p>Validates structure — duplicate codes, missing descriptors, a proficiency
+        cut outside the scale, bands in the wrong order — and separately lists
+        descriptors worth a human read.</p>
+      <pre><code>python run_framework_wobble.py check --framework frameworks/tanzania.yaml</code></pre>
+      <p>Spec defects (two adjacent levels with identical wording, a three-word
+        descriptor) are real and should be fixed. The advisory flags are a reading
+        list, <strong>not</strong> a prediction — see the finding above.</p>
+    </li>
+    <li>
+      <h3>Plan the run</h3>
+      <p>Reports exactly what it will cost and whether the design has the power to
+        answer the question.</p>
+      <pre><code>python run_framework_wobble.py plan \
+       --framework frameworks/tanzania.yaml --dir Transcripts -n 10</code></pre>
+      <p>Fewer than 3 observations and discrimination cannot be tested at all — every
+        indicator returns UNTESTED. Fewer than 5 runs and you only catch indicators
+        that flip often. <strong>10 observations × 10 runs</strong> is the
+        tested default.</p>
+    </li>
+    <li>
+      <h3>Run it</h3>
+      <pre><code>python run_framework_wobble.py run \
+       --framework frameworks/tanzania.yaml --dir Transcripts \
+       -n 10 --out tanzania_out --resume</code></pre>
+      <p>Crash-safe: scores are written after every transcript and <code>--resume</code>
+        skips what's done. A transcript that fails entirely is recorded and skipped
+        rather than taking the run down with it.</p>
+    </li>
+    <li>
+      <h3>Analyse — as often as you like</h3>
+      <pre><code>python run_framework_wobble.py analyse \
+       --framework frameworks/tanzania.yaml --out tanzania_out --cut 3</code></pre>
+      <p>Free. Move the proficiency cut, drop indicators, re-band — all without
+        spending a further call.</p>
+    </li>
+  </ol>
+</section>
+
+<section>
+  <h2>Reading the output</h2>
+  <p>Three tables and a headline. What to do with each:</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Output</th><th>Decision it drives</th></tr></thead>
+      <tbody>
+        <tr><td><code>headline.json</code></td>
+            <td>Overall AC1. ≥0.80 report individual indicators; 0.67–0.80 report
+                roll-ups only; below that, not decision-grade.</td></tr>
+        <tr><td><code>indicator_reliability.csv</code></td>
+            <td>The 2×2 verdict per indicator. NOISY → rewrite. UNINFORMATIVE →
+                investigate the bar. BROKEN → remove.</td></tr>
+        <tr><td><code>section_bands.csv</code></td>
+            <td>Whether a section's High/Medium/Low band survives a rerun. An
+                unstable section cannot be quoted from a single pass.</td></tr>
+        <tr><td><code>lesson_by_indicator.csv</code></td>
+            <td>The per-observation detail — for chasing down why one indicator moved.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <span class="tag">Watch the section size</span>
+    <p>
+      Band stability depends on how many indicators a section has, not just on how
+      good they are. A section with four indicators moves 25 points when a single
+      verdict flips — enough to cross a band line on its own. Trimming a weak
+      section's worst indicators can make its band <em>less</em> stable, not more.
+      If a section drops below about six indicators, rebuild it rather than
+      trimming it.
+    </p>
+  </div>
+</section>
+
+<section>
+  <h2>What the protocol cannot tell you</h2>
+  <div class="callout warn">
+    <span class="tag">The boundary</span>
+    <p>
+      This measures whether a scorer <strong>agrees with itself</strong>, not
+      whether it is <strong>right</strong>. An indicator returning the same wrong
+      answer ten times scores perfectly here.
+    </p>
+    <p>
+      Reliability is necessary but not sufficient. It is the cheap test, and it
+      should come first — there is no point validating an indicator against human
+      experts if it cannot even reproduce. But a framework that passes this
+      protocol has been shown to be <em>consistent</em>, and consistency is not
+      accuracy. The next study is a comparison against trained human observers on
+      the same observations.
+    </p>
+  </div>
+  <p>Two narrower limits worth stating whenever you report results:</p>
+  <ul>
+    <li><strong>The data source bounds the framework.</strong> Indicators resting on
+      what a transcript cannot carry — seating, gaze, who is writing — will fail
+      regardless of wording. That is a finding about your data, not the rubric.</li>
+    <li><strong>"No signal" is a statement about your sample.</strong> An indicator
+      that never varied across ten observations might well vary across fifty, or across
+      a sample containing stronger practice. Report the sample, not just the
+      verdict.</li>
+  </ul>
+</section>
+
+<footer>
+  <p>
+    Framework-agnostic protocol for measuring rubric reliability. Scale, sections,
+    levels and bands come from the spec file, so the same pipeline runs on any
+    coaching framework without code changes.
+  </p>
+  <p>
+    Reliability is not accuracy. This protocol establishes that a framework is
+    consistent; a comparison against expert human ratings is required before it can
+    be called correct.
+  </p>
+</footer>

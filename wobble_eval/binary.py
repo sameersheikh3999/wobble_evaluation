@@ -552,7 +552,11 @@ def analyse_binary(scores_long, cfg, run_meta=None):
     yes_at = getattr(cfg, "YES_AT", 3)
     high, med = getattr(cfg, "HIGH_BAND", 0.85), getattr(cfg, "MED_BAND", 0.60)
     target = getattr(cfg, "VOTE_TARGET", 0.95)
-    EXPECTED = [c for c in ALL_CODES if CODE2SECTION[c] in cfg.SECTIONS]
+    _drop = set(getattr(cfg, "EXCLUDE_CODES", ()) or ())
+    EXPECTED = [c for c in ALL_CODES
+                if CODE2SECTION[c] in cfg.SECTIONS and c not in _drop]
+    if _drop:
+        scores_long = scores_long[~scores_long["code"].isin(_drop)]
 
     # reindexed against EXPECTED on purpose — an indicator answered NA in every run must
     # still appear as a row (na_rate = 1.0), not silently vanish from the report

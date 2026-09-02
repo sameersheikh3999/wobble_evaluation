@@ -118,7 +118,11 @@ def analyse_multi(df, cfg, sessions_meta, clusters=None):
     alpha = cfg.ALPHA
     n_runs = int(df.iteration.max()) + 1
     sessions = list(dict.fromkeys(df.session_id))
-    codes = [c for c in ALL_CODES if CODE2SECTION[c] in cfg.SECTIONS]
+    _drop = set(getattr(cfg, "EXCLUDE_CODES", ()) or ())
+    codes = [c for c in ALL_CODES
+             if CODE2SECTION[c] in cfg.SECTIONS and c not in _drop]
+    if _drop:
+        df = df[~df["code"].isin(_drop)]
     clusters = clusters or {}
     # one representative per duplicate cluster, for the de-duplicated re-run
     primary = []

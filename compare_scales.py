@@ -48,7 +48,7 @@ import pandas as pd
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from run_multi_binary import detect_clusters, find_transcripts
-from wobble_eval import multi_binary
+from wobble_eval import exclusions, multi_binary
 from wobble_eval.binary import BinaryConfig
 from wobble_eval.framework import ALL_CODES, CODE2NAME, CODE2SECTION
 
@@ -98,11 +98,19 @@ def main(argv=None):
     p.add_argument("--scale14", default="multi_scale14_out")
     p.add_argument("--dir", default="Transcripts")
     p.add_argument("--cut", type=int, default=3, help="proficiency cut for the collapse")
+    p.add_argument("--exclude", default="",
+                   help="indicators to drop from scoring AND analysis: a named set "
+                        "(unreliable | wording | unobservable | none) or a "
+                        "comma-separated code list, e.g. C4,B2")
     p.add_argument("--out", default="scale_comparison")
     a = p.parse_args(argv)
 
     os.makedirs(a.out, exist_ok=True)
-    cfg = BinaryConfig(N_ITERATIONS=10, YES_AT=a.cut)
+    drop = exclusions.resolve(a.exclude)
+    cfg = BinaryConfig(N_ITERATIONS=10, YES_AT=a.cut, EXCLUDE_CODES=tuple(drop))
+    if drop:
+        print(f"Excluding {len(drop)} indicator(s):")
+        print(exclusions.describe(drop))
     sessions = [j for _, j in find_transcripts(a.dir)]
     clusters = {k[:8]: v for k, v in detect_clusters(sessions).items()}
     for s in sessions:                       # analyse_multi keys clusters by session_id

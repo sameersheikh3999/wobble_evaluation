@@ -47,7 +47,7 @@ import pandas as pd
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from run_wobble_binary import run_iteration
-from wobble_eval import binary, multi_binary
+from wobble_eval import binary, exclusions, multi_binary
 from wobble_eval.backend import make_backend
 from wobble_eval.binary import BinaryConfig
 from wobble_eval.framework import ALL_CODES, CODE2SECTION, FRAMEWORK
@@ -233,6 +233,10 @@ def main(argv=None):
     p.add_argument("--sections", default=",".join(cfg0.SECTIONS))
     p.add_argument("--concurrency", type=int, default=4)
     p.add_argument("--no-explain", action="store_true")
+    p.add_argument("--exclude", default="",
+                   help="indicators to drop from scoring AND analysis: a named set "
+                        "(unreliable | wording | unobservable | none) or a "
+                        "comma-separated code list, e.g. C4,B2")
     p.add_argument("--out", default="multi_binary_out")
     p.add_argument("--resume", action="store_true",
                    help="skip transcripts already scored in the pooled CSV")
@@ -244,6 +248,7 @@ def main(argv=None):
         MODEL=a.model, EFFORT=a.effort, N_ITERATIONS=a.iterations,
         SECTIONS=tuple(s.strip().upper() for s in a.sections.split(",") if s.strip()),
         MAX_CONCURRENCY=a.concurrency, EXPLAIN=not a.no_explain,
+        EXCLUDE_CODES=tuple(exclusions.resolve(a.exclude)),
         YES_AT=a.yes_at, OUT_DIR=a.out)
     for s in cfg.SECTIONS:
         if s not in FRAMEWORK:
@@ -260,6 +265,12 @@ def main(argv=None):
     if a.analyse_only:
         df = pd.read_csv(a.analyse_only)
     else:
+        if cfg.EXCLUDE_CODES:
+            n_ex = len(cfg.EXCLUDE_CODES)
+            print("")
+            print(f"  EXCLUDED - {n_ex} indicator(s) dropped from scoring "
+                  f"and analysis:")
+            print(exclusions.describe(cfg.EXCLUDE_CODES))
         print(f"\n{'=' * 78}\nBINARY WOBBLE ACROSS {len(found)} TRANSCRIPTS\n{'=' * 78}")
         print(f"  {cfg.MODEL} · effort={cfg.EFFORT} · {cfg.N_ITERATIONS} runs each · "
               f"YES bar = level {cfg.YES_AT}+")

@@ -1,0 +1,7 @@
+framework,bar,ind,met,AC1,flip,works,no_signal,noisy,broken,untested,pct_works
+FICO,own proficiency bar,37,0.305,0.879,0.0444,18,15,0,0,2,0.514
+FICO,above bottom level,37,0.763,0.921,0.0333,10,22,0,1,2,0.286
+HOTS,own proficiency bar,17,0.0,1.0,0.0,0,17,0,0,0,0.0
+HOTS,above bottom level,17,0.29,0.892,0.0471,9,8,0,0,0,0.529
+TEACH,own proficiency bar,28,0.194,0.893,0.0464,10,17,1,0,0,0.357
+TEACH,above bottom level,28,0.782,0.907,0.0417,11,17,0,0,0,0.393

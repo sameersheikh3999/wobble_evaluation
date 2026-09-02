@@ -1,0 +1,266 @@
+name: TEACH Classroom Observation Tool
+version: ''
+source: Teach_Tool.pdf
+scale:
+  levels: 3
+  labels:
+  - Low
+  - Medium
+  - High
+  proficiency_cut: 3
+bands:
+- name: High
+  min: 0.85
+- name: Medium
+  min: 0.6
+- name: Low
+  min: 0.0
+sections:
+- code: A
+  title: CLASSROOM CULTURE
+  note: ''
+  indicators:
+  - code: '1.1'
+    name: 'Supportive Learning Environment: The teacher treats all students respectfully'
+    levels:
+      1: The behaviour is not evidenced in the segment, or the evidence runs counter to it.
+      2: The behaviour is evidenced but only partially, inconsistently, or with some students and not
+        others.
+      3: The behaviour is evidenced fully and consistently across the segment.
+    note: 'TEACH behaviour - judge: The teacher treats all students respectfully'
+  - code: '1.2'
+    name: 'Supportive Learning Environment: The teacher uses positive language with students'
+    levels:
+      1: The behaviour is not evidenced in the segment, or the evidence runs counter to it.
+      2: The behaviour is evidenced but only partially, inconsistently, or with some students and not
+        others.
+      3: The behaviour is evidenced fully and consistently across the segment.
+    note: 'TEACH behaviour - judge: The teacher uses positive language with students'
+  - code: '1.3'
+    name: 'Supportive Learning Environment: The teacher responds to students’ needs'
+    levels:
+      1: The behaviour is not evidenced in the segment, or the evidence runs counter to it.
+      2: The behaviour is evidenced but only partially, inconsistently, or with some students and not
+        others.
+      3: The behaviour is evidenced fully and consistently across the segment.
+    note: 'TEACH behaviour - judge: The teacher responds to students’ needs'
+  - code: '1.4'
+    name: 'Supportive Learning Environment: The teacher does not exhibit bias and'
+    levels:
+      1: The behaviour is not evidenced in the segment, or the evidence runs counter to it.
+      2: The behaviour is evidenced but only partially, inconsistently, or with some students and not
+        others.
+      3: The behaviour is evidenced fully and consistently across the segment.
+    note: 'TEACH behaviour - judge: The teacher does not exhibit bias and'
+  - code: '2.1'
+    name: 'Positive Behaviorial Expectations: The teacher sets clear behavioral expectations for classroom
+      activities'
+    levels:
+      1: The behaviour is not evidenced in the segment, or the evidence runs counter to it.
+      2: The behaviour is evidenced but only partially, inconsistently, or with some students and not
+        others.
+      3: The behaviour is evidenced fully and consistently across the segment.
+    note: 'TEACH behaviour - judge: The teacher sets clear behavioral expectations for classroom activities'
+  - code: '2.2'
+    name: 'Positive Behaviorial Expectations: The teacher acknowledges positive student behavior'
+    levels:
+      1: The behaviour is not evidenced in the segment, or the evidence runs counter to it.
+      2: The behaviour is evidenced but only partially, inconsistently, or with some students and not
+        others.
+      3: The behaviour is evidenced fully and consistently across the segment.
+    note: 'TEACH behaviour - judge: The teacher acknowledges positive student behavior'
+  - code: '2.3'
+    name: 'Positive Behaviorial Expectations: The teacher redirects misbehavior and focuses on the expected
+      behavior, rat'
+    levels:
+      1: The behaviour is not evidenced in the segment, or the evidence runs counter to it.
+      2: The behaviour is evidenced but only partially, inconsistently, or with some students and not
+        others.
+      3: The behaviour is evidenced fully and consistently across the segment.
+    note: 'TEACH behaviour - judge: The teacher redirects misbehavior and focuses on the expected behavior,
+      rather than the undesired behavior'
+- code: B
+  title: INSTRUCTION
+  note: ''
+  indicators:
+  - code: '3.1'
+    name: 'Lesson Facilitation: The teacher explicitly articulates the objectives of the lesson and relates
+      classroom act'
+    levels:
+      1: The behaviour is not evidenced in the segment, or the evidence runs counter to it.
+      2: The behaviour is evidenced but only partially, inconsistently, or with some students and not
+        others.
+      3: The behaviour is evidenced fully and consistently across the segment.
+    note: 'TEACH behaviour - judge: The teacher explicitly articulates the objectives of the lesson and
+      relates classroom activities to the objectives'
+  - code: '3.2'
+    name: 'Lesson Facilitation: The teacher explains content using multiple forms of representation'
+    levels:
+      1: The behaviour is not evidenced in the segment, or the evidence runs counter to it.
+      2: The behaviour is evidenced but only partially, inconsistently, or with some students and not
+        others.
+      3: The behaviour is evidenced fully and consistently across the segment.
+    note: 'TEACH behaviour - judge: The teacher explains content using multiple forms of representation'
+  - code: '3.3'
+    name: 'Lesson Facilitation: The teacher makes connections in the lesson that relate to other content
+      knowledge or stu'
+    levels:
+      1: The behaviour is not evidenced in the segment, or the evidence runs counter to it.
+      2: The behaviour is evidenced but only partially, inconsistently, or with some students and not
+        others.
+      3: The behaviour is evidenced fully and consistently across the segment.
+    note: 'TEACH behaviour - judge: The teacher makes connections in the lesson that relate to other content
+      knowledge or students’ daily lives'
+  - code: '3.4'
+    name: 'Lesson Facilitation: The teacher models by enacting or thinking aloud'
+    levels:
+      1: The behaviour is not evidenced in the segment, or the evidence runs counter to it.
+      2: The behaviour is evidenced but only partially, inconsistently, or with some students and not
+        others.
+      3: The behaviour is evidenced fully and consistently across the segment.
+    note: 'TEACH behaviour - judge: The teacher models by enacting or thinking aloud'
+  - code: '4.1'
+    name: 'Checks For Understanding: The teacher uses questions, prompts or other strategies to determine
+      students’ level'
+    levels:
+      1: The behaviour is not evidenced in the segment, or the evidence runs counter to it.
+      2: The behaviour is evidenced but only partially, inconsistently, or with some students and not
+        others.
+      3: The behaviour is evidenced fully and consistently across the segment.
+    note: 'TEACH behaviour - judge: The teacher uses questions, prompts or other strategies to determine
+      students’ level of understanding'
+  - code: '4.2'
+    name: 'Checks For Understanding: The teacher monitors most students during independent/group work'
+    levels:
+      1: The behaviour is not evidenced in the segment, or the evidence runs counter to it.
+      2: The behaviour is evidenced but only partially, inconsistently, or with some students and not
+        others.
+      3: The behaviour is evidenced fully and consistently across the segment.
+    note: 'TEACH behaviour - judge: The teacher monitors most students during independent/group work'
+  - code: '4.3'
+    name: 'Checks For Understanding: The teacher adjusts teaching to the level of students'
+    levels:
+      1: The behaviour is not evidenced in the segment, or the evidence runs counter to it.
+      2: The behaviour is evidenced but only partially, inconsistently, or with some students and not
+        others.
+      3: The behaviour is evidenced fully and consistently across the segment.
+    note: 'TEACH behaviour - judge: The teacher adjusts teaching to the level of students'
+  - code: '5.1'
+    name: 'Feedback: The teacher provides specific comments or prompts that help clarify students’ misunderstandings'
+    levels:
+      1: The behaviour is not evidenced in the segment, or the evidence runs counter to it.
+      2: The behaviour is evidenced but only partially, inconsistently, or with some students and not
+        others.
+      3: The behaviour is evidenced fully and consistently across the segment.
+    note: 'TEACH behaviour - judge: The teacher provides specific comments or prompts that help clarify
+      students’ misunderstandings'
+  - code: '5.2'
+    name: 'Feedback: The teacher provides specific comments or prompts that help identify students’ successes'
+    levels:
+      1: The behaviour is not evidenced in the segment, or the evidence runs counter to it.
+      2: The behaviour is evidenced but only partially, inconsistently, or with some students and not
+        others.
+      3: The behaviour is evidenced fully and consistently across the segment.
+    note: 'TEACH behaviour - judge: The teacher provides specific comments or prompts that help identify
+      students’ successes'
+  - code: '6.1'
+    name: 'Critical Thinking: The teacher asks open-ended questions'
+    levels:
+      1: The behaviour is not evidenced in the segment, or the evidence runs counter to it.
+      2: The behaviour is evidenced but only partially, inconsistently, or with some students and not
+        others.
+      3: The behaviour is evidenced fully and consistently across the segment.
+    note: 'TEACH behaviour - judge: The teacher asks open-ended questions'
+  - code: '6.2'
+    name: 'Critical Thinking: The teacher provides thinking tasks'
+    levels:
+      1: The behaviour is not evidenced in the segment, or the evidence runs counter to it.
+      2: The behaviour is evidenced but only partially, inconsistently, or with some students and not
+        others.
+      3: The behaviour is evidenced fully and consistently across the segment.
+    note: 'TEACH behaviour - judge: The teacher provides thinking tasks'
+  - code: '6.3'
+    name: 'Critical Thinking: The students ask open-ended questions or perform thinking tasks'
+    levels:
+      1: The behaviour is not evidenced in the segment, or the evidence runs counter to it.
+      2: The behaviour is evidenced but only partially, inconsistently, or with some students and not
+        others.
+      3: The behaviour is evidenced fully and consistently across the segment.
+    note: 'TEACH behaviour - judge: The students ask open-ended questions or perform thinking tasks'
+- code: C
+  title: SOCIOEMOTIONAL SKILLS
+  note: ''
+  indicators:
+  - code: '7.1'
+    name: 'Autonomy: The teacher provides students with choices'
+    levels:
+      1: The behaviour is not evidenced in the segment, or the evidence runs counter to it.
+      2: The behaviour is evidenced but only partially, inconsistently, or with some students and not
+        others.
+      3: The behaviour is evidenced fully and consistently across the segment.
+    note: 'TEACH behaviour - judge: The teacher provides students with choices'
+  - code: '7.2'
+    name: 'Autonomy: The teacher provides students with opportunities to take on roles in the classroom'
+    levels:
+      1: The behaviour is not evidenced in the segment, or the evidence runs counter to it.
+      2: The behaviour is evidenced but only partially, inconsistently, or with some students and not
+        others.
+      3: The behaviour is evidenced fully and consistently across the segment.
+    note: 'TEACH behaviour - judge: The teacher provides students with opportunities to take on roles
+      in the classroom'
+  - code: '7.3'
+    name: 'Autonomy: The students volunteer to participate in the classroom'
+    levels:
+      1: The behaviour is not evidenced in the segment, or the evidence runs counter to it.
+      2: The behaviour is evidenced but only partially, inconsistently, or with some students and not
+        others.
+      3: The behaviour is evidenced fully and consistently across the segment.
+    note: 'TEACH behaviour - judge: The students volunteer to participate in the classroom'
+  - code: '8.1'
+    name: 'Perseverance: The teacher acknowledges students’ efforts'
+    levels:
+      1: The behaviour is not evidenced in the segment, or the evidence runs counter to it.
+      2: The behaviour is evidenced but only partially, inconsistently, or with some students and not
+        others.
+      3: The behaviour is evidenced fully and consistently across the segment.
+    note: 'TEACH behaviour - judge: The teacher acknowledges students’ efforts'
+  - code: '8.2'
+    name: 'Perseverance: The teacher has a positive attitude towards students’ challenges'
+    levels:
+      1: The behaviour is not evidenced in the segment, or the evidence runs counter to it.
+      2: The behaviour is evidenced but only partially, inconsistently, or with some students and not
+        others.
+      3: The behaviour is evidenced fully and consistently across the segment.
+    note: 'TEACH behaviour - judge: The teacher has a positive attitude towards students’ challenges'
+  - code: '8.3'
+    name: 'Perseverance: The teacher encourages goal setting'
+    levels:
+      1: The behaviour is not evidenced in the segment, or the evidence runs counter to it.
+      2: The behaviour is evidenced but only partially, inconsistently, or with some students and not
+        others.
+      3: The behaviour is evidenced fully and consistently across the segment.
+    note: 'TEACH behaviour - judge: The teacher encourages goal setting'
+  - code: '9.1'
+    name: 'Social & Collaborative Skills: The teacher promotes students’ collaboration through peer interaction'
+    levels:
+      1: The behaviour is not evidenced in the segment, or the evidence runs counter to it.
+      2: The behaviour is evidenced but only partially, inconsistently, or with some students and not
+        others.
+      3: The behaviour is evidenced fully and consistently across the segment.
+    note: 'TEACH behaviour - judge: The teacher promotes students’ collaboration through peer interaction'
+  - code: '9.2'
+    name: 'Social & Collaborative Skills: The teacher promotes students’ interpersonal skills'
+    levels:
+      1: The behaviour is not evidenced in the segment, or the evidence runs counter to it.
+      2: The behaviour is evidenced but only partially, inconsistently, or with some students and not
+        others.
+      3: The behaviour is evidenced fully and consistently across the segment.
+    note: 'TEACH behaviour - judge: The teacher promotes students’ interpersonal skills'
+  - code: '9.3'
+    name: 'Social & Collaborative Skills: Students collaborate with one another through peer interaction'
+    levels:
+      1: The behaviour is not evidenced in the segment, or the evidence runs counter to it.
+      2: The behaviour is evidenced but only partially, inconsistently, or with some students and not
+        others.
+      3: The behaviour is evidenced fully and consistently across the segment.
+    note: 'TEACH behaviour - judge: Students collaborate with one another through peer interaction'
