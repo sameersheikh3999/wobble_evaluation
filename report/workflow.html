@@ -1,0 +1,469 @@
+<title>From Rubric to Verdict</title>
+<style>
+  :root{
+    --paper:#f5f6f7; --surface:#fff; --surface-2:#eceff1;
+    --ink:#14171a; --ink-2:#3c444a; --muted:#69737a;
+    --rule:#dadfe3; --rule-soft:#e7ebee; --code-bg:#eef1f3;
+    --free:#0f6f72; --free-bg:#dfeeee;
+    --paid:#a8500f; --paid-bg:#f6e8da;
+    --good:#12704a; --good-bg:#dcece4;
+    --bad:#a3352f;  --bad-bg:#f5e1df;
+    --pend:#4a5a86; --pend-bg:#e3e7f1;
+    --f-display:"Segoe UI",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+    --f-body:Constantia,Cambria,Georgia,"Times New Roman",serif;
+    --f-data:Consolas,"SF Mono",ui-monospace,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --paper:#0f1214; --surface:#171b1e; --surface-2:#1d2225;
+      --ink:#e6e9eb; --ink-2:#b3bbc0; --muted:#828b91;
+      --rule:#282f33; --rule-soft:#1f2528; --code-bg:#1d2225;
+      --free:#5cb5b7; --free-bg:#112a2b;
+      --paid:#d69a5c; --paid-bg:#2a2016;
+      --good:#5cbc92; --good-bg:#13291f;
+      --bad:#e0776f;  --bad-bg:#2c1917;
+      --pend:#93a3cc; --pend-bg:#1a1f2e;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0f1214; --surface:#171b1e; --surface-2:#1d2225;
+    --ink:#e6e9eb; --ink-2:#b3bbc0; --muted:#828b91;
+    --rule:#282f33; --rule-soft:#1f2528; --code-bg:#1d2225;
+    --free:#5cb5b7; --free-bg:#112a2b;
+    --paid:#d69a5c; --paid-bg:#2a2016;
+    --good:#5cbc92; --good-bg:#13291f;
+    --bad:#e0776f;  --bad-bg:#2c1917;
+    --pend:#93a3cc; --pend-bg:#1a1f2e;
+  }
+  *{box-sizing:border-box}
+  body{background:var(--paper);color:var(--ink);font-family:var(--f-body);
+       font-size:1.0625rem;line-height:1.72;margin:0;padding:0 1.25rem 6rem;
+       -webkit-font-smoothing:antialiased}
+  header.top{max-width:40rem;margin:0 auto;padding:4.5rem 0 1.4rem}
+  .eyebrow{font-family:var(--f-data);font-size:.7rem;letter-spacing:.14em;
+           text-transform:uppercase;color:var(--free);margin:0 0 1.3rem}
+  h1{font-family:var(--f-display);font-size:clamp(2rem,5.5vw,2.8rem);line-height:1.1;
+     font-weight:600;letter-spacing:-.022em;text-wrap:balance;margin:0 0 1rem}
+  .standfirst{font-size:1.17rem;line-height:1.6;color:var(--ink-2);
+              margin:0 0 1.4rem;text-wrap:pretty}
+  section{max-width:40rem;margin:0 auto;padding-top:3rem}
+  figure.wide{max-width:56rem;margin:2rem auto}
+  h2{font-family:var(--f-display);font-size:1.48rem;font-weight:600;
+     letter-spacing:-.016em;line-height:1.22;text-wrap:balance;margin:0 0 .3rem;
+     padding-top:1.4rem;border-top:2px solid var(--ink)}
+  h3{font-family:var(--f-display);font-size:1.04rem;font-weight:600;
+     margin:1.9rem 0 .45rem;line-height:1.35}
+  p{margin:0 0 1.02rem;text-wrap:pretty}
+  strong{font-weight:600;color:var(--ink)}
+  ul,ol{margin:0 0 1.15rem;padding-left:1.2rem} li{margin-bottom:.45rem}
+  code{font-family:var(--f-data);font-size:.87em;background:var(--code-bg);
+       padding:.1em .34em;border-radius:2px}
+  figure{margin:2rem 0}
+  figure svg{max-width:100%;height:auto;display:block;margin:0 auto}
+  figcaption{font-family:var(--f-display);font-size:.86rem;color:var(--muted);
+             margin-top:.9rem;line-height:1.55;text-wrap:pretty}
+  .tablewrap{overflow-x:auto;margin:1.3rem 0 1.7rem;border:1px solid var(--rule);
+             border-radius:3px;background:var(--surface)}
+  table{border-collapse:collapse;width:100%;font-size:.92rem}
+  th,td{padding:.55rem .8rem;text-align:left;border-bottom:1px solid var(--rule-soft)}
+  th{font-family:var(--f-display);font-size:.77rem;font-weight:600;color:var(--muted);
+     border-bottom:1px solid var(--rule)}
+  tbody tr:last-child td{border-bottom:none}
+  .callout{background:var(--surface);border:1px solid var(--rule);
+           border-left:3px solid var(--free);border-radius:3px;
+           padding:1.05rem 1.2rem;margin:1.6rem 0}
+  .callout.pend{border-left-color:var(--pend)}
+  .callout.warn{border-left-color:var(--paid)}
+  .callout p:last-child{margin-bottom:0}
+  .callout .tag{font-family:var(--f-data);font-size:.68rem;letter-spacing:.12em;
+                text-transform:uppercase;color:var(--muted);display:block;
+                margin-bottom:.42rem}
+  footer{max-width:40rem;margin:3.6rem auto 0;padding-top:1.4rem;
+         border-top:1px solid var(--rule);font-size:.88rem;color:var(--muted)}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+
+<header class="top">
+  <p class="eyebrow">Evaluation workflow · any coaching framework</p>
+  <h1>From rubric to verdict</h1>
+  <p class="standfirst">
+    How a coaching framework is put through reliability testing, stage by stage —
+    what each step costs, what it produces, and where the one step we have not yet
+    run would slot in.
+  </p>
+</header>
+
+<section>
+  <h2>The workflow</h2>
+
+  <figure class="wide">
+    <svg viewBox="0 0 820 1080" role="img" aria-label="Seven-stage evaluation workflow. Inputs are an observation transcript, an optional lesson plan, and a framework spec. Stage 1 prepares and validates the spec at no cost. Stage 2 is the only paid stage: each observation is scored many times. Stage 3 reads the resulting grid two ways, for reliability and for discrimination, producing a four-way classification. Stage 4 checks band stability. Stage 5, comparison against human raters, has not been run because no human scores were available; its result is bounded above by the stage 3 self-agreement figure.">
+      <defs>
+        <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7"
+                markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="currentColor"/>
+        </marker>
+        <marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7"
+                markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="#4a5a86"/>
+        </marker>
+      </defs>
+
+      <!-- ============ INPUTS ============ -->
+      <text x="14" y="26" font-size="10.5" font-family="monospace" fill="currentColor"
+            opacity=".55" letter-spacing="1.4">INPUTS</text>
+      <g font-family="Segoe UI, sans-serif">
+        <rect x="14" y="36" width="240" height="60" rx="4" fill="none"
+              stroke="currentColor" stroke-width="1.5"/>
+        <text x="134" y="60" text-anchor="middle" font-size="13" font-weight="600"
+              fill="currentColor">Observation transcript</text>
+        <text x="134" y="79" text-anchor="middle" font-size="11" fill="currentColor"
+              opacity=".7">audio of one lesson, transcribed</text>
+
+        <rect x="272" y="36" width="240" height="60" rx="4" fill="none"
+              stroke="currentColor" stroke-width="1.3" stroke-dasharray="5 3"
+              opacity=".75"/>
+        <text x="392" y="60" text-anchor="middle" font-size="13" font-weight="600"
+              fill="currentColor" opacity=".8">Lesson plan</text>
+        <text x="392" y="79" text-anchor="middle" font-size="11" fill="currentColor"
+              opacity=".6">optional — only some indicators need it</text>
+
+        <rect x="530" y="36" width="276" height="60" rx="4" fill="none"
+              stroke="currentColor" stroke-width="1.5"/>
+        <text x="668" y="60" text-anchor="middle" font-size="13" font-weight="600"
+              fill="currentColor">Framework spec</text>
+        <text x="668" y="79" text-anchor="middle" font-size="11" fill="currentColor"
+              opacity=".7">FICO · HOTS · TEACH · any rubric</text>
+      </g>
+
+      <line x1="410" y1="98" x2="410" y2="124" stroke="currentColor" stroke-width="1.5"
+            marker-end="url(#a)"/>
+
+      <!-- ============ STAGE 1: PREPARE ============ -->
+      <rect x="14" y="128" width="792" height="86" rx="4" fill="#dfeeee" opacity=".55"/>
+      <text x="28" y="150" font-size="10.5" font-family="monospace" fill="#0f6f72"
+            letter-spacing="1.2">STAGE 1 — PREPARE · no model calls</text>
+      <g font-family="Segoe UI, sans-serif" font-size="12">
+        <rect x="28" y="158" width="240" height="44" rx="3" fill="#fff"
+              stroke="#0f6f72" stroke-width="1.2"/>
+        <text x="148" y="176" text-anchor="middle" font-weight="600" fill="#14171a">import</text>
+        <text x="148" y="192" text-anchor="middle" font-size="10.5" fill="#3c444a">spreadsheet → spec</text>
+
+        <rect x="288" y="158" width="240" height="44" rx="3" fill="#fff"
+              stroke="#0f6f72" stroke-width="1.2"/>
+        <text x="408" y="176" text-anchor="middle" font-weight="600" fill="#14171a">check</text>
+        <text x="408" y="192" text-anchor="middle" font-size="10.5" fill="#3c444a">validate · flag spec defects</text>
+
+        <rect x="548" y="158" width="240" height="44" rx="3" fill="#fff"
+              stroke="#0f6f72" stroke-width="1.2"/>
+        <text x="668" y="176" text-anchor="middle" font-weight="600" fill="#14171a">plan</text>
+        <text x="668" y="192" text-anchor="middle" font-size="10.5" fill="#3c444a">cost + statistical power</text>
+      </g>
+
+      <line x1="410" y1="216" x2="410" y2="242" stroke="currentColor" stroke-width="1.5"
+            marker-end="url(#a)"/>
+
+      <!-- ============ STAGE 2: SCORE ============ -->
+      <rect x="14" y="246" width="792" height="92" rx="4" fill="#f6e8da" opacity=".7"
+            stroke="#a8500f" stroke-width="2"/>
+      <text x="28" y="268" font-size="10.5" font-family="monospace" fill="#a8500f"
+            letter-spacing="1.2" font-weight="700">STAGE 2 — SCORE · the only paid stage</text>
+      <g font-family="Segoe UI, sans-serif">
+        <text x="410" y="294" text-anchor="middle" font-size="14.5" font-weight="600"
+              fill="#14171a">Score every observation R times, identically</text>
+        <text x="410" y="315" text-anchor="middle" font-size="11.5" fill="#3c444a">
+          same transcript · same rubric · same prompt · nothing varies but the scorer</text>
+        <text x="410" y="331" text-anchor="middle" font-size="11" font-family="monospace"
+              fill="#a8500f">L observations × R runs × S sections = model calls</text>
+      </g>
+
+      <line x1="410" y1="340" x2="410" y2="366" stroke="currentColor" stroke-width="1.5"
+            marker-end="url(#a)"/>
+
+      <!-- ============ STAGE 3: ANALYSE ============ -->
+      <rect x="14" y="370" width="792" height="222" rx="4" fill="#dfeeee" opacity=".55"/>
+      <text x="28" y="392" font-size="10.5" font-family="monospace" fill="#0f6f72"
+            letter-spacing="1.2">STAGE 3 — READ THE GRID TWO WAYS · free, repeatable</text>
+
+      <text x="410" y="414" text-anchor="middle" font-size="11.5"
+            font-family="Segoe UI, sans-serif" fill="#3c444a">
+        every indicator gets its own observations × runs grid</text>
+
+      <g font-family="Segoe UI, sans-serif">
+        <rect x="40" y="426" width="350" height="86" rx="3" fill="#fff"
+              stroke="#0f6f72" stroke-width="1.4"/>
+        <text x="215" y="448" text-anchor="middle" font-size="13" font-weight="600"
+              fill="#0f6f72">RELIABILITY — across a row</text>
+        <text x="215" y="467" text-anchor="middle" font-size="11" fill="#3c444a">
+          observation fixed, only the run changes</text>
+        <text x="215" y="484" text-anchor="middle" font-size="11" fill="#3c444a">
+          so any difference is scorer noise</text>
+        <text x="215" y="502" text-anchor="middle" font-size="10.5"
+              font-family="monospace" fill="#0f6f72">Gwet AC1 · flip rate · binomial vs floor</text>
+
+        <rect x="430" y="426" width="350" height="86" rx="3" fill="#fff"
+              stroke="#0f6f72" stroke-width="1.4"/>
+        <text x="605" y="448" text-anchor="middle" font-size="13" font-weight="600"
+              fill="#0f6f72">DISCRIMINATION — down a column</text>
+        <text x="605" y="467" text-anchor="middle" font-size="11" fill="#3c444a">
+          do different observations get</text>
+        <text x="605" y="484" text-anchor="middle" font-size="11" fill="#3c444a">
+          different answers at all?</text>
+        <text x="605" y="502" text-anchor="middle" font-size="10.5"
+              font-family="monospace" fill="#0f6f72">chi-square across observations</text>
+      </g>
+
+      <line x1="215" y1="514" x2="215" y2="534" stroke="currentColor" stroke-width="1.3"
+            marker-end="url(#a)"/>
+      <line x1="605" y1="514" x2="605" y2="534" stroke="currentColor" stroke-width="1.3"
+            marker-end="url(#a)"/>
+
+      <g font-family="Segoe UI, sans-serif" font-size="11.5" font-weight="600">
+        <rect x="40" y="538" width="140" height="40" rx="3" fill="#dcece4"/>
+        <text x="110" y="556" text-anchor="middle" fill="#12704a">HEALTHY</text>
+        <text x="110" y="571" text-anchor="middle" font-size="9.5" font-weight="400"
+              fill="#12704a">use it</text>
+
+        <rect x="192" y="538" width="140" height="40" rx="3" fill="#f6e8da"/>
+        <text x="262" y="556" text-anchor="middle" fill="#a8500f">NOISY</text>
+        <text x="262" y="571" text-anchor="middle" font-size="9.5" font-weight="400"
+              fill="#a8500f">rewrite it</text>
+
+        <rect x="344" y="538" width="176" height="40" rx="3" fill="#e3e7f1"/>
+        <text x="432" y="556" text-anchor="middle" fill="#4a5a86">UNINFORMATIVE</text>
+        <text x="432" y="571" text-anchor="middle" font-size="9.5" font-weight="400"
+              fill="#4a5a86">no coaching signal</text>
+
+        <rect x="532" y="538" width="118" height="40" rx="3" fill="#f5e1df"/>
+        <text x="591" y="556" text-anchor="middle" fill="#a3352f">BROKEN</text>
+        <text x="591" y="571" text-anchor="middle" font-size="9.5" font-weight="400"
+              fill="#a3352f">drop it</text>
+
+        <rect x="662" y="538" width="118" height="40" rx="3" fill="#eceff1"/>
+        <text x="721" y="553" text-anchor="middle" font-size="10.5" fill="#3c444a">NOT</text>
+        <text x="721" y="566" text-anchor="middle" font-size="10.5" fill="#3c444a">ASSESSABLE</text>
+        <text x="721" y="577" text-anchor="middle" font-size="9" font-weight="400"
+              fill="#3c444a">document missing</text>
+      </g>
+
+      <line x1="410" y1="594" x2="410" y2="618" stroke="currentColor" stroke-width="1.5"
+            marker-end="url(#a)"/>
+
+      <!-- ============ STAGE 4: BANDS ============ -->
+      <rect x="14" y="622" width="792" height="72" rx="4" fill="#dfeeee" opacity=".55"/>
+      <text x="28" y="644" font-size="10.5" font-family="monospace" fill="#0f6f72"
+            letter-spacing="1.2">STAGE 4 — BAND STABILITY</text>
+      <g font-family="Segoe UI, sans-serif">
+        <text x="410" y="666" text-anchor="middle" font-size="13" font-weight="600"
+              fill="#14171a">Does the section&rsquo;s High / Medium / Low band survive a re-run?</text>
+        <text x="410" y="684" text-anchor="middle" font-size="11" fill="#3c444a">
+          this is the number a coaching report actually quotes</text>
+      </g>
+
+      <line x1="410" y1="696" x2="410" y2="726" stroke="#4a5a86" stroke-width="1.6"
+            stroke-dasharray="6 4" marker-end="url(#ap)"/>
+
+      <!-- ============ STAGE 5: HUMAN — NOT RUN ============ -->
+      <rect x="14" y="730" width="792" height="196" rx="4" fill="#e3e7f1" opacity=".45"
+            stroke="#4a5a86" stroke-width="1.8" stroke-dasharray="8 5"/>
+      <text x="28" y="752" font-size="10.5" font-family="monospace" fill="#4a5a86"
+            letter-spacing="1.2" font-weight="700">STAGE 5 — AGREEMENT WITH HUMAN RATERS · NOT YET RUN</text>
+      <text x="28" y="770" font-size="11" font-family="Segoe UI, sans-serif" fill="#4a5a86">
+        no human-scored observations were available for this study</text>
+
+      <g font-family="Segoe UI, sans-serif">
+        <rect x="40" y="782" width="356" height="60" rx="3" fill="#fff"
+              stroke="#4a5a86" stroke-width="1.2" stroke-dasharray="4 3"/>
+        <text x="218" y="803" text-anchor="middle" font-size="12.5" font-weight="600"
+              fill="#4a5a86">Human rater scores the same observations</text>
+        <text x="218" y="822" text-anchor="middle" font-size="10.5" fill="#3c444a">
+          ideally 2+ raters, so human-human IRR is known too</text>
+
+        <rect x="424" y="782" width="356" height="60" rx="3" fill="#fff"
+              stroke="#4a5a86" stroke-width="1.2" stroke-dasharray="4 3"/>
+        <text x="602" y="803" text-anchor="middle" font-size="12.5" font-weight="600"
+              fill="#4a5a86">AI majority verdict per indicator</text>
+        <text x="602" y="822" text-anchor="middle" font-size="10.5" fill="#3c444a">
+          from stage 2, already computed</text>
+      </g>
+
+      <line x1="218" y1="844" x2="330" y2="866" stroke="#4a5a86" stroke-width="1.3"
+            stroke-dasharray="4 3" marker-end="url(#ap)"/>
+      <line x1="602" y1="844" x2="490" y2="866" stroke="#4a5a86" stroke-width="1.3"
+            stroke-dasharray="4 3" marker-end="url(#ap)"/>
+
+      <rect x="196" y="870" width="428" height="44" rx="3" fill="#fff"
+            stroke="#4a5a86" stroke-width="1.5"/>
+      <text x="410" y="888" text-anchor="middle" font-size="12.5" font-weight="600"
+            fill="#4a5a86" font-family="Segoe UI, sans-serif">HUMAN–AI AGREEMENT (validity)</text>
+      <text x="410" y="905" text-anchor="middle" font-size="10.5" font-family="monospace"
+            fill="#3c444a">weighted kappa · AC1 · exact + adjacent % · ICC(2,1)</text>
+
+      <!-- the ceiling relationship -->
+      <path d="M 806 470 C 860 470, 860 892, 640 892" fill="none" stroke="#a3352f"
+            stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#a)"
+            color="#a3352f"/>
+      <text x="700" y="952" text-anchor="middle" font-size="11.5" font-weight="600"
+            fill="#a3352f" font-family="Segoe UI, sans-serif">Stage 3 sets the ceiling</text>
+      <text x="700" y="968" text-anchor="middle" font-size="10.5" fill="#a3352f"
+            font-family="Segoe UI, sans-serif">a scorer cannot agree with a human</text>
+      <text x="700" y="982" text-anchor="middle" font-size="10.5" fill="#a3352f"
+            font-family="Segoe UI, sans-serif">better than it agrees with itself</text>
+
+      <!-- ============ OUTPUT ============ -->
+      <line x1="410" y1="918" x2="410" y2="1000" stroke="currentColor" stroke-width="1.5"
+            marker-end="url(#a)"/>
+      <rect x="150" y="1004" width="520" height="52" rx="4" fill="none"
+            stroke="currentColor" stroke-width="2"/>
+      <text x="410" y="1026" text-anchor="middle" font-size="13.5" font-weight="600"
+            fill="currentColor" font-family="Segoe UI, sans-serif">
+        Decision: keep · rewrite · change data source · drop</text>
+      <text x="410" y="1045" text-anchor="middle" font-size="11" fill="currentColor"
+            opacity=".7" font-family="Segoe UI, sans-serif">per indicator, with the evidence attached</text>
+    </svg>
+    <figcaption>
+      The evaluation workflow. Only stage 2 costs anything; everything before it is
+      validation you should exhaust first, and everything after it re-reads stored
+      scores for free. Stage 5 is drawn dashed because it has not been run — no
+      human-scored observations were available. The red curve is the constraint
+      that makes stage 3 worth doing first: a scorer cannot agree with a human
+      better than it agrees with itself, so the self-agreement figure is the
+      ceiling on any validity result.
+    </figcaption>
+  </figure>
+</section>
+
+<section>
+  <h2>What each stage costs and produces</h2>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Stage</th><th>Cost</th><th>Produces</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1 · Prepare</strong><br><code>import</code> <code>check</code> <code>plan</code></td>
+            <td>free</td>
+            <td>A validated spec, a list of spec defects, and the call count plus
+                whether the design has power to answer the question.</td></tr>
+        <tr><td><strong>2 · Score</strong><br><code>run</code></td>
+            <td><strong>L × R × S calls</strong></td>
+            <td>Every judgement, with evidence and the scorer's own confidence.
+                Written after each observation, so a crash costs time not data.</td></tr>
+        <tr><td><strong>3 · Analyse</strong><br><code>analyse</code></td>
+            <td>free, repeatable</td>
+            <td>Per-indicator AC1, flip rate, and the four-way classification.
+                Re-cut the threshold or exclude indicators without re-scoring.</td></tr>
+        <tr><td><strong>4 · Bands</strong></td>
+            <td>free</td>
+            <td>Whether each section's High/Medium/Low survives a re-run.</td></tr>
+        <tr><td><strong>5 · Human IRR</strong></td>
+            <td>rater time</td>
+            <td><em>Not yet run.</em> Would give validity — whether the scorer is
+                right, not merely consistent.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>Stage 5: the human comparison, specified</h2>
+
+  <div class="callout pend">
+    <span class="tag">Status</span>
+    <p>
+      <strong>This stage has not been run.</strong> No human-scored observations
+      exist in the study data — the transcripts carry audio and metadata only, and
+      the warehouse table that might hold coaching scores was not reachable. Every
+      reliability figure produced so far describes whether the scorer agrees with
+      <em>itself</em>. Nothing so far speaks to whether it is right.
+    </p>
+  </div>
+
+  <h3>What it needs</h3>
+  <ul>
+    <li><strong>The same observations, scored by a trained human</strong> against the
+      same rubric at the same proficiency cut. Re-using observations already scored
+      by the AI costs no extra model calls.</li>
+    <li><strong>Two or more human raters, ideally.</strong> Without a human–human
+      figure there is nothing to judge the human–AI figure against: if two trained
+      coaches only agree with each other 70% of the time, an AI agreeing with them
+      70% of the time is performing at human level, not failing.</li>
+    <li><strong>Around 20–30 observations.</strong> Fewer will not separate a real
+      gap from sampling noise on a per-indicator basis.</li>
+  </ul>
+
+  <h3>Which statistics, and why those</h3>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Measure</th><th>For</th><th>Why this one</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Gwet's AC1</strong></td><td>met / not-met verdicts</td>
+            <td>Same reason as in stage 3: with a lopsided split, kappa collapses
+                toward zero at high agreement. AC1 does not.</td></tr>
+        <tr><td><strong>Quadratic-weighted kappa</strong></td><td>the 1–4 level</td>
+            <td>An ordinal scale should not treat a 3-vs-4 disagreement as equal to
+                1-vs-4. Weighting gives partial credit for adjacency.</td></tr>
+        <tr><td><strong>Exact + adjacent agreement</strong></td><td>both</td>
+            <td>The plain number a non-statistician can check: how often identical,
+                how often within one level.</td></tr>
+        <tr><td><strong>ICC(2,1)</strong></td><td>section scores</td>
+            <td>Section fidelity is continuous, so a correlation-style coefficient
+                fits it better than a categorical one.</td></tr>
+        <tr><td><strong>Bland–Altman bias</strong></td><td>section scores</td>
+            <td>Separates <em>disagreement</em> from <em>systematic leniency</em>.
+                An AI that is consistently one level harsher is a calibration
+                problem, not a reliability one — and it is fixable.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout warn">
+    <span class="tag">Read the result against the ceiling</span>
+    <p>
+      The AI agrees with itself at AC1 <strong>0.87</strong>. It cannot agree with a
+      human better than that. So a human–AI figure of, say, 0.75 is not "0.25 short
+      of perfect" — it is close to the maximum the scorer's own consistency allows.
+    </p>
+    <p>
+      This is also why the seven unreliable indicators should be excluded from the
+      human comparison, or reported separately. An indicator whose verdict changes
+      between two AI runs cannot meaningfully be compared to a human's single
+      verdict — you would be measuring the noise, not the disagreement.
+    </p>
+  </div>
+</section>
+
+<section>
+  <h2>Where the current study sits</h2>
+  <p>
+    Stages 1 to 4 are complete and have been run on three frameworks. Stage 5 is
+    specified and unbuilt.
+  </p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Framework</th><th>Observations × runs</th><th>Stages 1–4</th>
+                 <th>Stage 5</th></tr></thead>
+      <tbody>
+        <tr><td>FICO</td><td>10 × 10, then 3 × 10</td><td>complete</td>
+            <td>not run</td></tr>
+        <tr><td>HOTS</td><td>3 × 10</td><td>complete</td><td>not run</td></tr>
+        <tr><td>TEACH</td><td>3 × 10</td><td>complete</td><td>not run</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    The pipeline has no code for stage 5 yet, because there has been nothing to run
+    it against. It is a contained addition — the AI verdicts are already stored per
+    observation and per indicator, so the work is a loader for the human scores and
+    the five statistics above.
+  </p>
+</section>
+
+<footer>
+  <p>
+    Evaluation workflow for coaching-framework reliability. Stages 1–4 implemented
+    and run; stage 5 specified, pending human-scored observations.
+  </p>
+  <p>
+    Reliability is not accuracy. Stages 1–4 establish that a framework can be
+    scored consistently. Only stage 5 can establish that it is scored correctly.
+  </p>
+</footer>
