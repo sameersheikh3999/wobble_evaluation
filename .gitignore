@@ -129,3 +129,5 @@ _cmp3/
 cmp3run.log
 cmp10.log
 cmp3.log
+~$*
+*.tmp
